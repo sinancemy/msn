@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 import os
 
 config_path = os.path.dirname(__file__)
-data_db_uri = "sqlite:///" + config_path + "/data.db"
+data_db_uri = "sqlite:///" + config_path + "/data.db" # TODO: Use standard SQL, not SQLite.
 
 SQLALCHEMY_DATABASE_URI = data_db_uri
 SQLALCHEMY_BINDS = {
