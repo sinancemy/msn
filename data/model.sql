@@ -59,7 +59,7 @@ CREATE TABLE Constitutes (
   FOREIGN KEY (enjoyer_id) REFERENCES Enjoyer(id),
   FOREIGN KEY (track_id) REFERENCES Track(id),
   FOREIGN KEY (playlist_id) REFERENCES Playlist(id),
-  PRIMARY KEY (enjoyer_idi track_id, playlist_id)
+  PRIMARY KEY (enjoyer_id track_id, playlist_id)
 );
 
 CREATE TABLE Friend (
