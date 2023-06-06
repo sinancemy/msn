@@ -13,23 +13,23 @@ const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
   password: 'phanchi99',
-  database: 'world',
+  database: 'msn',
 });
 
-function diff_lang(country1, country2, callback){
+function exampleQuery(parameter, callback){
   q = `
     # QUERY HERE
     `
-  v = [country1, country2]
+  v = [parameter]
   pool.query(q, v, (error, results) => {
     if (error) throw error;
     callback(error, results);
   });
 }
 
-app.get('/getDiffLang', (req, res) => {
-  const { country1, country2 } = req.query;
-  diff_lang(country1, country2 , (error, results) => {
+app.get('/getExampleQuery', (req, res) => {
+  const { parameter } = req.query;
+  exampleQuery(parameter, (error, results) => {
     if (error) throw error;
     res.send(results);
   });
@@ -37,6 +37,5 @@ app.get('/getDiffLang', (req, res) => {
 
 app.use("/", express.static('./'));
 app.listen(3000, () => {});
-
 
 app.get('/', (req, res) => {res.sendFile(__dirname + "/main.html");});
