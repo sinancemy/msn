@@ -22,85 +22,44 @@ CREATE TABLE Artist (
 
 CREATE TABLE Content (
   id INTEGER,
-  creation_date DATE,
   name VARCHAR(32),
+  creation_date DATE,
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Album (
   id INTEGER,
-  album_type VARCHAR(32),
+  cover_art BLOB,
   FOREIGN KEY (id) REFERENCES Content(id),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Playlist (
   id INTEGER,
+  enjoyer_id INTEGER,
   description VARCHAR(128),
+  cover_art BLOB,
   FOREIGN KEY (id) REFERENCES Content(id),
+  FOREIGN KEY (enjoyer_id) REFERENCES Enjoyer(id),
   PRIMARY KEY (id)
 );
 
 CREATE TABLE Track (
-  content_id INTEGER,
+  id INTEGER,
   album_id INTEGER,
   genre VARCHAR(32),
   length_seconds INTEGER,
-  FOREIGN KEY (content_id) REFERENCES Content(id),
+  FOREIGN KEY (id) REFERENCES Content(id),
   FOREIGN KEY (album_id) REFERENCES Album(id),
-  PRIMARY KEY (content_id, album_id)
+  PRIMARY KEY (id, album_id)
 );
 
-CREATE TABLE Constitutes (
-  enjoyer_id INTEGER,
+CREATE TABLE PlaylistTracks (
   track_id INTEGER,
   playlist_id INTEGER,
-  description VARCHAR(128),
-  FOREIGN KEY (enjoyer_id) REFERENCES Enjoyer(id),
   FOREIGN KEY (track_id) REFERENCES Track(id),
   FOREIGN KEY (playlist_id) REFERENCES Playlist(id),
-  PRIMARY KEY (enjoyer_id track_id, playlist_id)
-);
-
-CREATE TABLE Friend (
-  since DATE,
-  friend_id1 INTEGER,
-  friend_id2 INTEGER,
-  FOREIGN KEY (friend_id1) REFERENCES User(id),
-  FOREIGN KEY (friend_id2) REFERENCES User(id),
-  PRIMARY KEY (friend_id1, friend_id2)
-);
-
-CREATE TABLE Message (
-  id INTEGER,
-  txt VARCHAR(512),
-  PRIMARY KEY (id)
-);
-
-CREATE TABLE Includes (
-  content_id INTEGER,
-  message_id INTEGER,
-  FOREIGN KEY (content_id) REFERENCES Content(id),
-  FOREIGN KEY (message_id) REFERENCES Message(id),
-  PRIMARY KEY (content_id, message_id)
-);
-
-CREATE TABLE ReactsTo (
-  content_id INTEGER,
-  user_id INTEGER,
-  txt VARCHAR(512),
-  emoji VARCHAR(16),
-  FOREIGN KEY (content_id) REFERENCES Content(id),
-  FOREIGN KEY (user_id) REFERENCES User(id),
-  PRIMARY KEY (content_id, user_id)
-);
-
-CREATE TABLE Follows (
-  artist_id INTEGER,
-  enjoyer_id INTEGER,
-  FOREIGN KEY (artist_id) REFERENCES Artist(id),
-  FOREIGN KEY (enjoyer_id) REFERENCES Enjoyer(id),
-  PRIMARY KEY (artist_id, enjoyer_id)
+  PRIMARY KEY (track_id, playlist_id)
 );
 
 CREATE TABLE PerformsIn (
@@ -112,10 +71,53 @@ CREATE TABLE PerformsIn (
   PRIMARY KEY (artist_id, track_id)
 );
 
-CREATE TABLE Saved (
-  content_id INTEGER,
-  enjoyer_id INTEGER,
-  FOREIGN KEY (content_id) REFERENCES Content(id),
-  FOREIGN KEY (enjoyer_id) REFERENCES Enjoyer(id),
-  PRIMARY KEY (content_id, enjoyer_id)
+CREATE TABLE Friend (
+  friend_id1 INTEGER,
+  friend_id2 INTEGER,
+  since DATE,
+  FOREIGN KEY (friend_id1) REFERENCES User(id),
+  FOREIGN KEY (friend_id2) REFERENCES User(id),
+  PRIMARY KEY (friend_id1, friend_id2)
 );
+
+CREATE TABLE Reaction (
+  user_id INTEGER,
+  content_id INTEGER,
+  txt VARCHAR(512),
+  emoji VARCHAR(16),
+  FOREIGN KEY (user_id) REFERENCES User(id),
+  FOREIGN KEY (content_id) REFERENCES Content(id),
+  PRIMARY KEY (content_id, user_id)
+);
+
+CREATE TABLE Follows (
+  enjoyer_id INTEGER,
+  artist_id INTEGER,
+  FOREIGN KEY (enjoyer_id) REFERENCES Enjoyer(id),
+  FOREIGN KEY (artist_id) REFERENCES Artist(id),
+  PRIMARY KEY (enjoyer_id, artist_id)
+);
+
+CREATE TABLE Saved (
+  enjoyer_id INTEGER,
+  content_id INTEGER,
+  FOREIGN KEY (enjoyer_id) REFERENCES Enjoyer(id),
+  FOREIGN KEY (content_id) REFERENCES Content(id),
+  PRIMARY KEY (enjoyer_id, content_id)
+);
+
+-- CREATE TABLE Message (
+--   id INTEGER,
+--   txt VARCHAR(512),
+--   PRIMARY KEY (id)
+-- );
+
+-- CREATE TABLE MessageContent (
+--   content_id INTEGER,
+--   message_id INTEGER,
+--   FOREIGN KEY (content_id) REFERENCES Content(id),
+--   FOREIGN KEY (message_id) REFERENCES Message(id),
+--   PRIMARY KEY (content_id, message_id)
+-- );
+
+-- CREATE TABLE Sends (...)
