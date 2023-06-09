@@ -1,6 +1,10 @@
+CREATE DATABASE msn;
+USE msn;
+
 CREATE TABLE User (
   id INTEGER,
   username VARCHAR(32),
+  password CHAR(64),
   full_name VARCHAR(64),
   email VARCHAR(32),
   bio VARCHAR(128),
@@ -55,11 +59,11 @@ CREATE TABLE Track (
 );
 
 CREATE TABLE PlaylistTracks (
-  track_id INTEGER,
   playlist_id INTEGER,
-  FOREIGN KEY (track_id) REFERENCES Track(id),
+  track_id INTEGER,
   FOREIGN KEY (playlist_id) REFERENCES Playlist(id),
-  PRIMARY KEY (track_id, playlist_id)
+  FOREIGN KEY (track_id) REFERENCES Track(id),
+  PRIMARY KEY (playlist_id, track_id)
 );
 
 CREATE TABLE PerformsIn (
@@ -67,7 +71,7 @@ CREATE TABLE PerformsIn (
   track_id INTEGER,
   plays VARCHAR(32),
   FOREIGN KEY (artist_id) REFERENCES Artist(id),
-  FOREIGN KEY (track_id) REFERENCES Track(content_id),
+  FOREIGN KEY (track_id) REFERENCES Track(id),
   PRIMARY KEY (artist_id, track_id)
 );
 
@@ -105,19 +109,3 @@ CREATE TABLE Saved (
   FOREIGN KEY (content_id) REFERENCES Content(id),
   PRIMARY KEY (enjoyer_id, content_id)
 );
-
--- CREATE TABLE Message (
---   id INTEGER,
---   txt VARCHAR(512),
---   PRIMARY KEY (id)
--- );
-
--- CREATE TABLE MessageContent (
---   content_id INTEGER,
---   message_id INTEGER,
---   FOREIGN KEY (content_id) REFERENCES Content(id),
---   FOREIGN KEY (message_id) REFERENCES Message(id),
---   PRIMARY KEY (content_id, message_id)
--- );
-
--- CREATE TABLE Sends (...)

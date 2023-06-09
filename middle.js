@@ -8,7 +8,7 @@ async function getExampleQuery(parameter) {
 function exampleQuery() {
     var parameter = document.getElementById("parameter").value;
     var table = document.getElementById("falan-filan-table");
-    getDiffLang(parameter).then((jsonData) => {
+    getExampleQuery(parameter).then((jsonData) => {
         table.innerHTML = "";
         for (var i = 0; i < jsonData.length; i++) {
             var row = table.insertRow();

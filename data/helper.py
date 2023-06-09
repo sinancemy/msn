@@ -2,6 +2,7 @@ import random
 from datetime import datetime, timedelta
 import io
 from PIL import Image, ImageDraw
+from hashlib import sha256
 
 def generate_random_date(start_date=datetime(1970, 1, 1), end_date=datetime(2023, 12, 31)):
     random_seconds = random.randint(0, int((end_date - start_date).total_seconds()))
@@ -49,12 +50,17 @@ def generate_random_shape(image, res):
 
     del draw
 
-def generate_random_image(res, *n_shape):
+def generate_random_image(res, num_shapes):
     image = Image.new('RGB', (res, res), generate_random_color())
-    num_shapes = random.randint(*n_shape)
     for _ in range(num_shapes):
         generate_random_shape(image, res)
     image_data = io.BytesIO()
-    image.save(image_data, format='PNG')  # Change format if necessary (e.g., PNG)
+    image.save(image_data, format='PNG')
     image_binary = image_data.getvalue()
     return image_binary
+
+def hash_password(input_string):
+    sha256_hash_obj = sha256()
+    sha256_hash_obj.update(input_string.encode('utf-8'))
+    hashed_value = sha256_hash_obj.hexdigest()
+    return hashed_value
