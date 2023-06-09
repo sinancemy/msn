@@ -17,3 +17,25 @@ function exampleQuery() {
         }
     });
 }
+
+function showHomePanel() {
+    window.location.href = "home.html";
+}
+function showSearchPanel() {
+    window.location.href = "search.html";
+}
+function showFriendsPanel() {
+    window.location.href = "friends.html";
+}
+function showProfilePanel() {
+    window.location.href = "profile.html";
+}
+function showPlaylistsPanel() {
+    window.location.href = "playlists.html";
+}
+function showAlbumsPanel() {
+    window.location.href = "albums.html";
+}
+
+
+

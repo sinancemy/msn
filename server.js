@@ -38,4 +38,4 @@ app.get('/getExampleQuery', (req, res) => {
 app.use("/", express.static('./'));
 app.listen(3000, () => {});
 
-app.get('/', (req, res) => {res.sendFile(__dirname + "/main.html");});
+app.get('/', (req, res) => {res.sendFile(__dirname + "/home.html");});
