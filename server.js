@@ -20,13 +20,13 @@ app.use(authRoutes)
 app.use(queryRoutes)
 
 app.use("/", express.static('./'));
-app.listen(3000, () => { });
+app.listen(3001, () => { });
 app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 
 
 // TODO BACKEND:
 
-// LOGIN OLAN USERIN FOLLOWLADIĞI, SAVED ALBUMS, SAVED PLAYLISTS
+// LOGIN OLAN USERIN SAVED ALBUMS, SAVED PLAYLISTS
 // LOGIN OLAN KİŞİNİN TÜM ARKADAŞLARI ve bilgileri
 // LOGIN OLAN KİŞİNİN AVATARı vs vs bilgileri
 // ALBÜM içerik sayfası için ALBUM bilgileri
@@ -41,7 +41,7 @@ app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 // Artist profili
 
 
-function exampleQuery(parameter, callback){
+function exampleQuery(parameter, callback) {
   q = `
     # QUERY HERE
     `
@@ -61,8 +61,8 @@ app.get('/getExampleQuery', (req, res) => {
 });
 
 app.use("/", express.static('./'));
-app.listen(3000, () => {});
+app.listen(3001, () => { });
 
-app.get('/', (req, res) => {res.sendFile(__dirname + "/login.html");});
+app.get('/', (req, res) => { res.sendFile(__dirname + "/login.html"); });
 // app.get('/search', (req, res) => {res.sendFile(__dirname + "/search.html");});
 

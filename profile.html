@@ -8,6 +8,7 @@
     <head>
         <meta charset="UTF-8">
         <title>MSN</title>
+        
     </head>
 
     <body>
@@ -16,45 +17,28 @@
         <a href="search.html">Go to Main Page</a>
 
 
-        <div class="center">
-            <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
-            <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
-            <button id="friends-panel" class="big-button" onclick="showFriendsPanel()">Friends</button>
-            <button id="profile-panel" class="big-button" onclick="showProfilePanel()">Profile</button>
-      </div>
+      
 
-
-
-      </div>
-
-    </div> 
-        <div class="panel" style="width: 1325px; height: 170px; float: left; margin-right: 10px;">
-        <h2 class="panel-header" >Profile Photo    Friends</h2>
      
-    </div>
-   </div>  
-        
-    </div> 
-        <div class="panel" style="width: 1325px; height: 170px; float: left; margin-right: 10px;">
-        <h2 class="panel-header" >Playlists</h2>
-            <div class="panel-content">
-                
-              
-            </div>
-        
-        </div>
-    </div>  
-        
-   
+      <div class="panel-container">
+        <div class="panel" style="width: 1325px; height: 400px; float: left; margin-right: 10px; position: relative;">
+          <h2 class="panel-header">Login</h2>
+          <div class="panel-content">
+           
+            <textarea class="panel-textarea" placeholder="Enter Your Username" style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px;"></textarea>
+            <textarea class="panel-textarea" placeholder="Enter Your Password" style="width: 500px; height: 80px; position: absolute; top: 100px; left: 200px;"></textarea>
+            
+            
 
-</div> 
-<div class="panel" style="width: 1325px; height: 30px; float: left; margin-right: 10px;">
-  <h2 class="panel-header" >Music Controls</h2>
- 
-</div>
-</div>  
-    
-    
+            <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="login()">Login</button>
+
+          </div>
+        </div>
+      </div>
+
+  
+      
+        
 
   
 
