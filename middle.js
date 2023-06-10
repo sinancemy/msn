@@ -1,21 +1,40 @@
 
-async function getExampleQuery(parameter) {
-    const response = await fetch(`http://localhost:3000/getExampleQuery?parameter=${parameter}`);
-    const jsonData = await response.json();
-    return jsonData;
-}
-
-function exampleQuery() {
+async function exampleFunction(parameter) {
     var parameter = document.getElementById("parameter").value;
     var table = document.getElementById("falan-filan-table");
-    getExampleQuery(parameter).then((jsonData) => {
-        table.innerHTML = "";
-        for (var i = 0; i < jsonData.length; i++) {
-            var row = table.insertRow();
-            var langCell = row.insertCell(0);
-            langCell.innerHTML = jsonData[i].Language;
-        }
+    const response = await fetch(`http://localhost:3000/getExampleQuery?parameter=${parameter}`);
+    const data = await response.json();
+    table.innerHTML = "";
+    for (var i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        var langCell = row.insertCell(0);
+        langCell.innerHTML = data[i].Language;
+    }
+}
+
+async function getCurrentUserId() {
+    const response = await fetch(`http://localhost:3000/login/getUserId`);
+    const data = await response.json();
+    console.log(data.userId)
+    return data.userId;
+}
+
+async function loginAuthorizationRequest(username, password) {
+    const response = await fetch(`http://localhost:3000/login/auth`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            username: username,
+            password: password
+        })
     });
+    const data = await response.json();
+    const userId = data.userId
+    if (userId != null) {
+        console.log("LOGIN SUCCESSFUL, LOGGED IN AS USER WITH id = " + userId)
+    } else {
+        console.log("LOGIN FAILED FOR username = " + username)
+    }
 }
 
 function showHomePanel() {
