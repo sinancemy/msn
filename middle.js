@@ -50,7 +50,7 @@ async function getSavedAlbums() {
 }
 
 async function getSavedPlaylists() {
-    const response = await fetch(`http://localhost:3001/savedPlaylist`);
+    const response = await fetch(`http://localhost:3001/savedPlaylists`);
     const data = await response.json();
     console.log("Saved Artists: ", data);
 }

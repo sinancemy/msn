@@ -20,13 +20,13 @@ app.use(authRoutes)
 app.use(queryRoutes)
 
 app.use("/", express.static('./'));
-app.listen(3001, () => { });
+app.listen(3000, () => { });
 app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 
 
 // TODO BACKEND:
 
-// LOGIN OLAN USERIN SAVED ALBUMS, SAVED PLAYLISTS
+// LOGIN OLAN USERIN, SAVED PLAYLISTS
 // LOGIN OLAN KİŞİNİN TÜM ARKADAŞLARI ve bilgileri
 // LOGIN OLAN KİŞİNİN AVATARı vs vs bilgileri
 // ALBÜM içerik sayfası için ALBUM bilgileri

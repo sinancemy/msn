@@ -71,4 +71,36 @@ router.get('/savedAlbums', (req, res) => {
         });
 });
 
+router.get('/savedPlaylists', (req, res) => {
+    // Load parameters
+    const userId = req.session.userId;
+    // Execute query
+    (function (parameter, callback) {
+        const q = `
+        SELECT Playlist.id, Content.name, Playlist.description, Playlist.cover_art
+        FROM Playlist
+        JOIN Saved ON Saved.content_id = Playlist.id
+        JOIN Content ON Content.id = Playlist.id
+        WHERE Saved.enjoyer_id = ?
+
+        UNION
+
+        SELECT Playlist.id, Content.name, Playlist.description, Playlist.cover_art
+        FROM Playlist
+        JOIN Content ON Content.id = Playlist.id
+        WHERE Playlist.enjoyer_id = ?
+      `;
+        const v = [userId, userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
 module.exports = router
