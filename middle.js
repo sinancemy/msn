@@ -40,7 +40,20 @@ async function loginAuthorizationRequest(username, password) {
 async function getFollowedArtists() {
     const response = await fetch(`http://localhost:3001/followedArtists`);
     const data = await response.json();
-    console.log("Followed Artists: ", data);
+    var table = document.getElementById("followed-artists-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.onclick = function() {showArtistPanel(data[i].id);}
+        // Put name in cell
+        var nameCell = row.insertCell(0);
+        nameCell.innerHTML = data[i].full_name;
+        // Put image in cell
+        var avatarCell = row.insertCell(1);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].avatar.data));
+        avatarCell.appendChild(img);
+    }
 }
 
 async function getSavedAlbums() {
@@ -75,8 +88,8 @@ function showPlaylistPanel() {
 function showAlbumPanel() {
     window.location.href = "albums.html";
 }
-function showArtistPanel() {
-    window.location.href = "artistProfile.html";
+function showArtistPanel(artist_id) {
+    window.location.href = `artistProfile.html?id=${artist_id}`;
 }
 
 function performSearch() {
