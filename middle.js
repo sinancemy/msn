@@ -31,8 +31,10 @@ async function loginAuthorizationRequest(username, password) {
     const data = await response.json();
     const userId = data.userId
     if (userId != null) {
+        showHomePanel()
         console.log("LOGIN SUCCESSFUL, LOGGED IN AS USER WITH id = " + userId)
     } else {
+        // TODO : Display something on page, incorrect username/password.
         console.log("LOGIN FAILED FOR username = " + username)
     }
 }

@@ -20,9 +20,14 @@ app.use(authRoutes)
 app.use(queryRoutes)
 
 app.use("/", express.static('./'));
-app.listen(3000, () => { });
-app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
+app.listen(3001, () => { });
 
+app.get('/', (req, res) => {
+  if (req.session.userId == null)
+    res.sendFile(__dirname + "/login.html"); 
+  else
+    res.sendFile(__dirname + "/home.html")
+});
 
 // TODO BACKEND:
 
@@ -33,7 +38,6 @@ app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 
 // TODO FRONTEND
 
-// LOGIN
 // HOME ve SEARCH scrollable
 // SEARCH sayfası düzenlemesi/ekstra fonksiyonalite (checkbox falan)
 // Artist profili
@@ -57,10 +61,3 @@ app.get('/getExampleQuery', (req, res) => {
     res.send(results);
   });
 });
-
-app.use("/", express.static('./'));
-app.listen(3001, () => { });
-
-app.get('/', (req, res) => { res.sendFile(__dirname + "/login.html"); });
-// app.get('/search', (req, res) => {res.sendFile(__dirname + "/search.html");});
-
