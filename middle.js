@@ -67,6 +67,10 @@ function performSearch() {
     console.log("Selected Panels: ", selectedPanels);
   }
 
+  function login() {
+    window.location.href = "home.html";
+}
+
 
 
 

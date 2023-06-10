@@ -32,7 +32,6 @@ const pool = mysql.createPool({
 // TODO FRONTEND
 
 // LOGIN
-
 // HOME ve SEARCH scrollable
 // SEARCH sayfası düzenlemesi/ekstra fonksiyonalite (checkbox falan)
 // Artist profili
@@ -59,5 +58,5 @@ app.get('/getExampleQuery', (req, res) => {
 app.use("/", express.static('./'));
 app.listen(3000, () => {});
 
-app.get('/', (req, res) => {res.sendFile(__dirname + "/home.html");});
+app.get('/', (req, res) => {res.sendFile(__dirname + "/login.html");});
 // app.get('/search', (req, res) => {res.sendFile(__dirname + "/search.html");});
