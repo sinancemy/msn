@@ -79,7 +79,7 @@ async function getCurrentUserInfo() {
     const data = await response.json();
     console.log("Current User Info: ", data);
 }
-async function getUserInfo() {
+async function getUserInfo(parameter) {
     const response = await fetch(`http://localhost:3001/getUserInfo?userId=${parameter}`);
     const data = await response.json();
     console.log("User Info: ", data);
