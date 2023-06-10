@@ -20,7 +20,7 @@ app.use(authRoutes)
 app.use(queryRoutes)
 
 app.use("/", express.static('./'));
-app.listen(3000, () => { });
+app.listen(3001, () => { });
 app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 
 
