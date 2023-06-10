@@ -49,12 +49,44 @@ function showFriendsPanel() {
 function showProfilePanel() {
     window.location.href = "profile.html";
 }
-function showPlaylistsPanel() {
+function showPlaylistPanel() {
     window.location.href = "playlists.html";
 }
-function showAlbumsPanel() {
+function showAlbumPanel() {
     window.location.href = "albums.html";
 }
+function showArtistPanel() {
+    window.location.href = "artistProfile.html";
+}
+
+function performSearch() {
+    var selectedPanels = [];
+
+    // Check if the Artists checkbox is checked
+    if (document.getElementById("search-artists").checked) {
+      selectedPanels.push("Artists");
+    }
+
+    // Check if the Albums checkbox is checked
+    if (document.getElementById("search-albums").checked) {
+      selectedPanels.push("Albums");
+    }
+
+    // Check if the Playlists checkbox is checked
+    if (document.getElementById("search-playlists").checked) {
+      selectedPanels.push("Playlists");
+    }
+
+    // Check if the Songs checkbox is checked
+    if (document.getElementById("search-songs").checked) {
+      selectedPanels.push("Songs");
+    }
+
+    // Display the selected panels (console.log is used as an example)
+    console.log("Selected Panels: ", selectedPanels);
+  }
+
+
 
 
 
