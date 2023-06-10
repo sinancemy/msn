@@ -20,6 +20,9 @@ async function getCurrentUserId() {
 }
 
 async function loginAuthorizationRequest(username, password) {
+    // const hash = crypto.createHash('sha256');
+    // hash.update(password);
+    // password = hash.digest('hex')
     const response = await fetch(`http://localhost:3000/login/auth`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -71,27 +74,27 @@ function performSearch() {
 
     // Check if the Artists checkbox is checked
     if (document.getElementById("search-artists").checked) {
-      selectedPanels.push("Artists");
+        selectedPanels.push("Artists");
     }
 
     // Check if the Albums checkbox is checked
     if (document.getElementById("search-albums").checked) {
-      selectedPanels.push("Albums");
+        selectedPanels.push("Albums");
     }
 
     // Check if the Playlists checkbox is checked
     if (document.getElementById("search-playlists").checked) {
-      selectedPanels.push("Playlists");
+        selectedPanels.push("Playlists");
     }
 
     // Check if the Songs checkbox is checked
     if (document.getElementById("search-songs").checked) {
-      selectedPanels.push("Songs");
+        selectedPanels.push("Songs");
     }
 
     // Display the selected panels (console.log is used as an example)
     console.log("Selected Panels: ", selectedPanels);
-  }
+}
 
   function login() {
     window.location.href = "home.html";
