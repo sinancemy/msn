@@ -37,6 +37,13 @@ async function loginAuthorizationRequest(username, password) {
     }
 }
 
+async function getFollowedArtists() {
+    const response = await fetch(`http://localhost:3000/followedArtists`);
+    const data = await response.json();
+    console.log("Followed Artists: ", data);
+}
+
+
 function showHomePanel() {
     window.location.href = "home.html";
 }
