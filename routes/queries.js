@@ -103,4 +103,33 @@ router.get('/savedPlaylists', (req, res) => {
 });
 
 
+router.get('/friends', (req, res) => {
+    // Load parameters
+    const userId = req.session.userId;
+    // Execute query
+    (function (parameter, callback) {
+        const q = `
+        SELECT CASE
+            WHEN f.friend_id1 = ? THEN f.friend_id2
+            ELSE f.friend_id1
+        END AS friend_id,
+        u.full_name
+        FROM Friend f
+        JOIN User u ON (f.friend_id1 = u.id OR f.friend_id2 = u.id)
+        WHERE f.friend_id1 = ? OR f.friend_id2 = ?
+      `;
+        const v = [userId,userId,userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+
 module.exports = router

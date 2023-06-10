@@ -55,6 +55,12 @@ async function getSavedPlaylists() {
     console.log("Saved Artists: ", data);
 }
 
+async function getFriends() {
+    const response = await fetch(`http://localhost:3001/friends`);
+    const data = await response.json();
+    console.log("Friends: ", data);
+}
+
 
 
 function showHomePanel() {
