@@ -40,23 +40,3 @@ app.get('/', (req, res) => {
 // HOME ve SEARCH scrollable
 // SEARCH sayfası düzenlemesi/ekstra fonksiyonalite (checkbox falan)
 // Artist profili
-
-
-function exampleQuery(parameter, callback) {
-  q = `
-    # QUERY HERE
-    `
-  v = [parameter]
-  pool.query(q, v, (error, results) => {
-    if (error) throw error;
-    callback(error, results);
-  });
-}
-
-app.get('/getExampleQuery', (req, res) => {
-  const { parameter } = req.query;
-  exampleQuery(parameter, (error, results) => {
-    if (error) throw error;
-    res.send(results);
-  });
-});
