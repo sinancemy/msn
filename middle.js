@@ -38,7 +38,7 @@ async function loginAuthorizationRequest(username, password) {
 }
 
 async function getFollowedArtists() {
-    const response = await fetch(`http://localhost:3001/followedArtists`);
+    const response = await fetch(`http://localhost:3001/getFollowedArtists`);
     const data = await response.json();
     var table = document.getElementById("followed-artists-table");
     for (let i = 0; i < data.length; i++) {
@@ -57,15 +57,32 @@ async function getFollowedArtists() {
 }
 
 async function getSavedAlbums() {
-    const response = await fetch(`http://localhost:3001/savedAlbums`);
+    const response = await fetch(`http://localhost:3001/getSavedAlbums`);
     const data = await response.json();
     console.log("Saved Artists: ", data);
 }
 
 async function getSavedPlaylists() {
-    const response = await fetch(`http://localhost:3001/savedPlaylists`);
+    const response = await fetch(`http://localhost:3001/getSavedPlaylists`);
     const data = await response.json();
     console.log("Saved Artists: ", data);
+}
+
+async function getFriends() {
+    const response = await fetch(`http://localhost:3001/getFriends`);
+    const data = await response.json();
+    console.log("Friends: ", data);
+}
+
+async function getCurrentUserInfo() {
+    const response = await fetch(`http://localhost:3001/getCurrentUserInfo`);
+    const data = await response.json();
+    console.log("Current User Info: ", data);
+}
+async function getUserInfo() {
+    const response = await fetch(`http://localhost:3001/getUserInfo?userId=${parameter}`);
+    const data = await response.json();
+    console.log("User Info: ", data);
 }
 
 

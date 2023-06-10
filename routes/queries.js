@@ -23,7 +23,7 @@ router.get('/getExampleQuery', (req, res) => {
 });
 
 
-router.get('/followedArtists', (req, res) => {
+router.get('/getFollowedArtists', (req, res) => {
     // Load parameters
     const userId = req.session.userId;
     // Execute query
@@ -47,11 +47,11 @@ router.get('/followedArtists', (req, res) => {
         });
 });
 
-router.get('/savedAlbums', (req, res) => {
+router.get('/getSavedAlbums', (req, res) => {
     // Load parameters
     const userId = req.session.userId;
     // Execute query
-    (function (parameter, callback) {
+    (function (userId, callback) {
         const q = `
         SELECT Album.id, Content.name, Album.cover_art
         FROM Album
@@ -71,11 +71,11 @@ router.get('/savedAlbums', (req, res) => {
         });
 });
 
-router.get('/savedPlaylists', (req, res) => {
+router.get('/getSavedPlaylists', (req, res) => {
     // Load parameters
     const userId = req.session.userId;
     // Execute query
-    (function (parameter, callback) {
+    (function (userId, callback) {
         const q = `
         SELECT Playlist.id, Content.name, Playlist.description, Playlist.cover_art
         FROM Playlist
@@ -102,5 +102,78 @@ router.get('/savedPlaylists', (req, res) => {
         });
 });
 
+
+router.get('/getFriends', (req, res) => {
+    // Load parameters
+    const userId = req.session.userId;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT CASE
+            WHEN f.friend_id1 = ? THEN f.friend_id2
+            ELSE f.friend_id1
+        END AS friend_id,
+        u.full_name,
+        u.avatar
+        FROM Friend f
+        JOIN User u ON (f.friend_id1 = u.id OR f.friend_id2 = u.id)
+        WHERE f.friend_id1 = ? OR f.friend_id2 = ?
+      `;
+        const v = [userId,userId,userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/getCurrentUserInfo', (req, res) => {
+    // Load parameters
+    const userId = req.session.userId;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT id, full_name, avatar, bio
+        FROM User
+        WHERE id = ?
+      `;
+        const v = [userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+router.get('/getUserInfo', (req, res) => {
+    // Load parameters
+    const userId = req.query;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT id, full_name, avatar, bio
+        FROM User
+        WHERE id = ?
+      `;
+        const v = [userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
 
 module.exports = router

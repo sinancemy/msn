@@ -26,8 +26,6 @@ app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 
 // TODO BACKEND:
 
-// LOGIN OLAN USERIN, SAVED PLAYLISTS
-// LOGIN OLAN KİŞİNİN TÜM ARKADAŞLARI ve bilgileri
 // LOGIN OLAN KİŞİNİN AVATARı vs vs bilgileri
 // ALBÜM içerik sayfası için ALBUM bilgileri
 // aynısı playlist için
