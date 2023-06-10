@@ -30,7 +30,22 @@
           <h2 class="panel-header">Search</h2>
           <div class="panel-content">
             <img class="panel-image" src="search.png" alt="Image" style="width: 100px; height: 100px; position: absolute; top: 1px; right: 100px;">
-            <textarea class="panel-textarea" placeholder="What do you want to listen to?" style="width: 900px; height: 60px; position: absolute; top: 20px; left: 200px;"></textarea>
+            <textarea class="panel-textarea" placeholder="What do you want to listen to?" style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px;"></textarea>
+            
+            <input type="checkbox" id="search-artists" name="enable-search" style="position: absolute; top: 10px; right: 600px;">
+            <label for="search-checkbox" style="position: absolute; top: 10px; right: 500px;">Artists</label>
+
+            <input type="checkbox" id="search-albums" name="enable-search" style="position: absolute; top: 30px; right: 600px;">
+            <label for="search-checkbox" style="position: absolute; top: 30px; right: 500px;">Albums</label>
+
+            <input type="checkbox" id="search-playlists" name="enable-search" style="position: absolute; top: 50px; right: 600px;">
+            <label for="search-checkbox" style="position: absolute; top: 50px; right: 500px;">Playlists</label>
+
+            <input type="checkbox" id="search-songs" name="enable-search" style="position: absolute; top: 70px; right: 600px;">
+            <label for="search-checkbox" style="position: absolute; top: 70px; right: 500px;">Songs</label>
+
+            <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="performSearch()">Search</button>
+
           </div>
         </div>
       </div>
@@ -40,32 +55,49 @@
 
       </div>
 
-    </div> 
-    <div class="panel" style="width: 1325px; height: 50px; float: left; margin-right: 10px;">
-      <h2 class="panel-header" >Songs</h2>
-     
-    </div>
-   </div>  
+      <div class="panel" style="width: 300px; height: 300px;">
+        <h2 class="panel-header">Artists</h2>
+        <div class="panel-content">
+          <img class="panel-image" src="kenandogulu/kenandogulu.jpeg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
+          <p>Kenan Doğulu</p>
+          <button id="artist-panel" onclick="showArtistPanel()">View Artist</button>
+        </div>
         
-    </div> 
-    <div class="panel" style="width: 1325px; height: 50px; float: left; margin-right: 10px;">
-    <h2 class="panel-header" >Albums</h2>
-    <button id="albums-panel" onclick="showAlbumsPanel()">All Albums</button>
+      </div>
     
-    </div>
-    </div>  
-        
-    </div> 
-    <div class="panel" style="width: 1325px; height: 50px; float: left; margin-right: 10px;">
-    <h2 class="panel-header" >Artists</h2>
-    
-    </div>
-    </div>  
+      <div class="panel" style="width: 300px; height: 300px;">
+        <h2 class="panel-header">Albums</h2>
+        <div class="panel-content">
+          <img class="panel-image" src="kenandogulu/KenanDogulu-Festival.jpg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
+          <p>Festival</p>
+          <button id="albums-panel" onclick="showAlbumPanel()">View Album</button>
+        </div>
+      </div>
+
+      <div class="panel" style="width: 300px; height: 300px;">
+        <h2 class="panel-header">Playlists</h2>
+        <div class="panel-content">
+          <img class="panel-image" src="kenandogulu/kenandogulu-playlist.png.jpg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
+          <p>This is Kenan Doğulu</p>
+          <button id="playlists-panel" onclick="showPlaylistPanel()">View Playlist</button>
+        </div>
+      </div>
+
+
+      <div class="panel" style="width: 300px; height: 300px;">
+        <h2 class="panel-header">Songs</h2>
+        <div class="panel-content">
+          <img class="panel-image" src="kenandogulu/kenandogulu-playlist.png.jpg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
+          <p>This is Kenan Doğulu</p>
+          <button id="songs-panel" onclick="PlaySong()">Play Song</button>
+        </div>
+      </div>
+
 
 </div> 
 <div class="panel" style="width: 1325px; height: 30px; float: left; margin-right: 10px;">
   <h2 class="panel-header" >Music Controls</h2>
- 
+  
 </div>
 </div>  
     

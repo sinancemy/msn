@@ -32,11 +32,9 @@ const pool = mysql.createPool({
 // TODO FRONTEND
 
 // LOGIN
-// ALBUM, PLAYLIST içerik sayfası
+
 // HOME ve SEARCH scrollable
 // SEARCH sayfası düzenlemesi/ekstra fonksiyonalite (checkbox falan)
-// PROFILDE FOLLOWU SİLLİYORUZ
-// SEARCH SAYFASI HOME GİBİ OLSUN
 // Artist profili
 
 function exampleQuery(parameter, callback){
