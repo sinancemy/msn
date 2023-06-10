@@ -26,7 +26,7 @@ app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 
 // TODO BACKEND:
 
-// LOGIN OLAN USERIN FOLLOWLADIĞI ARTİSTLER (TOP5 / HEPSİ), SAVED ALBUMS, SAVED PLAYLISTS
+// LOGIN OLAN USERIN FOLLOWLADIĞI, SAVED ALBUMS, SAVED PLAYLISTS
 // LOGIN OLAN KİŞİNİN TÜM ARKADAŞLARI ve bilgileri
 // LOGIN OLAN KİŞİNİN AVATARı vs vs bilgileri
 // ALBÜM içerik sayfası için ALBUM bilgileri
