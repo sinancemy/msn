@@ -156,7 +156,7 @@ router.get('/getCurrentUserInfo', (req, res) => {
 
 router.get('/getUserInfo', (req, res) => {
     // Load parameters
-    const userId = req.query;
+    const { userId } = req.query;
     // Execute query
     (function (userId, callback) {
         const q = `

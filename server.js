@@ -31,7 +31,6 @@ app.get('/', (req, res) => {
 
 // TODO BACKEND:
 
-// LOGIN OLAN KİŞİNİN AVATARı vs vs bilgileri
 // ALBÜM içerik sayfası için ALBUM bilgileri
 // aynısı playlist için
 // aynısı artist profili için...
