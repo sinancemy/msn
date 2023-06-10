@@ -16,6 +16,29 @@ const pool = mysql.createPool({
   database: 'msn',
 });
 
+// TODO BACKEND:
+
+// LOGIN OLAN USERIN FOLLOWLADIĞI ARTİSTLER (TOP5 / HEPSİ), SAVED ALBUMS, SAVED PLAYLISTS
+// LOGIN OLAN KİŞİNİN TÜM ARKADAŞLARI ve bilgileri
+// LOGIN OLAN KİŞİNİN AVATARı vs vs bilgileri
+
+// ALBÜM içerik sayfası için ALBUM bilgileri
+// aynısı playlist için
+// aynısı artist profili için...
+
+// TODO MIDDLE:
+// Queryleri bağlama işi vs vs.
+
+// TODO FRONTEND
+
+// LOGIN
+// ALBUM, PLAYLIST içerik sayfası
+// HOME ve SEARCH scrollable
+// SEARCH sayfası düzenlemesi/ekstra fonksiyonalite (checkbox falan)
+// PROFILDE FOLLOWU SİLLİYORUZ
+// SEARCH SAYFASI HOME GİBİ OLSUN
+// Artist profili
+
 function exampleQuery(parameter, callback){
   q = `
     # QUERY HERE
@@ -39,3 +62,4 @@ app.use("/", express.static('./'));
 app.listen(3000, () => {});
 
 app.get('/', (req, res) => {res.sendFile(__dirname + "/home.html");});
+// app.get('/search', (req, res) => {res.sendFile(__dirname + "/search.html");});

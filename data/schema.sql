@@ -6,13 +6,15 @@ CREATE TABLE User (
   username VARCHAR(32),
   password CHAR(64),
   full_name VARCHAR(64),
-  email VARCHAR(32),
+  avatar BLOB,
+  email VARCHAR(64),
   bio VARCHAR(128),
   PRIMARY KEY(id)
 );
 
 CREATE TABLE Enjoyer (
   id INTEGER,
+  enjoyment FLOAT,
   FOREIGN KEY (id) REFERENCES User(id),
   PRIMARY KEY (id)
 );
@@ -26,7 +28,7 @@ CREATE TABLE Artist (
 
 CREATE TABLE Content (
   id INTEGER,
-  name VARCHAR(32),
+  name VARCHAR(64),
   creation_date DATE,
   PRIMARY KEY (id)
 );

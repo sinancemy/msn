@@ -7,7 +7,7 @@ from hashlib import sha256
 def generate_random_date(start_date=datetime(1970, 1, 1), end_date=datetime(2023, 12, 31)):
     random_seconds = random.randint(0, int((end_date - start_date).total_seconds()))
     random_date = start_date + timedelta(seconds=random_seconds)
-    return random_date.strftime('%Y-%m-%d')
+    return random_date
 
 def generate_random_color():
     return tuple(random.randint(0, 255) for _ in range(3))
