@@ -73,7 +73,7 @@ async function getSavedAlbums() {
         var coverCell = row.insertCell(0);
         var img = document.createElement("img");
         img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
-        img.className = "small-image"
+        img.className = "panel-image"
         coverCell.appendChild(img);
         // Put name in cell
         var nameCell = row.insertCell(1);
@@ -94,7 +94,7 @@ async function getSavedPlaylists() {
         var coverCell = row.insertCell(0);
         var img = document.createElement("img");
         img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
-        img.className = "small-image"
+        img.className = "panel-image"
         coverCell.appendChild(img);
         // Put name in cell
         var nameCell = row.insertCell(1);
@@ -130,7 +130,7 @@ function showHomePanel() {
     window.location.href = "../pages/home.html";
 }
 function showSearchPanel() {
-    window.location.href = "../pages/search.html";
+    window.location.href = `../pages/search.html`;
 }
 function showFriendsPanel() {
     window.location.href = "../pages/friends.html";
