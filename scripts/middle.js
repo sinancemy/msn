@@ -46,6 +46,7 @@ async function getFollowedArtists() {
     for (let i = 0; i < data.length; i++) {
         var row = table.insertRow();
         // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
         row.onclick = function() {showArtistPanel(data[i].id);}
         // Put image in cell
         var avatarCell = row.insertCell(0);
