@@ -529,6 +529,28 @@ router.get('/updateBio', (req, res) => {
         });
 });
 
+router.get('/updateUsername', (req, res) => {
+    // Load parameters
+    const { userId, username } = req.query;
+    // Execute query
+    (function (userId, username, callback) {
+        const q = `
+        UPDATE User
+        SET username = ? 
+        WHERE id = ?
+      `;
+        const v = [username, userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId, username,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 
 router.get('/searchTracks', (req, res) => {
