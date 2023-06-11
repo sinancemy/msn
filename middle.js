@@ -43,6 +43,19 @@ async function getFollowedArtists() {
     console.log("Followed Artists: ", data);
 }
 
+async function getSavedAlbums() {
+    const response = await fetch(`http://localhost:3001/savedAlbums`);
+    const data = await response.json();
+    console.log("Saved Artists: ", data);
+}
+
+async function getSavedPlaylists() {
+    const response = await fetch(`http://localhost:3001/savedPlaylist`);
+    const data = await response.json();
+    console.log("Saved Artists: ", data);
+}
+
+
 
 function showHomePanel() {
     window.location.href = "home.html";
@@ -71,29 +84,29 @@ function performSearch() {
 
     // Check if the Artists checkbox is checked
     if (document.getElementById("search-artists").checked) {
-      selectedPanels.push("Artists");
+        selectedPanels.push("Artists");
     }
 
     // Check if the Albums checkbox is checked
     if (document.getElementById("search-albums").checked) {
-      selectedPanels.push("Albums");
+        selectedPanels.push("Albums");
     }
 
     // Check if the Playlists checkbox is checked
     if (document.getElementById("search-playlists").checked) {
-      selectedPanels.push("Playlists");
+        selectedPanels.push("Playlists");
     }
 
     // Check if the Songs checkbox is checked
     if (document.getElementById("search-songs").checked) {
-      selectedPanels.push("Songs");
+        selectedPanels.push("Songs");
     }
 
     // Display the selected panels (console.log is used as an example)
     console.log("Selected Panels: ", selectedPanels);
-  }
+}
 
-  function login() {
+function login() {
     window.location.href = "home.html";
 }
 
