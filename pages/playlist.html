@@ -17,21 +17,53 @@
             <button id="profile-panel" class="big-button" onclick="showProfilePanel()">Profile</button>
       </div>
 
-    </div> 
-        <div class="panel-scrollable" >
-        <h2 class="panel-header" >Playlist</h2>
+      <div class="panel-scrollable" >
+        <h2 id="playlist-name" class="panel-header"></h2>
+        <h4 id="playlist-date" class="panel-header"></h4>
+        <img id="playlist-cover-art" class="panel-image"></img>
+            <table border="1">
+              <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Length</th>
+                    <th>Artists</th>
+                </tr>
+              </thead>
+              <tbody id="playlist-tracks-table">
+              </tbody>
+            </table>
     </div>
 
-    </div> 
-        <div class="panel-scrollable" >
-        <h2 class="panel-header" >Playlist Reactions</h2>
-        <button id="add-reaction" onclick="addReaction()">Add Reaction</button>
+    <div class="panel-scrollable" >
+        <h2 class="panel-header">Playlist Reactions</h2>
+        <table border="1">
+            <thead>
+              <tr>
+                  <th>Avatar</th>
+                  <th>Name</th>
+                  <th>Comment</th>
+                  <th>Reaction</th>
+              </tr>
+            </thead>
+            <tbody id="playlist-reactions-table">
+            </tbody>
+          </table>
     </div>
 
-    </div> 
-        <div class="panel-scrollable" >
-        <h2 class="panel-header" >Track Reactions</h2>
-        <button id="add-reaction" onclick="addReaction()">Add Reaction</button>
+    <div class="panel-scrollable" >
+        <h2 class="panel-header">Track Reactions</h2>
+        <table border="1">
+            <thead>
+              <tr>
+                  <th>Avatar</th>
+                  <th>Name</th>
+                  <th>Comment</th>
+                  <th>Reaction</th>
+              </tr>
+            </thead>
+            <tbody id="track-reactions-table">
+            </tbody>
+          </table>
     </div>
 
 </div> 
@@ -42,4 +74,11 @@
 
     </body>
     <script type="text/javascript" src="../scripts/middle.js"></script>
+    <script type="text/javascript" src="../scripts/content.js"></script>
+    <script type="text/javascript">
+        const id = new URLSearchParams(window.location.search).get('id')
+        getPlaylistInfo(id);
+        getPlaylistTracks(id);
+        getPlaylistReactions(id);
+    </script>
 </html>

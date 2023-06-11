@@ -158,7 +158,9 @@ function showFriendsPanel() {
     window.location.href = "../pages/friends.html";
 }
 function showProfilePanel() {
-    // enjoyersa enjoyer, artistse artist profile (kendi profili farkı)
+    window.location.href = "../pages/enjoyerProfile.html";
+}
+function showCurrentProfilePanel() {
     window.location.href = "../pages/enjoyerProfile.html";
 }
 function showPlaylistPanel(playlist_id) {

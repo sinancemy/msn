@@ -1,3 +1,4 @@
+
 async function getAlbumInfo(albumId) {
     const response = await fetch(`http://localhost:3001/getAlbumInfo?albumId=${albumId}`);
     const data = await response.json();
@@ -13,7 +14,6 @@ async function getAlbumInfo(albumId) {
 async function getAlbumTracks(albumId) {
     const response = await fetch(`http://localhost:3001/getAlbumTracks?albumId=${albumId}`);
     const data = await response.json();
-    console.log(data)
     var table = document.getElementById("album-tracks-table")
     for (let i = 0; i < data.length; i++) {
         getPerformers(data[i].id).then((artist_data) => {
@@ -93,14 +93,68 @@ function getAlbumReactions(albumId) {
 async function getPlaylistInfo(playlistId) {
     const response = await fetch(`http://localhost:3001/getPlaylistInfo?playlistId=${playlistId}`);
     const data = await response.json();
-    console.log("Playlist Info: ", data);
+    console.log(data)
+    const playlist_data = data[0]
+    var nameElem = document.getElementById("playlist-name");
+    nameElem.innerText = playlist_data.name;
+    var dateElem = document.getElementById("playlist-date");
+    dateElem.innerText = formatDate(playlist_data.creation_date);
+    var artElem = document.getElementById("playlist-cover-art");
+    artElem.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, playlist_data.cover_art.data));
 }
 
 async function getPlaylistTracks(playlistId) {
     const response = await fetch(`http://localhost:3001/getPlaylistTracks?playlistId=${playlistId}`);
     const data = await response.json();
-    console.log("Playlist Tracks: ", data);
+    var table = document.getElementById("playlist-tracks-table")
+    for (let i = 0; i < data.length; i++) {
+        getPerformers(data[i].id).then((artist_data) => {
+            var row = table.insertRow();
+            // When row is clicked, go to the artist page with the proper id.
+            row.className = "clickable-table-row"
+            row.onclick = function () { getTrackReactions(data[i].id) }
+    
+            var nameCell = row.insertCell(0)
+            nameCell.innerHTML = data[i].name;
+            var lengthCell = row.insertCell(1);
+            lengthCell.innerHTML = formatSeconds(data[i].length_seconds);
+            var artistsCell = row.insertCell(2);
+            artistsCell.innerHTML = "| "
+            for(let j = 0; j < artist_data.length; j++){
+                artistsCell.innerHTML += artist_data[j].full_name + " | ";
+            }
+        });
+    }
 }
+
+function getPlaylistReactions(playlistId) {
+    getContentReactions(playlistId).then((data) => {
+        var table = document.getElementById("playlist-reactions-table")
+        for (let i = 0; i < data.length; i++) {
+            var row = table.insertRow();
+            // When row is clicked, go to the artist page with the proper id.
+            row.className = "clickable-table-row"
+            row.onclick = function () { } // kendi yorumuysa silebilir?
+
+            var avatarCell = row.insertCell(0);
+            var img = document.createElement("img");
+            img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].avatar.data));
+            img.className = "panel-image"
+            avatarCell.appendChild(img);
+
+            var nameCell = row.insertCell(1)
+            nameCell.innerHTML = data[i].full_name;
+
+            var commentCell = row.insertCell(2);
+            commentCell.innerHTML = data[i].txt;
+
+            var reactionCell = row.insertCell(3);
+            reactionCell.innerHTML = data[i].emoji
+        }
+    });
+}
+
+
 
 async function getContentReactions(contentId) {
     const response = await fetch(`http://localhost:3001/getContentReactions?contentId=${contentId}`);
