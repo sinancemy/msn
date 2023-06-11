@@ -127,12 +127,6 @@ async function getFriends() {
    
 }
   
- 
-  
-
-  
-
-
 async function updateBio(userId, bio) {
     const response = await fetch(`http://localhost:3001/updateBio?userId=${userId}&bio=${bio}`);
     const data = await response.json();
