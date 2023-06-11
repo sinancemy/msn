@@ -52,7 +52,7 @@ async function getFollowedArtists() {
         var avatarCell = row.insertCell(0);
         var img = document.createElement("img");
         img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].avatar.data));
-        img.className = "small-image"
+        img.className = "panel-image"
         avatarCell.appendChild(img);
         // Put name in cell
         var nameCell = row.insertCell(1);

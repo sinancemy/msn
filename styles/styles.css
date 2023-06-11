@@ -13,7 +13,7 @@
 /* Styles for the panel container */
 .panel-container {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap; /* Allow panels to wrap onto a new line */
   margin-bottom: 2%; /* Adjust the percentage as needed */
 }
 
@@ -24,6 +24,8 @@
   border: 2px solid black;
   padding: 7%;
   margin-bottom: 1%; /* Adjust the percentage as needed */
+  width: calc(33.33% - 2%); /* Adjust the width to fit three panels per row */
+  box-sizing: border-box; /* Include border and padding in the width calculation */
 }
 
 /* Styles for the panel header */
@@ -33,7 +35,7 @@
   top: 0;
   left: 0;
   margin-top: 0; /* Adjust the margin as needed to align the panel header */
-  text-align: right; 
+  text-align: right;
 }
 
 /* Styles for the tables */
@@ -66,24 +68,15 @@ h1 {
 
 /* Optional: Additional custom styles can be added as needed */
 
-
 .panel-image {
-  max-width: 100%;
-  max-height: 100%;
+  width: 40%; /* (200 / 1000) * 100 = 20 */
+  height: auto;
   object-fit: cover;
   margin-bottom: 10px;
-}
-
-.small-image{
-  width: 64px;
-  height: 64px;
-}
-
-.big-image{
-  width: 256px;
-  height: 256px;
 }
 
 .clickable-table-row{
   cursor: pointer;
 }
+
+
