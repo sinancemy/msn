@@ -138,17 +138,19 @@ router.get('/getFriends', (req, res) => {
     // Execute query
     (function (userId, callback) {
         const q = `
-        SELECT CASE
-            WHEN f.friend_id1 = ? THEN f.friend_id2
-            ELSE f.friend_id1
-        END AS friend_id,
-        u.full_name,
-        u.avatar
-        FROM Friend f
-        JOIN User u ON (f.friend_id1 = u.id OR f.friend_id2 = u.id)
-        WHERE f.friend_id1 = ? OR f.friend_id2 = ?
-      `;
-        const v = [userId, userId, userId];
+        SELECT Friend.friend_id1 AS friend_id, User.full_name, User.avatar
+        FROM Friend
+        JOIN User ON Friend.friend_id1 = User.id
+        WHERE Friend.friend_id2 = ?
+
+        UNION
+
+        SELECT Friend.friend_id2 AS friend_id, User.full_name, User.avatar
+        FROM Friend
+        JOIN User ON Friend.friend_id2 = User.id
+        WHERE Friend.friend_id1 = ?
+       `;
+        const v = [userId, userId];
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
