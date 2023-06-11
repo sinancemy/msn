@@ -89,6 +89,35 @@ async function getUserInfo(parameter) {
     console.log("User Info: ", data);
 }
 
+async function getAlbumInfo(parameter) {
+    const response = await fetch(`http://localhost:3001/getAlbumInfo?userId=${parameter}`);
+    const data = await response.json();
+    console.log("Album Info: ", data);
+}
+
+
+function showHomePanel() {
+    window.location.href = "home.html";
+}
+function showSearchPanel() {
+    window.location.href = "search.html";
+}
+function showFriendsPanel() {
+    window.location.href = "friends.html";
+}
+function showProfilePanel() {
+    window.location.href = "profile.html";
+}
+function showPlaylistPanel() {
+    window.location.href = "playlists.html";
+}
+function showAlbumPanel() {
+    window.location.href = "albums.html";
+}
+function showArtistPanel(artist_id) {
+    window.location.href = `artistProfile.html?id=${artist_id}`;
+}
+
 function performSearch() {
     var selectedPanels = [];
 
