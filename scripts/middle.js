@@ -97,25 +97,25 @@ async function getAlbumInfo(parameter) {
 
 
 function showHomePanel() {
-    window.location.href = "home.html";
+    window.location.href = "../pages/home.html";
 }
 function showSearchPanel() {
-    window.location.href = "search.html";
+    window.location.href = "../pages/search.html";
 }
 function showFriendsPanel() {
-    window.location.href = "friends.html";
+    window.location.href = "../pages/friends.html";
 }
 function showProfilePanel() {
-    window.location.href = "profile.html";
+    window.location.href = "../pages/profile.html";
 }
 function showPlaylistPanel() {
-    window.location.href = "playlists.html";
+    window.location.href = "../pages/playlists.html";
 }
 function showAlbumPanel() {
-    window.location.href = "albums.html";
+    window.location.href = "../pages/albums.html";
 }
 function showArtistPanel(artist_id) {
-    window.location.href = `artistProfile.html?id=${artist_id}`;
+    window.location.href = `../pages/artistProfile.html?id=${artist_id}`;
 }
 
 function performSearch() {

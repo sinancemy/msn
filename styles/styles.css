@@ -1,46 +1,71 @@
+/* Styles for the center div */
+.center {
+  text-align: center;
+  margin-bottom: 20px;
+}
 
+/* Styles for the big buttons */
+.big-button {
+  padding: 2% 4%; /* Adjust the percentages as needed */
+  margin: 0 1%; /* Adjust the percentages as needed */
+}
+
+/* Styles for the panel container */
+.panel-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2%; /* Adjust the percentage as needed */
+}
+
+/* Styles for the panel */
+.panel {
+  position: relative; /* Add position relative to the panel */
+  display: inline-block; /* Add display inline-block to the panel */
+  border: 2px solid black;
+  padding: 7%;
+  margin-bottom: 1%; /* Adjust the percentage as needed */
+}
+
+/* Styles for the panel header */
+.panel-header {
+  position: relative; /* Add position relative to the panel header */
+  display: inline-block;
+  top: 0;
+  left: 0;
+  margin-top: 0; /* Adjust the margin as needed to align the panel header */
+  text-align: right; 
+}
+
+/* Styles for the tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1%; /* Adjust the percentage as needed */
+  overflow-y: scroll; /* Add scroll for vertical overflow */
+  max-height: 200px; /* Set a fixed height for the table */
+}
+
+table th,
+table td {
+  padding: 1%;
+  text-align: left;
+}
+
+/* Styles for the music controls panel */
+.music-controls-panel {
+  width: 100%; /* Adjust the percentage as needed */
+  height: 30px;
+  float: left;
+  margin-right: 1%; /* Adjust the percentage as needed */
+}
+
+/* Styles for the h1 heading */
 h1 {
   text-align: center;
 }
-.center {
-  text-align: center;
-}
 
-.center button {
-margin: 0 auto;
-}
+/* Optional: Additional custom styles can be added as needed */
 
-.big-button {
-  width: 250px;
-  height: 70px;
-  font-size: 24px;
-  padding: 15px;
-  margin-left: auto;
-}
-
-.panel {
-  border: 5px solid #ccc;
-  padding: 20px;
-  width: 400px;
-  height: 400px;
-  display: inline-block;
-  margin-right: 10px;
-  margin-bottom: 10px;
-}
-
-.scrollable{
-  overflow-y: auto;
-}
-
-.panel-header {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.panel-content {
-  margin-bottom: 10px;
-}
 
 .panel-image {
   width: 200px;
@@ -57,8 +82,4 @@ margin: 0 auto;
 .big-image{
   width: 256px;
   height: 256px;
-}
-
-.clickable-table-row{
-  cursor: pointer;
 }
