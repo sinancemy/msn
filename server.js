@@ -24,9 +24,9 @@ app.listen(3001, () => { });
 
 app.get('/', (req, res) => {
   if (req.session.userId == null)
-    res.sendFile(__dirname + "/login.html"); 
+    res.sendFile(__dirname + "/pages/login.html"); 
   else
-    res.sendFile(__dirname + "/home.html")
+    res.sendFile(__dirname + "/pages/home.html")
 });
 
 // TODO BACKEND:

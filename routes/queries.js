@@ -176,4 +176,10 @@ router.get('/getUserInfo', (req, res) => {
         });
 });
 
+// QUERY FOR SEARCH BAR
+// SELECT t.content_id, c.name AS track_name
+// FROM Track t
+// JOIN Content c ON t.content_id = c.id
+// WHERE c.name LIKE ?;
+
 module.exports = router

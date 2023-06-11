@@ -42,19 +42,20 @@ async function loginAuthorizationRequest(username, password) {
 async function getFollowedArtists() {
     const response = await fetch(`http://localhost:3001/getFollowedArtists`);
     const data = await response.json();
-    var table = document.getElementById("followed-artists-table");
+    var table = document.getElementById("artists-table");
     for (let i = 0; i < data.length; i++) {
         var row = table.insertRow();
         // When row is clicked, go to the artist page with the proper id.
         row.onclick = function() {showArtistPanel(data[i].id);}
-        // Put name in cell
-        var nameCell = row.insertCell(0);
-        nameCell.innerHTML = data[i].full_name;
         // Put image in cell
-        var avatarCell = row.insertCell(1);
+        var avatarCell = row.insertCell(0);
         var img = document.createElement("img");
         img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].avatar.data));
+        img.className = "small-image"
         avatarCell.appendChild(img);
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].full_name;
     }
 }
 
@@ -87,30 +88,6 @@ async function getUserInfo(parameter) {
     console.log("User Info: ", data);
 }
 
-
-
-function showHomePanel() {
-    window.location.href = "home.html";
-}
-function showSearchPanel() {
-    window.location.href = "search.html";
-}
-function showFriendsPanel() {
-    window.location.href = "friends.html";
-}
-function showProfilePanel() {
-    window.location.href = "profile.html";
-}
-function showPlaylistPanel() {
-    window.location.href = "playlists.html";
-}
-function showAlbumPanel() {
-    window.location.href = "albums.html";
-}
-function showArtistPanel(artist_id) {
-    window.location.href = `artistProfile.html?id=${artist_id}`;
-}
-
 function performSearch() {
     var selectedPanels = [];
 
@@ -138,8 +115,26 @@ function performSearch() {
     console.log("Selected Panels: ", selectedPanels);
 }
 
-function login() {
-    window.location.href = "home.html";
+function showHomePanel() {
+    window.location.href = "../pages/home.html";
+}
+function showSearchPanel() {
+    window.location.href = "../pages/search.html";
+}
+function showFriendsPanel() {
+    window.location.href = "../pages/friends.html";
+}
+function showProfilePanel() {
+    window.location.href = "../pages/profile.html";
+}
+function showPlaylistPanel() {
+    window.location.href = "../pages/playlists.html";
+}
+function showAlbumPanel() {
+    window.location.href = "../pages/albums.html";
+}
+function showArtistPanel(artist_id) {
+    window.location.href = `../pages/artistProfile.html?id=${artist_id}`;
 }
 
 

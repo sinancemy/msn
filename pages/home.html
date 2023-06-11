@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles/styles.css">
 
 <html>
 
@@ -19,48 +19,58 @@
   </div>
 
   <div class="panel-container">
+    <h2 class="panel-header">Artists</h2>
     <div class="panel">
       <table border="1">
         <thead>
           <tr>
-            <th>Name</th>
             <th>Avatar</th>
+            <th>Name</th>
           </tr>
         </thead>
-        <tbody id="followed-artists-table">
+        <tbody id="artists-table">
         </tbody>
       </table>
     </div>
 
     <div class="panel">
       <h2 class="panel-header">Albums</h2>
-      <div class="panel-content">
-        <img class="panel-image" src="kenandogulu/KenanDogulu-Festival.jpg" alt="Image"
-          style="width: 100px; height: auto; float: left; margin-right: 10px;">
-        <p>Festival</p>
-        <button id="albums-panel" onclick="showAlbumPanel()">View Album</button>
-      </div>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody id="albums-table">
+        </tbody>
+      </table>
     </div>
 
     <div class="panel">
-      <h2 class="panel-header">Playlists</h2>
-      <div class="panel-content">
-        <img class="panel-image" src="kenandogulu/kenandogulu-playlist.png.jpg" alt="Image"
-          style="width: 100px; height: auto; float: left; margin-right: 10px;">
-        <p>This is Kenan Doğulu</p>
-        <button id="albums-panel" onclick="showPlaylistPanel()">View Playlist</button>
-      </div>
+      <h2 class="panel-header">Playlist</h2>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Cover</th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody id="playlists-table">
+        </tbody>
+      </table>
     </div>
-
-
   </div>
+
   <div class="panel" style="width: 1325px; height: 30px; float: left; margin-right: 10px;">
     <h2 class="panel-header">Music Controls</h2>
   </div>
+
 </body>
 
-<script type="text/javascript" src="middle.js"></script>
+<script type="text/javascript" src="../scripts/middle.js"></script>
 <script>
-getFollowedArtists()
+  getFollowedArtists()
 </script>
+
 </html>
