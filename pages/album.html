@@ -3,8 +3,6 @@
 
 <html>
 
-
-
 <head>
     <meta charset="UTF-8">
     <title>MSN</title>
@@ -23,15 +21,28 @@
     </div>
 
     <div class="panel-scrollable" >
-        <h2 class="panel-header">Album</h2>
+        <h2 id="album-name" class="panel-header">Album</h2>
+            <table border="1">
+              <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Length</th>
+                    <th>Artists</th>
+                </tr>
+              </thead>
+              <tbody id="album-tracks-table">
+              </tbody>
+            </table>
     </div>
 
     <div class="panel-scrollable" >
-        <h2 class="panel-header">Reactions</h2>
+        <h2 class="panel-header">Album Reactions</h2>
     </div>
 
     <div class="panel-scrollable" >
-        <h2 class="panel-header">Tracks</h2>
+        <h2 class="panel-header">Track Reactions</h2>
+        <button id="add-reaction" onclick="addReaction()">Add Reaction</button>
+
     </div>
     
     <div class="panel-music-controls">
@@ -40,5 +51,6 @@
 
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
+<script type="text/javascript" src="../scripts/content.js"></script>
 
 </html>
