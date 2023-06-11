@@ -18,26 +18,29 @@
       </div>
 
       <div class="panel-container">
-        <div class="panel-single" >
+        <div class="panel-search" >
           <h2 class="panel-header">Search</h2>
           <div class="panel-content">
             <img class="panel-image-search" src="/assets/search.png" alt="Image" >
             <textarea class="search-textarea" id="search-input" class="panel-textarea" placeholder="What are you looking for?" ></textarea>
             
-            <input class="checkbox-artists" type="checkbox" id="search-artists">
-            <label class="checkbox-artists-text" for="search-checkbox" >Artists</label>
+            <div>
+              <input type="checkbox" id="search-artists">
+              <label for="search-checkbox" >Artists</label>
+  
+              <input type="checkbox" id="search-enjoyers" >
+              <label for="search-checkbox" >Enjoyers</label>
+  
+              <input type="checkbox" id="search-albums">
+              <label for="search-checkbox" >Albums</label>
+  
+              <input type="checkbox" id="search-playlists">
+              <label for="search-checkbox" >Playlists</label>
+  
+              <input type="checkbox" id="search-tracks">
+              <label for="search-checkbox" >Songs</label>
+            </div>
 
-            <input class="checkbox-enjoyers" type="checkbox" id="search-enjoyers" >
-            <label class="checkbox-enjoyers-text" for="search-checkbox" >Enjoyers</label>
-
-            <input class="checkbox-albums" type="checkbox" id="search-albums">
-            <label class="checkbox-albums-text" for="search-checkbox" >Albums</label>
-
-            <input class="checkbox-playlists" type="checkbox" id="search-playlists">
-            <label class="checkbox-playlists-text" for="search-checkbox" >Playlists</label>
-
-            <input class="checkbox-songs" type="checkbox" id="search-songs">
-            <label class="checkbox-songs-text" for="search-checkbox" >Songs</label>
 
             <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="performSearch()">Search</button>
 
@@ -45,7 +48,7 @@
         </div>
       </div>
 
-      <div class="panel-search" >
+      <div class="panel-scrollable" >
         <h2 class="panel-header">Artists</h2>
         <table border="1">
           <thead>
@@ -59,7 +62,7 @@
         </table>
       </div>
 
-      <div class="panel-search">
+      <div class="panel-scrollable">
         <h2 class="panel-header">Enjoyers</h2>
         <table border="1">
           <thead>
@@ -68,12 +71,12 @@
               <th>Name</th>
             </tr>
           </thead>
-          <tbody id="enjoyer-search-table">
+          <tbody id="enjoyers-search-table">
           </tbody>
         </table>
       </div>
     
-      <div class="panel-search" >
+      <div class="panel-scrollable" >
         <h2 class="panel-header">Albums</h2>
         <table border="1">
           <thead>
@@ -87,7 +90,7 @@
         </table>
       </div>
 
-      <div class="panel-search" >
+      <div class="panel-scrollable" >
         <h2 class="panel-header">Playlists</h2>
         <table border="1">
           <thead>
@@ -102,7 +105,7 @@
       </div>
 
 
-      <div class="panel-search">
+      <div class="panel-scrollable">
         <h2 class="panel-header">Tracks</h2>
         <table border="1">
           <thead>

@@ -52,7 +52,7 @@ function performSearch() {
     }
 
     if (document.getElementById("search-enjoyers").checked) {
-        searchArtists(searchQuery).then((data) => {
+        searchEnjoyers(searchQuery).then((data) => {
             var table = document.getElementById("enjoyers-search-table");
             table.innerHTML = ""
             for (let i = 0; i < data.length; i++) {
@@ -65,7 +65,7 @@ function performSearch() {
                 img.className = "panel-image"
                 avatarCell.appendChild(img);
                 var nameCell = row.insertCell(1);
-                nameCell.innerHTML = data[i].enjoyer_name;
+                nameCell.innerHTML = data[i].full_name;
             }
         });
     }
@@ -122,7 +122,7 @@ function performSearch() {
                 img.className = "panel-image"
                 coverCell.appendChild(img);
                 var nameCell = row.insertCell(1);
-                nameCell.innerHTML = data[i].song_name;
+                nameCell.innerHTML = data[i].name;
             }
         });
     }
