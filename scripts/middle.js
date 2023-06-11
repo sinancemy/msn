@@ -47,7 +47,7 @@ async function getFollowedArtists() {
         var row = table.insertRow();
         // When row is clicked, go to the artist page with the proper id.
         row.className = "clickable-table-row"
-        row.onclick = function() {showArtistPanel(data[i].id);}
+        row.onclick = function () { showArtistPanel(data[i].id); }
         // Put image in cell
         var avatarCell = row.insertCell(0);
         var img = document.createElement("img");
@@ -68,7 +68,7 @@ async function getSavedAlbums() {
         var row = table.insertRow();
         // When row is clicked, go to the artist page with the proper id.
         row.className = "clickable-table-row"
-        row.onclick = function() {showAlbumPanel(data[i].id);}
+        row.onclick = function () { showAlbumPanel(data[i].id); }
         // Put image in cell
         var coverCell = row.insertCell(0);
         var img = document.createElement("img");
@@ -89,7 +89,7 @@ async function getSavedPlaylists() {
         var row = table.insertRow();
         // When row is clicked, go to the artist page with the proper id.
         row.className = "clickable-table-row"
-        row.onclick = function() {showPlaylistPanel(data[i].id);}
+        row.onclick = function () { showPlaylistPanel(data[i].id); }
         // Put image in cell
         var coverCell = row.insertCell(0);
         var img = document.createElement("img");
@@ -120,9 +120,40 @@ async function getUserInfo(parameter) {
 }
 
 async function getAlbumInfo(parameter) {
-    const response = await fetch(`http://localhost:3001/getAlbumInfo?userId=${parameter}`);
+    const response = await fetch(`http://localhost:3001/getAlbumInfo?albumID=${parameter}`);
     const data = await response.json();
     console.log("Album Info: ", data);
+}
+
+async function searchTracks(parameter) {
+    console.log("help")
+    const response = await fetch(`http://localhost:3001/searchTracks?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Tracks: ", data);
+}
+
+async function searchAlbums(parameter) {
+    const response = await fetch(`http://localhost:3001/searchAlbums?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Albums: ", data);
+}
+
+async function searchPlaylists(parameter) {
+    const response = await fetch(`http://localhost:3001/searchPlaylists?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Playlists: ", data);
+}
+
+async function searchArtists(parameter) {
+    const response = await fetch(`http://localhost:3001/searchArtists?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Artists: ", data);
+}
+
+async function searchEnjoyers(parameter) {
+    const response = await fetch(`http://localhost:3001/searchEnjoyers?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Enjoyers: ", data);
 }
 
 
