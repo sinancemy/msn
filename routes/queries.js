@@ -573,6 +573,26 @@ router.get('/updateAvatar', (req, res) => {
         });
 });
 
+router.get('/addPlaylistTrack', (req, res) => {
+    // Load parameters
+    const { playlistId, trackId } = req.query;
+    // Execute query
+    (function (playlistId, trackId, callback) {
+        const q = `
+        INSERT INTO PlaylistTracks (playlist_id, track_id)
+        VALUES (?, ?)
+      `;
+        const v = [playlistId, trackId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(playlistId, trackId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
 
 
 router.get('/searchTracks', (req, res) => {

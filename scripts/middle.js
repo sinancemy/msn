@@ -141,6 +141,13 @@ async function updateAvatar(userId, avatar) {
     console.log("Result: ", data);
 }
 
+async function addPlaylistTrack(playlistId, trackId) {
+    const response = await fetch(`http://localhost:3001/addPlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+
 function showHomePanel() {
     window.location.href = "../pages/home.html";
 }
