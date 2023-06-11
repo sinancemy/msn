@@ -27,14 +27,17 @@
             <input type="checkbox" id="search-artists" name="enable-search" style="position: absolute; top: 10px; right: 600px;">
             <label for="search-checkbox" style="position: absolute; top: 10px; right: 500px;">Artists</label>
 
+            <input type="checkbox" id="search-artists" name="enable-search" style="position: absolute; top: 10px; right: 600px;">
+            <label for="search-checkbox" style="position: absolute; top: 10px; right: 500px;">Enjoyers</label>
+
             <input type="checkbox" id="search-albums" name="enable-search" style="position: absolute; top: 30px; right: 600px;">
             <label for="search-checkbox" style="position: absolute; top: 30px; right: 500px;">Albums</label>
 
             <input type="checkbox" id="search-playlists" name="enable-search" style="position: absolute; top: 50px; right: 600px;">
             <label for="search-checkbox" style="position: absolute; top: 50px; right: 500px;">Playlists</label>
 
-            <input type="checkbox" id="search-songs" name="enable-search" style="position: absolute; top: 70px; right: 600px;">
-            <label for="search-checkbox" style="position: absolute; top: 70px; right: 500px;">Songs</label>
+            <input type="checkbox" id="search-tracks" name="enable-search" style="position: absolute; top: 70px; right: 600px;">
+            <label for="search-checkbox" style="position: absolute; top: 70px; right: 500px;">Tracks</label>
 
             <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="performSearch()">Search</button>
 
@@ -42,42 +45,75 @@
         </div>
       </div>
 
-      <div class="panel" style="width: 300px; height: 300px;">
+      <div class="panel-scrollable">
         <h2 class="panel-header">Artists</h2>
-        <div class="panel-content">
-          <img class="panel-image" src="kenandogulu/kenandogulu.jpeg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
-          <p>Kenan Doğulu</p>
-          <button id="artist-panel" onclick="showArtistPanel()">View Artist</button>
-        </div>
-        
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody id="artists-search-table">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="panel-scrollable">
+        <h2 class="panel-header">Enjoyers</h2>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody id="enjoyer-search-table">
+          </tbody>
+        </table>
       </div>
     
-      <div class="panel" style="width: 300px; height: 300px;">
+      <div class="panel-scrollable">
         <h2 class="panel-header">Albums</h2>
-        <div class="panel-content">
-          <img class="panel-image" src="kenandogulu/KenanDogulu-Festival.jpg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
-          <p>Festival</p>
-          <button id="albums-panel" onclick="showAlbumPanel()">View Album</button>
-        </div>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody id="albums-search-table">
+          </tbody>
+        </table>
       </div>
 
-      <div class="panel" style="width: 300px; height: 300px;">
+      <div class="panel-scrollable">
         <h2 class="panel-header">Playlists</h2>
-        <div class="panel-content">
-          <img class="panel-image" src="kenandogulu/kenandogulu-playlist.png.jpg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
-          <p>This is Kenan Doğulu</p>
-          <button id="playlists-panel" onclick="showPlaylistPanel()">View Playlist</button>
-        </div>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody id="playlists-search-table">
+          </tbody>
+        </table>
       </div>
 
 
-      <div class="panel" style="width: 300px; height: 300px;">
-        <h2 class="panel-header">Songs</h2>
-        <div class="panel-content">
-          <img class="panel-image" src="kenandogulu/kenandogulu-playlist.png.jpg" alt="Image" style="width: 70px; height: auto; float: left; margin-right: 10px;">
-          <p>This is Kenan Doğulu</p>
-          <button id="songs-panel" onclick="PlaySong()">Play Song</button>
-        </div>
+      <div class="panel-scrollable">
+        <h2 class="panel-header">Tracks</h2>
+        <table border="1">
+          <thead>
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody id="tracks-search-table">
+          </tbody>
+        </table>
       </div>
 </div> 
 
