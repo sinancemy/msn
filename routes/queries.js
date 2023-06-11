@@ -182,10 +182,9 @@ router.get('/getAlbumInfo', (req, res) => {
     // Execute query
     (function (albumId, callback) {
         const q = `
-        SELECT Album.id, Album.cover_art, Content.name AS album_name, Content.creation_date, Track.id AS track_id, Track.name AS track_name
+        SELECT Album.id, Content.name, Album.cover_art, Content.creation_date
         FROM Album
         JOIN Content ON Album.id = Content.id
-        JOIN Track ON Track.album_id = Album.id
         WHERE Album.id = ?
       `;
         const v = [albumId];
@@ -199,6 +198,79 @@ router.get('/getAlbumInfo', (req, res) => {
             res.send(results);
         });
 });
+
+router.get('/getAlbumTracks', (req, res) => {
+    // Load parameters
+    const { albumId } = req.query;
+    // Execute query
+    (function (albumId, callback) {
+        const q = `
+        SELECT Track.id, Content.name, Track.genre, Track.length_seconds
+        FROM Track
+        INNER JOIN Album ON Track.album_id = Album.id
+        INNER JOIN Content ON Track.id = Content.id
+        WHERE Album.id = ?
+      `;
+        const v = [albumId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(albumId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/getPlaylistInfo', (req, res) => {
+    // Load parameters
+    const { playlistId } = req.query;
+    // Execute query
+    (function (playlistId, callback) {
+        const q = `
+        SELECT Playlist.id, Content.name, Playlist.cover_art, Playlist.description
+        FROM Playlist
+        JOIN Content ON Playlist.id = Content.id
+        WHERE Playlist.id = ?
+      `;
+        const v = [playlistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(playlistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+router.get('/getPlaylistTracks', (req, res) => {
+    // Load parameters
+    const { playlistId } = req.query;
+    // Execute query
+    (function (playlistId, callback) {
+        const q = `
+        SELECT Content.id, Content.name, Track.genre, Track.length_seconds
+        FROM Track
+        JOIN PlaylistTracks ON PlaylistTracks.track_id = Track.id
+        JOIN Content ON Content.id = Track.id
+        WHERE PlaylistTracks.playlist_id = ?
+      `;
+        const v = [playlistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(playlistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 
 router.get('/searchTracks', (req, res) => {
