@@ -18,26 +18,23 @@
       </div>
 
       <div class="panel-container">
-        <div class="panel" style="width: 1325px; height: 60px; float: left; margin-right: 10px; position: relative;">
+        <div class="panel-single" >
           <h2 class="panel-header">Search</h2>
           <div class="panel-content">
-            <img class="panel-image" src="search.png" alt="Image" style="width: 100px; height: 100px; position: absolute; top: 1px; right: 100px;">
-            <textarea id="search-input" class="panel-textarea" placeholder="What are you looking for?" style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px;"></textarea>
+            <img class="panel-image-search" src="/assets/search.png" alt="Image" >
+            <textarea class="search-textarea" id="search-input" class="panel-textarea" placeholder="What are you looking for?" ></textarea>
             
-            <input type="checkbox" id="search-artists" name="enable-search" style="position: absolute; top: 10px; right: 600px;">
-            <label for="search-checkbox" style="position: absolute; top: 10px; right: 500px;">Artists</label>
+            <input class="checkbox-artists" type="checkbox" id="search-artists" name="enable-search" >
+            <label class="checkbox-artists-text" for="search-checkbox" >Artists</label>
 
-            <input type="checkbox" id="search-artists" name="enable-search" style="position: absolute; top: 10px; right: 600px;">
-            <label for="search-checkbox" style="position: absolute; top: 10px; right: 500px;">Enjoyers</label>
+            <input class="checkbox-albums" type="checkbox" id="search-albums" name="enable-search">
+            <label class="checkbox-albums-text" for="search-checkbox" >Albums</label>
 
-            <input type="checkbox" id="search-albums" name="enable-search" style="position: absolute; top: 30px; right: 600px;">
-            <label for="search-checkbox" style="position: absolute; top: 30px; right: 500px;">Albums</label>
+            <input class="checkbox-playlists" type="checkbox" id="search-playlists" name="enable-search">
+            <label class="checkbox-playlists-text" for="search-checkbox" >Playlists</label>
 
-            <input type="checkbox" id="search-playlists" name="enable-search" style="position: absolute; top: 50px; right: 600px;">
-            <label for="search-checkbox" style="position: absolute; top: 50px; right: 500px;">Playlists</label>
-
-            <input type="checkbox" id="search-tracks" name="enable-search" style="position: absolute; top: 70px; right: 600px;">
-            <label for="search-checkbox" style="position: absolute; top: 70px; right: 500px;">Tracks</label>
+            <input class="checkbox-songs" type="checkbox" id="search-songs" name="enable-search" >
+            <label class="checkbox-songs-text" for="search-checkbox" >Songs</label>
 
             <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="performSearch()">Search</button>
 
@@ -45,7 +42,7 @@
         </div>
       </div>
 
-      <div class="panel-scrollable">
+      <div class="panel-search" >
         <h2 class="panel-header">Artists</h2>
         <table border="1">
           <thead>
@@ -73,7 +70,7 @@
         </table>
       </div>
     
-      <div class="panel-scrollable">
+      <div class="panel-search" >
         <h2 class="panel-header">Albums</h2>
         <table border="1">
           <thead>
@@ -87,7 +84,7 @@
         </table>
       </div>
 
-      <div class="panel-scrollable">
+      <div class="panel-search" >
         <h2 class="panel-header">Playlists</h2>
         <table border="1">
           <thead>
@@ -114,10 +111,15 @@
           <tbody id="tracks-search-table">
           </tbody>
         </table>
+      <div class="panel-search" style="width: 300px; height: 300px;">
+        <h2 class="panel-header">Songs</h2>
+        <div class="panel-content">
+          <button id="songs-panel" onclick="PlaySong()">Play Song</button>
+        </div>
       </div>
 </div> 
 
-<div class="panel" style="width: 1325px; height: 30px; float: left; margin-right: 10px;">
+<div class="panel-music-controls">
   <h2 class="panel-header" >Music Controls</h2>
 </div>
     
