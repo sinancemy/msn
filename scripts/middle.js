@@ -139,6 +139,12 @@ async function addPlaylistTrack(playlistId, trackId) {
     console.log("Result: ", data);
 }
 
+async function addFriend(userId1, userId2) {
+    const response = await fetch(`http://localhost:3001/addFriend?userId1=${userId1}&userId2=${userId2}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+  }
+
 
 function showHomePanel() {
     window.location.href = `../pages/home.html`;
@@ -169,9 +175,9 @@ function showCurrentProfilePanel() {
 function showUserPanel(user_id) {
     getUserType(user_id).then((data) => {
         if (data.is_enjoyer == 1){
-                showEnjoyerPanel(id);
+                showEnjoyerPanel(user_id);
         } else if (data.is_artist == 1){
-                showArtistPanel(id);
+                showArtistPanel(user_id);
         }  else {
             console.log("user doesnt exist")
         }

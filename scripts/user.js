@@ -43,7 +43,7 @@ async function getFriends(userId) {
         var row = table.insertRow();
         // When row is clicked, go to the artist page with the proper id.
         row.className = "clickable-table-row"
-        row.onclick = function () { showUserPanel(data[i].friend_id); } // arkadaşı artistse artistprofile gitmesi gerek çaktırma :D
+        row.onclick = function () { showUserPanel(data[i].friend_id); }
         // Put image in cell
         var coverCell = row.insertCell(0);
         var img = document.createElement("img");

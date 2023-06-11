@@ -538,6 +538,27 @@ router.get('/addArtist', (req, res) => {
     });
 });
 
+router.get('/addFriend', (req, res) => {
+    // Load parameters
+    const { userId1, userId2 } = req.query;
+    // Execute query
+    (function ( userId1, userId2, callback) {
+        const q = `
+        INSERT INTO Friend (friend_id1, friend_id2, since)
+        VALUES (?, ?, CURRENT_DATE())
+       `;
+        const v = [ userId1, userId2 ];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })( userId1, userId2,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 router.get('/updateBio', (req, res) => {
     // Load parameters
     const { userId, bio } = req.query;
