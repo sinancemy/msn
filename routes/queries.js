@@ -373,6 +373,29 @@ router.get('/getArtistAppearedAlbums', (req, res) => {
         });
 });
 
+router.get('/getContentReactions', (req, res) => {
+    // Load parameters
+    const { contentId } = req.query;
+    // Execute query
+    (function (contentId, callback) {
+        const q = `
+        SELECT User.id, User.full_name, User.avatar, Reaction.txt, Reaction.emoji
+        FROM Reaction
+        JOIN User ON Reaction.user_id = User.id
+        WHERE Reaction.content_id = ?
+       `;
+        const v = [contentId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(contentId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 router.get('/searchTracks', (req, res) => {
     // Load parameters
     const { searchQuery } = req.query;

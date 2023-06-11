@@ -166,6 +166,11 @@ async function getArtistAppearedAlbums(artistId) {
     console.log("Artist Appeared Albums: ", data);
 }
 
+async function getContentReactions(contentId) {
+    const response = await fetch(`http://localhost:3001/getContentReactions?contentId=${contentId}`);
+    const data = await response.json();
+    console.log("Track Reactions: ", data);
+}
 
 function showHomePanel() {
     window.location.href = "../pages/home.html";
