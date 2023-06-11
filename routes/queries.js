@@ -297,6 +297,81 @@ router.get('/getArtistInfo', (req, res) => {
 });
 
 
+router.get('/getArtistTracks', (req, res) => {
+    // Load parameters
+    const { artistId } = req.query;
+    // Execute query
+    (function (artistId, callback) {
+        const q = `
+        SELECT Track.id AS track_id, Content.name AS track_name, Track.genre, Track.length_seconds, Album.id AS album_id
+        FROM Track
+        JOIN Album ON Track.album_id = Album.id
+        JOIN PerformsIn ON Track.id = PerformsIn.track_id
+        JOIN Content ON Track.id = Content.id
+        WHERE PerformsIn.artist_id = ?
+      `;
+        const v = [artistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(artistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/getArtistFollowers', (req, res) => {
+    // Load parameters
+    const { artistId } = req.query;
+    // Execute query
+    (function (artistId, callback) {
+        const q = `
+        SELECT User.id, User.full_name, User.avatar
+        FROM User
+        JOIN Follows ON Follows.enjoyer_id = User.id
+        WHERE Follows.artist_id = ?
+       `;
+        const v = [artistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(artistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/getArtistAppearedAlbums', (req, res) => {
+    // Load parameters
+    const { artistId } = req.query;
+    // Execute query
+    (function (artistId, callback) {
+        const q = `
+        SELECT Album.id, Content.name, Album.cover_art
+        FROM Album
+        JOIN Content ON Album.id = Content.id
+        WHERE Album.id IN (
+            SELECT Track.album_id
+            FROM Track
+            JOIN PerformsIn ON Track.id = PerformsIn.track_id
+            WHERE PerformsIn.artist_id = ?
+            )
+       `;
+        const v = [artistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(artistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
 
 router.get('/searchTracks', (req, res) => {
     // Load parameters

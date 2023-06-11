@@ -160,11 +160,10 @@ async function getArtistFollowers(artistId) {
     console.log("Artist Followers: ", data);
 }
 
-
-async function getArtistAlbums(artistId) {
-    const response = await fetch(`http://localhost:3001/getArtistAlbums?artistId=${artistId}`);
+async function getArtistAppearedAlbums(artistId) {
+    const response = await fetch(`http://localhost:3001/getArtistAppearedAlbums?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Artist Albums: ", data);
+    console.log("Artist Appeared Albums: ", data);
 }
 
 
