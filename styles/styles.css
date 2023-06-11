@@ -9,7 +9,11 @@
   padding: 2% 4%;
   margin: 0 1%;
 }
-
+.send-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  margin-right: 10px;
+}
 /* Styles for the panel container */
 .panel-container {
   display: flex;
@@ -187,7 +191,7 @@ h1 {
   width: 100px;
   height: 100px;
   position: absolute;
-  top: 1px;
+  top: 50px;
   right: 100px;
 }
 
@@ -195,7 +199,15 @@ h1 {
   width: 500px;
   height: 60px;
   position: absolute;
-  top: 20px;
+  top: 30px;
+  left: 200px;
+  resize: none;
+}
+.emoji-textarea {
+  width: 500px;
+  height: 60px;
+  position: absolute;
+  top: 100px;
   left: 200px;
   resize: none;
 }
