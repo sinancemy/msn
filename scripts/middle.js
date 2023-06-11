@@ -47,7 +47,7 @@ async function getFollowedArtists() {
         var row = table.insertRow();
         // When row is clicked, go to the artist page with the proper id.
         row.className = "clickable-table-row"
-        row.onclick = function() {showArtistPanel(data[i].id);}
+        row.onclick = function () { showArtistPanel(data[i].id); }
         // Put image in cell
         var avatarCell = row.insertCell(0);
         var img = document.createElement("img");
@@ -63,13 +63,43 @@ async function getFollowedArtists() {
 async function getSavedAlbums() {
     const response = await fetch(`http://localhost:3001/getSavedAlbums`);
     const data = await response.json();
-    console.log("Saved Artists: ", data);
+    var table = document.getElementById("albums-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        row.onclick = function () { showAlbumPanel(data[i].id); }
+        // Put image in cell
+        var coverCell = row.insertCell(0);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
+        img.className = "small-image"
+        coverCell.appendChild(img);
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].name;
+    }
 }
 
 async function getSavedPlaylists() {
     const response = await fetch(`http://localhost:3001/getSavedPlaylists`);
     const data = await response.json();
-    console.log("Saved Artists: ", data);
+    var table = document.getElementById("playlists-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        row.onclick = function () { showPlaylistPanel(data[i].id); }
+        // Put image in cell
+        var coverCell = row.insertCell(0);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
+        img.className = "small-image"
+        coverCell.appendChild(img);
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].name;
+    }
 }
 
 async function getFriends() {
@@ -90,9 +120,40 @@ async function getUserInfo(parameter) {
 }
 
 async function getAlbumInfo(parameter) {
-    const response = await fetch(`http://localhost:3001/getAlbumInfo?userId=${parameter}`);
+    const response = await fetch(`http://localhost:3001/getAlbumInfo?albumID=${parameter}`);
     const data = await response.json();
     console.log("Album Info: ", data);
+}
+
+async function searchTracks(parameter) {
+    console.log("help")
+    const response = await fetch(`http://localhost:3001/searchTracks?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Tracks: ", data);
+}
+
+async function searchAlbums(parameter) {
+    const response = await fetch(`http://localhost:3001/searchAlbums?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Albums: ", data);
+}
+
+async function searchPlaylists(parameter) {
+    const response = await fetch(`http://localhost:3001/searchPlaylists?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Playlists: ", data);
+}
+
+async function searchArtists(parameter) {
+    const response = await fetch(`http://localhost:3001/searchArtists?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Artists: ", data);
+}
+
+async function searchEnjoyers(parameter) {
+    const response = await fetch(`http://localhost:3001/searchEnjoyers?searchQuery=${parameter}`);
+    const data = await response.json();
+    console.log("Matched Enjoyers: ", data);
 }
 
 
@@ -108,11 +169,11 @@ function showFriendsPanel() {
 function showProfilePanel() {
     window.location.href = "../pages/profile.html";
 }
-function showPlaylistPanel() {
-    window.location.href = "../pages/playlists.html";
+function showPlaylistPanel(playlist_id) {
+    window.location.href = `../pages/playlist.html?id=${playlist_id}`;
 }
-function showAlbumPanel() {
-    window.location.href = "../pages/albums.html";
+function showAlbumPanel(album_id) {
+    window.location.href = `../pages/album.html?id=${album_id}`;
 }
 function showArtistPanel(artist_id) {
     window.location.href = `../pages/artistProfile.html?id=${artist_id}`;
