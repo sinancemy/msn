@@ -31,6 +31,9 @@ app.get('/', (req, res) => {
 
 // TODO BACKEND:
 
+// DELETE REACTION
+
+
 // TODO FRONTEND
 
 // HOME ve SEARCH scrollable

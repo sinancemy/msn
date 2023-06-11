@@ -145,6 +145,11 @@ async function getArtistAppearedAlbums(artistId) {
     console.log("Artist Appeared Albums: ", data);
 }
 
+async function addReaction(userId, contentId, text, emoji) {
+    const response = await fetch(`http://localhost:3001/addReaction?userId=${userId}&contentId=${contentId}&text=${text}&emoji=${emoji}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
 
 function showHomePanel() {
     window.location.href = "../pages/home.html";

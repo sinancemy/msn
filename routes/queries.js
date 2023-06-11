@@ -420,6 +420,27 @@ router.get('/getPerformers', (req, res) => {
         });
 });
 
+router.get('/addReaction', (req, res) => {
+    // Load parameters
+    const { userId, contentId, text, emoji } = req.query;
+    // Execute query
+    (function (userId, contentId, text, emoji, callback) {
+        const q = `
+        INSERT INTO Reaction (user_id, content_id, txt, emoji)
+        VALUES (?, ?, ?, ?)
+       `;
+        const v = [userId, contentId, text, emoji];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId, contentId, text, emoji,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 router.get('/searchTracks', (req, res) => {
     // Load parameters
     const { searchQuery } = req.query;
