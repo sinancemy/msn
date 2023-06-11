@@ -147,6 +147,12 @@ async function getArtistAppearedAlbums(artistId) {
 
 
 
+async function getPerformers(trackId) {
+    const response = await fetch(`http://localhost:3001/getPerformers?trackId=${trackId}`);
+    const data = await response.json();
+    console.log("Performers: ", data);
+}
+
 function showHomePanel() {
     window.location.href = "../pages/home.html";
 }
