@@ -472,6 +472,29 @@ router.get('/addReaction', (req, res) => {
         });
 });
 
+
+router.get('/removeReaction', (req, res) => {
+    // Load parameters
+    const { userId, contentId } = req.query;
+    // Execute query
+    (function (userId, contentId, callback) {
+        const q = `
+        DELETE FROM Reaction
+        WHERE user_id = ?
+        AND content_id = ?
+       `;
+        const v = [userId, contentId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId, contentId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 router.get('/addEnjoyer', (req, res) => {
     // Load parameters
     const { userId, enjoyment, username, password, fullName, avatar, email, bio } = req.query;
@@ -705,7 +728,6 @@ router.get('/searchTracks', (req, res) => {
         WHERE Content.name LIKE ?
       `;
         const v = ['%' + searchQuery + '%'];
-        console.log(v);
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
