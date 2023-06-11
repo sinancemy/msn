@@ -22,6 +22,35 @@ router.get('/getExampleQuery', (req, res) => {
         });
 });
 
+router.get('/getUserType', (req, res) => {
+    const {userId} = req.query;
+    (function (userId, callback) {
+        const q = `
+            SELECT EXISTS(
+                SELECT 1
+                FROM User
+                NATURAL JOIN Enjoyer
+                WHERE Enjoyer.id = ?
+            ) AS is_enjoyer,
+            EXISTS(
+                SELECT 1
+                FROM User
+                NATURAL JOIN Artist
+                WHERE Artist.id = ?
+            ) AS is_artist
+        `;
+        const v = [userId, userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 router.get('/getFollowedArtists', (req, res) => {
     // Load parameters
@@ -105,7 +134,7 @@ router.get('/getSavedPlaylists', (req, res) => {
 
 router.get('/getFriends', (req, res) => {
     // Load parameters
-    const userId = req.session.userId;
+    const { userId } = req.query;
     // Execute query
     (function (userId, callback) {
         const q = `

@@ -33,7 +33,7 @@
                   <th>Name</th>
                 </tr>
               </thead>
-              <tbody id="enjoyer-friends-table">
+              <tbody id="friends-table">
               </tbody>
             </table>
           </div>
@@ -62,9 +62,11 @@
 
     </body>
     <script type="text/javascript" src="../scripts/middle.js"></script>
+    <script type="text/javascript" src="../scripts/user.js"></script>
 
     <script>
         const id = new URLSearchParams(window.location.search).get('id')
+        console.log(id)
         getFriends(id)
         getSavedPlaylists()
      

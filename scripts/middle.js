@@ -19,6 +19,19 @@ async function getCurrentUserId() {
     return data.userId;
 }
 
+async function getUserType(userId){
+    const response = await fetch(`http://localhost:3001/getUserType?userId=${userId}`);
+    const data = await response.json();
+    return data[0];
+}
+
+async function getCurrentUserType() {
+    const userId = await getCurrentUserId()
+    const data = await getUserType(userId)
+    return data;
+}
+
+
 async function loginAuthorizationRequest(username, password) {
     const response = await fetch(`http://localhost:3001/login/auth`, {
         method: 'POST',
@@ -102,37 +115,6 @@ async function getSavedPlaylists() {
     }
 }
 
-async function getFriends() {
-   
-    const response = await fetch(`http://localhost:3001/getFriends`);
-    const data = await response.json();
-    var table = document.getElementById("enjoyer-friends-table");
-    
-  
-    for (let i = 0; i < data.length; i++) {
-        var row = table.insertRow();
-        // When row is clicked, go to the artist page with the proper id.
-        row.className = "clickable-table-row"
-        row.onclick = function () { showEnjoyerPanel(data[i].id); }
-        // Put image in cell
-        var coverCell = row.insertCell(0);
-        var img = document.createElement("img");
-        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].avatar.data));
-        img.className = "panel-image"
-        coverCell.appendChild(img);
-        // Put name in cell
-        var nameCell = row.insertCell(1);
-        nameCell.innerHTML = data[i].full_name;
-    }
-   
-}
-  
- 
-  
-
-  
-
-
 async function updateBio(userId, bio) {
     const response = await fetch(`http://localhost:3001/updateBio?userId=${userId}&bio=${bio}`);
     const data = await response.json();
@@ -159,20 +141,43 @@ async function addPlaylistTrack(playlistId, trackId) {
 
 
 function showHomePanel() {
-    window.location.href = "../pages/home.html";
+    window.location.href = `../pages/home.html`;
 }
 function showSearchPanel() {
     window.location.href = `../pages/search.html`;
 }
 function showFriendsPanel() {
-    window.location.href = "../pages/friends.html";
+    window.location.href = `../pages/friends.html`;
 }
-function showProfilePanel() {
-    window.location.href = "../pages/enjoyerProfile.html";
-}
+
 function showCurrentProfilePanel() {
-    window.location.href = "../pages/enjoyerProfile.html";
+    getCurrentUserType().then((data) => {
+        if (data.is_enjoyer == 1){
+            getCurrentUserId().then((id) => {
+                showEnjoyerPanel(id);
+            })
+        } else if (data.is_artist == 1){
+            getCurrentUserId().then((id) => {
+                showArtistPanel(id);
+            })
+        }  else {
+            console.log("user doesnt exist")
+        }
+    });
 }
+
+function showUserPanel(user_id) {
+    getUserType(user_id).then((data) => {
+        if (data.is_enjoyer == 1){
+                showEnjoyerPanel(id);
+        } else if (data.is_artist == 1){
+                showArtistPanel(id);
+        }  else {
+            console.log("user doesnt exist")
+        }
+    })
+}
+
 function showPlaylistPanel(playlist_id) {
     window.location.href = `../pages/playlist.html?id=${playlist_id}`;
 }
