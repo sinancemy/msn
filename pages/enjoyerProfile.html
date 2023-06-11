@@ -2,77 +2,75 @@
 <link rel="stylesheet" href="../styles/styles.css">
 
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>MSN</title>
-        
-    </head>
 
-    <body>
-        <h1>Music Socialization Network</h1>
+<head>
+  <meta charset="UTF-8">
+  <title>MSN</title>
 
-        <div class="center">
-            <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
-            <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
-            <button id="friends-panel" class="big-button" onclick="showFriendsPanel()">Friends</button>
-            <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
-        </div>
-    
-        <div class="panel">
-            <h2 class="panel-header">Enjoyer Avatar</h2>
-            
-          </div>
-        </div>
+</head>
 
-        <div class="panel-scrollable">
-            <h2 class="panel-header">Enjoyer Friends</h2>
-            <table border="1">
-              <thead>
-                <tr>
-                  <th>Avatar</th>
-                  <th>Name</th>
-                </tr>
-              </thead>
-              <tbody id="friends-table">
-              </tbody>
-            </table>
-          </div>
-        </div>
+<body>
+  <h1>Music Socialization Network</h1>
 
-        <div class="panel-scrollable">
-            <h2 class="panel-header">Enjoyer Playlists</h2>
-            <table border="1">
-                <thead>
-                  <tr>
-                    <th>Cover</th>
-                    <th>Name</th>
-                  </tr>
-                </thead>
-                <tbody id="playlists-table">
-                </tbody>
-              </table>
-            </div>
-          </div>
-       
-    
-        <div class="panel-music-controls">
-            <h2 class="panel-header">Music Controls</h2>
-    
-        </div>
+  <div class="center">
+    <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
+    <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
+    <button id="friends-panel" class="big-button" onclick="showFriendsPanel()">Friends</button>
+    <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
+  </div>
 
-    </body>
-    <script type="text/javascript" src="../scripts/middle.js"></script>
-    <script type="text/javascript" src="../scripts/user.js"></script>
+  <div class="panel">
+    <h2 class="panel-header">Enjoyer Avatar</h2>
 
-    <script>
-        const id = new URLSearchParams(window.location.search).get('id')
-        console.log(id)
-        getFriends(id)
-        getSavedPlaylists()
-     
-    </script>
+  </div>
+  </div>
+
+  <div class="panel-scrollable">
+    <h2 class="panel-header">Enjoyer Friends</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="friends-table">
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+  <div class="panel-scrollable">
+    <h2 class="panel-header">Enjoyer Playlists</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Cover</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="playlists-table">
+      </tbody>
+    </table>
+  </div>
+  </div>
+
+
+  <div class="panel-music-controls">
+    <h2 class="panel-header">Music Controls</h2>
+
+  </div>
+
+</body>
+<script type="text/javascript" src="../scripts/middle.js"></script>
+<script type="text/javascript" src="../scripts/user.js"></script>
+
+<script>
+  const id = new URLSearchParams(window.location.search).get('id')
+  console.log(id)
+  getFriends(id)
+  getSavedPlaylists()
+
+</script>
 
 </html>
-
-
-

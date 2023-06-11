@@ -20,8 +20,7 @@
           style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px; resize: none;"></textarea>
         <textarea id="password-field" class="panel-textarea" placeholder="Enter Your Password"
           style="width: 500px; height: 80px; position: absolute; top: 100px; left: 200px; resize: none;"></textarea>
-        <button class="panel-button" style="position: absolute; top: 40px; right: 300px;"
-          onclick="loginAuthorizationRequest(
+        <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="loginAuthorizationRequest(
             document.getElementById('username-field').value,
             CryptoJS.SHA256(document.getElementById('password-field').value).toString())">Login</button>
       </div>

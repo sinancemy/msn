@@ -247,4 +247,4 @@ function decodeEmoji(emojiBytes) {
     const decoder = new TextDecoder('utf-8');
     const emojiString = decoder.decode(uint8Array);
     return emojiString;
-  }
+}

@@ -2,127 +2,131 @@
 <link rel="stylesheet" href="../styles/styles.css">
 
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>MSN</title>
-    </head>
 
-    <body>
-        <h1>Music Socialization Network</h1>
+<head>
+  <meta charset="UTF-8">
+  <title>MSN</title>
+</head>
 
-        <div class="center">
-            <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
-            <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
-            <button id="friends-panel" class="big-button" onclick="showFriendsPanel()">Friends</button>
-            <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
-      </div>
+<body>
+  <h1>Music Socialization Network</h1>
 
-      <div class="panel-container">
-        <div class="panel-search" >
-          <h2 class="panel-header">Search</h2>
-          <div class="panel-content">
-         
-            <textarea class="search-textarea" id="search-input" class="panel-textarea" placeholder="What are you looking for?" ></textarea>
-            
-            <div>
-              <div style="position: relative; width: 100%;">
-                <input type="checkbox" id="search-artists" style="position: absolute; top: 30px; right: 50%;">
-                <label for="search-checkbox" style="position: absolute; top: 30px; right: 45%;">Artists</label>
-        
-                <input type="checkbox" id="search-albums" style="position: absolute; top: 50px; right: 50%;">
-                <label for="search-checkbox" style="position: absolute; top: 50px; right: 45%;">Albums</label>
+  <div class="center">
+    <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
+    <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
+    <button id="friends-panel" class="big-button" onclick="showFriendsPanel()">Friends</button>
+    <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
+  </div>
 
-                <input type="checkbox" id="search-playlists" style="position: absolute; top: 70px; right: 50%;">
-                <label for="search-checkbox" style="position: absolute; top: 70px; right: 44%;">Playlists</label>
+  <div class="panel-container">
+    <div class="panel-search">
+      <h2 class="panel-header">Search</h2>
+      <div class="panel-content">
 
-                <input type="checkbox" id="search-tracks" style="position: absolute; top: 90px; right: 50%;">
-                <label for="search-checkbox" style="position: absolute; top: 90px; right: 45%;">Songs</label>
-              </div>
-            </div>
+        <textarea class="search-textarea" id="search-input" class="panel-textarea"
+          placeholder="What are you looking for?"></textarea>
 
+        <div>
+          <div style="position: relative; width: 100%;">
+            <input type="checkbox" id="search-artists" style="position: absolute; top: 30px; right: 50%;">
+            <label for="search-checkbox" style="position: absolute; top: 30px; right: 45%;">Artists</label>
 
-            <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="performSearch()">Search</button>
+            <input type="checkbox" id="search-albums" style="position: absolute; top: 50px; right: 50%;">
+            <label for="search-checkbox" style="position: absolute; top: 50px; right: 45%;">Albums</label>
 
+            <input type="checkbox" id="search-playlists" style="position: absolute; top: 70px; right: 50%;">
+            <label for="search-checkbox" style="position: absolute; top: 70px; right: 44%;">Playlists</label>
+
+            <input type="checkbox" id="search-tracks" style="position: absolute; top: 90px; right: 50%;">
+            <label for="search-checkbox" style="position: absolute; top: 90px; right: 45%;">Songs</label>
           </div>
         </div>
+
+
+        <button class="panel-button" style="position: absolute; top: 40px; right: 300px;"
+          onclick="performSearch()">Search</button>
+
       </div>
+    </div>
+  </div>
 
-      <div class="panel-scrollable" >
-        <h2 class="panel-header">Artists</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Avatar</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody id="artists-search-table">
-          </tbody>
-        </table>
-      </div>
+  <div class="panel-scrollable">
+    <h2 class="panel-header">Artists</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="artists-search-table">
+      </tbody>
+    </table>
+  </div>
 
-      <div class="panel-scrollable">
-        <h2 class="panel-header">Enjoyers</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Avatar</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody id="enjoyers-search-table">
-          </tbody>
-        </table>
-      </div>
-    
-      <div class="panel-scrollable" >
-        <h2 class="panel-header">Albums</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Avatar</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody id="albums-search-table">
-          </tbody>
-        </table>
-      </div>
+  <div class="panel-scrollable">
+    <h2 class="panel-header">Enjoyers</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="enjoyers-search-table">
+      </tbody>
+    </table>
+  </div>
 
-      <div class="panel-scrollable" >
-        <h2 class="panel-header">Playlists</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Avatar</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody id="playlists-search-table">
-          </tbody>
-        </table>
-      </div>
+  <div class="panel-scrollable">
+    <h2 class="panel-header">Albums</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="albums-search-table">
+      </tbody>
+    </table>
+  </div>
+
+  <div class="panel-scrollable">
+    <h2 class="panel-header">Playlists</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="playlists-search-table">
+      </tbody>
+    </table>
+  </div>
 
 
-      <div class="panel-scrollable">
-        <h2 class="panel-header">Tracks</h2>
-        <table border="1">
-          <thead>
-            <tr>
-              <th>Avatar</th>
-              <th>Name</th>
-            </tr>
-          </thead>
-          <tbody id="tracks-search-table">
-          </tbody>
-        </table>
-</div> 
+  <div class="panel-scrollable">
+    <h2 class="panel-header">Tracks</h2>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="tracks-search-table">
+      </tbody>
+    </table>
+  </div>
 
-<div class="panel-music-controls">
-  <h2 class="panel-header" >Music Controls</h2>
-</div>
-    
-    </body>
-    <script type="text/javascript" src="../scripts/middle.js"></script>
-    <script type="text/javascript" src="../scripts/search.js"></script>
+  <div class="panel-music-controls">
+    <h2 class="panel-header">Music Controls</h2>
+  </div>
+
+</body>
+<script type="text/javascript" src="../scripts/middle.js"></script>
+<script type="text/javascript" src="../scripts/search.js"></script>
+
 </html>
