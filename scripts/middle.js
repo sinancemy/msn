@@ -102,49 +102,6 @@ async function getSavedPlaylists() {
     }
 }
 
-async function getFriends() {
-    const response = await fetch(`http://localhost:3001/getFriends`);
-    const data = await response.json();
-    console.log("Friends: ", data);
-}
-
-async function getCurrentUserInfo() {
-    const response = await fetch(`http://localhost:3001/getCurrentUserInfo`);
-    const data = await response.json();
-    console.log("Current User Info: ", data);
-}
-async function getUserInfo(userId) {
-    const response = await fetch(`http://localhost:3001/getUserInfo?userId=${userId}`);
-    const data = await response.json();
-    console.log("User Info: ", data);
-}
-
-
-
-async function getArtistInfo(artistId) {
-    const response = await fetch(`http://localhost:3001/getArtistInfo?artistId=${artistId}`);
-    const data = await response.json();
-    console.log("Artist Info: ", data);
-}
-
-async function getArtistTracks(artistId) {
-    const response = await fetch(`http://localhost:3001/getArtistTracks?artistId=${artistId}`);
-    const data = await response.json();
-    console.log("Artist Tracks: ", data);
-}
-
-async function getArtistFollowers(artistId) {
-    const response = await fetch(`http://localhost:3001/getArtistFollowers?artistId=${artistId}`);
-    const data = await response.json();
-    console.log("Artist Followers: ", data);
-}
-
-async function getArtistAppearedAlbums(artistId) {
-    const response = await fetch(`http://localhost:3001/getArtistAppearedAlbums?artistId=${artistId}`);
-    const data = await response.json();
-    console.log("Artist Appeared Albums: ", data);
-}
-
 
 function showHomePanel() {
     window.location.href = "../pages/home.html";
@@ -170,4 +127,26 @@ function showArtistPanel(artist_id) {
 }
 function showEnjoyerPanel(enjoyer_id) {
     window.location.href = `../pages/enjoyerProfile.html?id=${enjoyer_id}`;
+}
+
+function formatSeconds(seconds) {
+    var minutes = Math.floor(seconds / 60);
+    var remainingSeconds = seconds % 60;
+    
+    var formattedMinutes = ("0" + minutes).slice(-2);
+    var formattedSeconds = ("0" + remainingSeconds).slice(-2);
+    
+    return formattedMinutes + ":" + formattedSeconds;
+  }
+
+function formatDate(dateString) {
+    var date = new Date(dateString);
+
+    var day = date.getUTCDate();
+    var month = date.getUTCMonth() + 1;
+    var year = date.getUTCFullYear();
+
+    var formattedDate = ("0" + day).slice(-2) + "-" + ("0" + month).slice(-2) + "-" + year;
+
+    return formattedDate;
 }

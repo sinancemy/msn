@@ -11,8 +11,6 @@
 <body>
     <h1>Music Socialization Network</h1>
 
-    <a href="search.html">Go to Main Page</a>
-
     <div class="center">
         <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
         <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
@@ -21,7 +19,9 @@
     </div>
 
     <div class="panel-scrollable" >
-        <h2 id="album-name" class="panel-header">Album</h2>
+        <h2 id="album-name" class="panel-header"></h2>
+        <h4 id="album-date" class="panel-header"></h4>
+        <img id="album-cover-art" class="panel-image"></img>
             <table border="1">
               <thead>
                 <tr>
@@ -37,10 +37,34 @@
 
     <div class="panel-scrollable" >
         <h2 class="panel-header">Reactions</h2>
+        <table border="1">
+            <thead>
+              <tr>
+                  <th>Avatar</th>
+                  <th>Name</th>
+                  <th>Comment</th>
+                  <th>Reaction</th>
+              </tr>
+            </thead>
+            <tbody id="album-reactions-table">
+            </tbody>
+          </table>
     </div>
 
     <div class="panel-scrollable" >
         <h2 class="panel-header">Tracks</h2>
+        <table border="1">
+            <thead>
+              <tr>
+                  <th>Avatar</th>
+                  <th>Name</th>
+                  <th>Comment</th>
+                  <th>Reaction</th>
+              </tr>
+            </thead>
+            <tbody id="track-reactions-table">
+            </tbody>
+          </table>
     </div>
     
     <div class="panel-music-controls">
@@ -50,5 +74,12 @@
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
 <script type="text/javascript" src="../scripts/content.js"></script>
+<script type="text/javascript">
+    const id = new URLSearchParams(window.location.search).get('id')
+    getAlbumInfo(id);
+    getAlbumTracks(id);
+    getAlbumReactions(id);
+    
+</script>
 
 </html>
