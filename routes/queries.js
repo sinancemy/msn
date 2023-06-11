@@ -119,7 +119,7 @@ router.get('/getFriends', (req, res) => {
         JOIN User u ON (f.friend_id1 = u.id OR f.friend_id2 = u.id)
         WHERE f.friend_id1 = ? OR f.friend_id2 = ?
       `;
-        const v = [userId,userId,userId];
+        const v = [userId, userId, userId];
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
@@ -181,5 +181,30 @@ router.get('/getUserInfo', (req, res) => {
 // FROM Track t
 // JOIN Content c ON t.content_id = c.id
 // WHERE c.name LIKE ?;
+
+router.get('/getAlbumInfo', (req, res) => {
+    // Load parameters
+    const { albumId } = req.query;
+    // Execute query
+    (function (albumId, callback) {
+        const q = `
+        SELECT Album.id, Album.cover_art, Content.name AS album_name, Content.creation_date, Track.id AS track_id, Track.name AS track_name
+        FROM Album
+        JOIN Content ON Album.id = Content.id
+        JOIN Track ON Track.album_id = Album.id
+        WHERE Album.id = ?;
+      `;
+        const v = [albumId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(albumId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 module.exports = router
