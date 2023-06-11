@@ -24,16 +24,19 @@
             <img class="panel-image-search" src="/assets/search.png" alt="Image" >
             <textarea class="search-textarea" id="search-input" class="panel-textarea" placeholder="What are you looking for?" ></textarea>
             
-            <input class="checkbox-artists" type="checkbox" id="search-artists" name="enable-search" >
+            <input class="checkbox-artists" type="checkbox" id="search-artists">
             <label class="checkbox-artists-text" for="search-checkbox" >Artists</label>
 
-            <input class="checkbox-albums" type="checkbox" id="search-albums" name="enable-search">
+            <input class="checkbox-enjoyers" type="checkbox" id="search-enjoyers" >
+            <label class="checkbox-enjoyers-text" for="search-checkbox" >Enjoyers</label>
+
+            <input class="checkbox-albums" type="checkbox" id="search-albums">
             <label class="checkbox-albums-text" for="search-checkbox" >Albums</label>
 
-            <input class="checkbox-playlists" type="checkbox" id="search-playlists" name="enable-search">
+            <input class="checkbox-playlists" type="checkbox" id="search-playlists">
             <label class="checkbox-playlists-text" for="search-checkbox" >Playlists</label>
 
-            <input class="checkbox-songs" type="checkbox" id="search-songs" name="enable-search" >
+            <input class="checkbox-songs" type="checkbox" id="search-songs">
             <label class="checkbox-songs-text" for="search-checkbox" >Songs</label>
 
             <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="performSearch()">Search</button>
@@ -56,7 +59,7 @@
         </table>
       </div>
 
-      <div class="panel-scrollable">
+      <div class="panel-search">
         <h2 class="panel-header">Enjoyers</h2>
         <table border="1">
           <thead>
@@ -99,7 +102,7 @@
       </div>
 
 
-      <div class="panel-scrollable">
+      <div class="panel-search">
         <h2 class="panel-header">Tracks</h2>
         <table border="1">
           <thead>
@@ -111,12 +114,6 @@
           <tbody id="tracks-search-table">
           </tbody>
         </table>
-      <div class="panel-search" style="width: 300px; height: 300px;">
-        <h2 class="panel-header">Songs</h2>
-        <div class="panel-content">
-          <button id="songs-panel" onclick="PlaySong()">Play Song</button>
-        </div>
-      </div>
 </div> 
 
 <div class="panel-music-controls">
