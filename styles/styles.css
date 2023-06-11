@@ -73,6 +73,19 @@
 
 }
 
+.panel-music-controls {
+  position: relative;
+  display: inline-block;
+  border: 2px solid black;
+  padding: 7%;
+  margin-bottom: 1%;
+  width: calc(100% - 2%);
+  box-sizing: border-box;
+  height: 10%; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+
 .panel-scrollable-single {
   position: relative;
   display: inline-block;

@@ -135,7 +135,7 @@ function showFriendsPanel() {
     window.location.href = "../pages/friends.html";
 }
 function showProfilePanel() {
-    window.location.href = "../pages/profile.html";
+    window.location.href = "../pages/enjoyerProfile.html";
 }
 function showPlaylistPanel(playlist_id) {
     window.location.href = `../pages/playlist.html?id=${playlist_id}`;
