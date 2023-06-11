@@ -18,16 +18,36 @@
             <button id="profile-panel" class="big-button" onclick="showProfilePanel()">Profile</button>
         </div>
     
-        <div class="panel-enjoyer-profile">
-            <h2 class="panel-header">Enjoyer Profile</h2>
-            <p>PROFILE PHOTO        FOLLOW/FOLLOWING</p>
-            </p>FRIENDS</p>
     
+        <div class="panel-scrollable">
+            <h2 class="panel-header">Enjoyer Profile</h2>
+            <table border="1">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody id="enjoyer-friends-table">
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <div class="panel-enjoyer-profile">
+        <div class="panel-scrollable">
             <h2 class="panel-header">Enjoyer Playlists</h2>
-        </div>
+            <table border="1">
+                <thead>
+                  <tr>
+                    <th>Cover</th>
+                    <th>Name</th>
+                  </tr>
+                </thead>
+                <tbody id="playlists-table">
+                </tbody>
+              </table>
+            </div>
+          </div>
+       
     
         <div class="panel-music-controls">
             <h2 class="panel-header">Music Controls</h2>
@@ -36,6 +56,13 @@
 
     </body>
     <script type="text/javascript" src="../scripts/middle.js"></script>
+
+    <script>
+        getFriends()
+        getSavedPlaylists()
+     
+    </script>
+
 </html>
 
 
