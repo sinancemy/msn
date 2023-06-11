@@ -18,12 +18,18 @@
             <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
         </div>
     
-    
+        <div class="panel">
+            <h2 class="panel-header">Enjoyer Avatar</h2>
+            
+          </div>
+        </div>
+
         <div class="panel-scrollable">
-            <h2 class="panel-header">Enjoyer Profile</h2>
+            <h2 class="panel-header">Enjoyer Friends</h2>
             <table border="1">
               <thead>
                 <tr>
+                  <th>Avatar</th>
                   <th>Name</th>
                 </tr>
               </thead>
@@ -58,7 +64,8 @@
     <script type="text/javascript" src="../scripts/middle.js"></script>
 
     <script>
-        getFriends()
+        const id = new URLSearchParams(window.location.search).get('id')
+        getFriends(id)
         getSavedPlaylists()
      
     </script>
