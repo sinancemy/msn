@@ -149,7 +149,8 @@ function getPlaylistReactions(playlistId) {
             commentCell.innerHTML = data[i].txt;
 
             var reactionCell = row.insertCell(3);
-            reactionCell.innerHTML = data[i].emoji
+            console.log(decodeEmoji(data[i].emoji))
+            reactionCell.innerHTML = decodeEmoji(data[i].emoji);
         }
     });
 }

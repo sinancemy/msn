@@ -19,7 +19,7 @@ async function getCurrentUserId() {
     return data.userId;
 }
 
-async function getUserType(userId){
+async function getUserType(userId) {
     const response = await fetch(`http://localhost:3001/getUserType?userId=${userId}`);
     const data = await response.json();
     return data[0];
@@ -152,15 +152,15 @@ function showFriendsPanel() {
 
 function showCurrentProfilePanel() {
     getCurrentUserType().then((data) => {
-        if (data.is_enjoyer == 1){
+        if (data.is_enjoyer == 1) {
             getCurrentUserId().then((id) => {
                 showEnjoyerPanel(id);
             })
-        } else if (data.is_artist == 1){
+        } else if (data.is_artist == 1) {
             getCurrentUserId().then((id) => {
                 showArtistPanel(id);
             })
-        }  else {
+        } else {
             console.log("user doesnt exist")
         }
     });
@@ -168,11 +168,11 @@ function showCurrentProfilePanel() {
 
 function showUserPanel(user_id) {
     getUserType(user_id).then((data) => {
-        if (data.is_enjoyer == 1){
-                showEnjoyerPanel(id);
-        } else if (data.is_artist == 1){
-                showArtistPanel(id);
-        }  else {
+        if (data.is_enjoyer == 1) {
+            showEnjoyerPanel(user_id);
+        } else if (data.is_artist == 1) {
+            showArtistPanel(user_id);
+        } else {
             console.log("user doesnt exist")
         }
     })
@@ -194,12 +194,12 @@ function showEnjoyerPanel(enjoyer_id) {
 function formatSeconds(seconds) {
     var minutes = Math.floor(seconds / 60);
     var remainingSeconds = seconds % 60;
-    
+
     var formattedMinutes = ("0" + minutes).slice(-2);
     var formattedSeconds = ("0" + remainingSeconds).slice(-2);
-    
+
     return formattedMinutes + ":" + formattedSeconds;
-  }
+}
 
 function formatDate(dateString) {
     var date = new Date(dateString);
@@ -212,3 +212,10 @@ function formatDate(dateString) {
 
     return formattedDate;
 }
+
+function decodeEmoji(emojiBytes) {
+    const uint8Array = new Uint8Array(emojiBytes.data);
+    const decoder = new TextDecoder('utf-8');
+    const emojiString = decoder.decode(uint8Array);
+    return emojiString;
+  }
