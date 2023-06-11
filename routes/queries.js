@@ -23,7 +23,7 @@ router.get('/getExampleQuery', (req, res) => {
 });
 
 
-router.get('/followedArtists', (req, res) => {
+router.get('/getFollowedArtists', (req, res) => {
     // Load parameters
     const userId = req.session.userId;
     // Execute query
@@ -47,11 +47,11 @@ router.get('/followedArtists', (req, res) => {
         });
 });
 
-router.get('/savedAlbums', (req, res) => {
+router.get('/getSavedAlbums', (req, res) => {
     // Load parameters
     const userId = req.session.userId;
     // Execute query
-    (function (parameter, callback) {
+    (function (userId, callback) {
         const q = `
         SELECT Album.id, Content.name, Album.cover_art
         FROM Album
@@ -70,5 +70,141 @@ router.get('/savedAlbums', (req, res) => {
             res.send(results);
         });
 });
+
+router.get('/getSavedPlaylists', (req, res) => {
+    // Load parameters
+    const userId = req.session.userId;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT Playlist.id, Content.name, Playlist.description, Playlist.cover_art
+        FROM Playlist
+        JOIN Saved ON Saved.content_id = Playlist.id
+        JOIN Content ON Content.id = Playlist.id
+        WHERE Saved.enjoyer_id = ?
+
+        UNION
+
+        SELECT Playlist.id, Content.name, Playlist.description, Playlist.cover_art
+        FROM Playlist
+        JOIN Content ON Content.id = Playlist.id
+        WHERE Playlist.enjoyer_id = ?
+      `;
+        const v = [userId, userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+router.get('/getFriends', (req, res) => {
+    // Load parameters
+    const userId = req.session.userId;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT CASE
+            WHEN f.friend_id1 = ? THEN f.friend_id2
+            ELSE f.friend_id1
+        END AS friend_id,
+        u.full_name,
+        u.avatar
+        FROM Friend f
+        JOIN User u ON (f.friend_id1 = u.id OR f.friend_id2 = u.id)
+        WHERE f.friend_id1 = ? OR f.friend_id2 = ?
+      `;
+        const v = [userId, userId, userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/getCurrentUserInfo', (req, res) => {
+    // Load parameters
+    const userId = req.session.userId;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT id, full_name, avatar, bio
+        FROM User
+        WHERE id = ?
+      `;
+        const v = [userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+router.get('/getUserInfo', (req, res) => {
+    // Load parameters
+    const { userId } = req.query;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT id, full_name, avatar, bio
+        FROM User
+        WHERE id = ?
+      `;
+        const v = [userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+// QUERY FOR SEARCH BAR
+// SELECT t.content_id, c.name AS track_name
+// FROM Track t
+// JOIN Content c ON t.content_id = c.id
+// WHERE c.name LIKE ?;
+
+router.get('/getAlbumInfo', (req, res) => {
+    // Load parameters
+    const { albumId } = req.query;
+    // Execute query
+    (function (albumId, callback) {
+        const q = `
+        SELECT Album.id, Album.cover_art, Content.name AS album_name, Content.creation_date, Track.id AS track_id, Track.name AS track_name
+        FROM Album
+        JOIN Content ON Album.id = Content.id
+        JOIN Track ON Track.album_id = Album.id
+        WHERE Album.id = ?;
+      `;
+        const v = [albumId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(albumId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 module.exports = router

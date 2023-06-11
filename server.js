@@ -21,48 +21,22 @@ app.use(queryRoutes)
 
 app.use("/", express.static('./'));
 app.listen(3001, () => { });
-app.get('/', (req, res) => { res.sendFile(__dirname + "/home.html"); });
 
+app.get('/', (req, res) => {
+  if (req.session.userId == null)
+    res.sendFile(__dirname + "/pages/login.html"); 
+  else
+    res.sendFile(__dirname + "/pages/home.html")
+});
 
 // TODO BACKEND:
 
-// LOGIN OLAN USERIN SAVED ALBUMS, SAVED PLAYLISTS
-// LOGIN OLAN KİŞİNİN TÜM ARKADAŞLARI ve bilgileri
-// LOGIN OLAN KİŞİNİN AVATARı vs vs bilgileri
 // ALBÜM içerik sayfası için ALBUM bilgileri
 // aynısı playlist için
 // aynısı artist profili için...
 
 // TODO FRONTEND
 
-// LOGIN
 // HOME ve SEARCH scrollable
 // SEARCH sayfası düzenlemesi/ekstra fonksiyonalite (checkbox falan)
 // Artist profili
-
-
-function exampleQuery(parameter, callback) {
-  q = `
-    # QUERY HERE
-    `
-  v = [parameter]
-  pool.query(q, v, (error, results) => {
-    if (error) throw error;
-    callback(error, results);
-  });
-}
-
-app.get('/getExampleQuery', (req, res) => {
-  const { parameter } = req.query;
-  exampleQuery(parameter, (error, results) => {
-    if (error) throw error;
-    res.send(results);
-  });
-});
-
-app.use("/", express.static('./'));
-app.listen(3001, () => { });
-
-app.get('/', (req, res) => { res.sendFile(__dirname + "/login.html"); });
-// app.get('/search', (req, res) => {res.sendFile(__dirname + "/search.html");});
-
