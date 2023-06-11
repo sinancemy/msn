@@ -63,13 +63,43 @@ async function getFollowedArtists() {
 async function getSavedAlbums() {
     const response = await fetch(`http://localhost:3001/getSavedAlbums`);
     const data = await response.json();
-    console.log("Saved Artists: ", data);
+    var table = document.getElementById("albums-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        row.onclick = function() {showAlbumPanel(data[i].id);}
+        // Put image in cell
+        var coverCell = row.insertCell(0);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
+        img.className = "small-image"
+        coverCell.appendChild(img);
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].name;
+    }
 }
 
 async function getSavedPlaylists() {
     const response = await fetch(`http://localhost:3001/getSavedPlaylists`);
     const data = await response.json();
-    console.log("Saved Artists: ", data);
+    var table = document.getElementById("playlists-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        row.onclick = function() {showPlaylistPanel(data[i].id);}
+        // Put image in cell
+        var coverCell = row.insertCell(0);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
+        img.className = "small-image"
+        coverCell.appendChild(img);
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].name;
+    }
 }
 
 async function getFriends() {
@@ -108,11 +138,11 @@ function showFriendsPanel() {
 function showProfilePanel() {
     window.location.href = "../pages/profile.html";
 }
-function showPlaylistPanel() {
-    window.location.href = "../pages/playlists.html";
+function showPlaylistPanel(playlist_id) {
+    window.location.href = `../pages/playlist.html?id=${playlist_id}`;
 }
-function showAlbumPanel() {
-    window.location.href = "../pages/albums.html";
+function showAlbumPanel(album_id) {
+    window.location.href = `../pages/album.html?id=${album_id}`;
 }
 function showArtistPanel(artist_id) {
     window.location.href = `../pages/artistProfile.html?id=${artist_id}`;
