@@ -31,6 +31,11 @@ app.get('/', (req, res) => {
 
 // TODO BACKEND:
 
+//getTrackReaction()
+//getAlbumReaction()
+//getPlaylistReaction()
+
+
 // aynısı artist profili için...
 
 // TODO FRONTEND

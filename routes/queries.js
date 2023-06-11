@@ -271,6 +271,31 @@ router.get('/getPlaylistTracks', (req, res) => {
         });
 });
 
+router.get('/getArtistInfo', (req, res) => {
+    // Load parameters
+    const { artistId } = req.query;
+    // Execute query
+    (function (artistId, callback) {
+        const q = `
+        SELECT Artist.id, User.full_name, User.bio, COUNT(Follows.enjoyer_id) AS follower_count
+        FROM Artist
+        JOIN User ON Artist.id = User.id
+        LEFT JOIN Follows ON Artist.id = Follows.artist_id
+        WHERE Artist.id = ?
+        GROUP BY Artist.id, User.full_name, User.bio
+      `;
+        const v = [artistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(artistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 
 router.get('/searchTracks', (req, res) => {
@@ -279,7 +304,7 @@ router.get('/searchTracks', (req, res) => {
     // Execute query
     (function (searchQuery, callback) {
         const q = `
-        SELECT Track.id, Content.name AS song_name, Album.cover_art
+        SELECT Track.id as track_id, Content.name, Album.id as album_id, Album.cover_art
         FROM Track
         JOIN Content ON Track.id = Content.id
         JOIN Album ON Track.album_id = Album.id
