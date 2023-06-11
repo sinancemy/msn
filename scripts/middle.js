@@ -19,7 +19,7 @@ async function getCurrentUserId() {
     return data.userId;
 }
 
-async function getUserType(userId){
+async function getUserType(userId) {
     const response = await fetch(`http://localhost:3001/getUserType?userId=${userId}`);
     const data = await response.json();
     return data[0];
@@ -139,12 +139,23 @@ async function addPlaylistTrack(playlistId, trackId) {
     console.log("Result: ", data);
 }
 
+async function removePlaylistTrack(playlistId, trackId) {
+    const response = await fetch(`http://localhost:3001/removePlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
 async function addFriend(userId1, userId2) {
     const response = await fetch(`http://localhost:3001/addFriend?userId1=${userId1}&userId2=${userId2}`);
     const data = await response.json();
     console.log("Result: ", data);
-  }
+}
 
+async function removeFriend(userId1, userId2) {
+    const response = await fetch(`http://localhost:3001/removeFriend?userId1=${userId1}&userId2=${userId2}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
 
 function showHomePanel() {
     window.location.href = `../pages/home.html`;
@@ -158,15 +169,15 @@ function showFriendsPanel() {
 
 function showCurrentProfilePanel() {
     getCurrentUserType().then((data) => {
-        if (data.is_enjoyer == 1){
+        if (data.is_enjoyer == 1) {
             getCurrentUserId().then((id) => {
                 showEnjoyerPanel(id);
             })
-        } else if (data.is_artist == 1){
+        } else if (data.is_artist == 1) {
             getCurrentUserId().then((id) => {
                 showArtistPanel(id);
             })
-        }  else {
+        } else {
             console.log("user doesnt exist")
         }
     });
@@ -174,11 +185,11 @@ function showCurrentProfilePanel() {
 
 function showUserPanel(user_id) {
     getUserType(user_id).then((data) => {
-        if (data.is_enjoyer == 1){
-                showEnjoyerPanel(user_id);
-        } else if (data.is_artist == 1){
-                showArtistPanel(user_id);
-        }  else {
+        if (data.is_enjoyer == 1) {
+            showEnjoyerPanel(user_id);
+        } else if (data.is_artist == 1) {
+            showArtistPanel(user_id);
+        } else {
             console.log("user doesnt exist")
         }
     })
@@ -200,12 +211,12 @@ function showEnjoyerPanel(enjoyer_id) {
 function formatSeconds(seconds) {
     var minutes = Math.floor(seconds / 60);
     var remainingSeconds = seconds % 60;
-    
+
     var formattedMinutes = ("0" + minutes).slice(-2);
     var formattedSeconds = ("0" + remainingSeconds).slice(-2);
-    
+
     return formattedMinutes + ":" + formattedSeconds;
-  }
+}
 
 function formatDate(dateString) {
     var date = new Date(dateString);
