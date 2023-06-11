@@ -195,3 +195,6 @@ h1 {
   left: 200px;
   resize: none;
 }
+.hidden-panel {
+  display: none;
+}
