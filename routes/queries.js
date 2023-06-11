@@ -176,12 +176,6 @@ router.get('/getUserInfo', (req, res) => {
         });
 });
 
-// QUERY FOR SEARCH BAR
-// SELECT t.content_id, c.name AS track_name
-// FROM Track t
-// JOIN Content c ON t.content_id = c.id
-// WHERE c.name LIKE ?;
-
 router.get('/getAlbumInfo', (req, res) => {
     // Load parameters
     const { albumId } = req.query;
@@ -192,7 +186,7 @@ router.get('/getAlbumInfo', (req, res) => {
         FROM Album
         JOIN Content ON Album.id = Content.id
         JOIN Track ON Track.album_id = Album.id
-        WHERE Album.id = ?;
+        WHERE Album.id = ?
       `;
         const v = [albumId];
         pool.query(q, v, (error, results) => {
@@ -206,5 +200,132 @@ router.get('/getAlbumInfo', (req, res) => {
         });
 });
 
+
+router.get('/searchTracks', (req, res) => {
+    // Load parameters
+    const { searchQuery } = req.query;
+    // Execute query
+    (function (searchQuery, callback) {
+        const q = `
+        SELECT Track.id, Content.name AS song_name, Album.cover_art
+        FROM Track
+        JOIN Content ON Track.id = Content.id
+        JOIN Album ON Track.album_id = Album.id
+        WHERE Content.name LIKE ?
+      `;
+        const v = ['%' + searchQuery + '%'];
+        console.log(v);
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(searchQuery,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/searchAlbums', (req, res) => {
+    // Load parameters
+    const { searchQuery } = req.query;
+    // Execute query
+    (function (searchQuery, callback) {
+        const q = `
+        SELECT Album.id, Content.name AS album_name, Album.cover_art
+        FROM Album
+        JOIN Content ON Album.id = Content.id
+        WHERE Content.name LIKE ?
+      `;
+        const v = ['%' + searchQuery + '%'];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(searchQuery,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/searchPlaylists', (req, res) => {
+    // Load parameters
+    const { searchQuery } = req.query;
+    // Execute query
+    (function (searchQuery, callback) {
+        const q = `
+        SELECT Playlist.id, Content.name AS playlist_name, Playlist.cover_art
+        FROM Playlist
+        JOIN Content ON Playlist.id = Content.id
+        WHERE Content.name LIKE ?
+      `;
+        const v = ['%' + searchQuery + '%'];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(searchQuery,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/searchArtists', (req, res) => {
+    // Load parameters
+    const { searchQuery } = req.query;
+    // Execute query
+    (function (searchQuery, callback) {
+        const q = `
+        SELECT Artist.id, User.full_name AS artist_name, User.avatar
+        FROM Artist
+        JOIN User ON Artist.id = User.id
+        WHERE User.full_name LIKE ?
+      `;
+        const v = ['%' + searchQuery + '%'];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(searchQuery,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+router.get('/searchEnjoyers', (req, res) => {
+    // Load parameters
+    const { searchQuery } = req.query;
+    // Execute query
+    (function (searchQuery, callback) {
+        const q = `
+        SELECT User.id, User.full_name, User.avatar
+        FROM User
+        JOIN Enjoyer ON User.id = Enjoyer.id
+        WHERE User.username LIKE ?
+        AND User.id IN (SELECT id FROM Enjoyer)
+
+        UNION
+
+        SELECT User.id, User.full_name, User.avatar
+        FROM User
+        JOIN Enjoyer ON User.id = Enjoyer.id
+        WHERE User.full_name LIKE ?
+        AND User.id IN (SELECT id FROM Enjoyer)
+      `;
+        const v = ['%' + searchQuery + '%', '%' + searchQuery + '%'];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(searchQuery,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
 
 module.exports = router
