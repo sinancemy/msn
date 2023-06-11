@@ -145,6 +145,21 @@ async function getArtistAppearedAlbums(artistId) {
     console.log("Artist Appeared Albums: ", data);
 }
 
+async function addReaction() {
+    const comment = prompt("Enter your comment:");
+  
+    // Check if the user entered a comment
+    if (comment !== null && comment.trim() !== "") {
+      // Perform the desired action with the comment
+      // For example, you can store it in a variable or send it to a server
+  
+      // Here, we'll just display the comment in the console
+      console.log("Entered comment:", comment);
+    } else {
+      // Handle case when the user cancels or enters an empty comment
+      console.log("No comment entered.");
+    }
+  }
 
 function showHomePanel() {
     window.location.href = "../pages/home.html";
