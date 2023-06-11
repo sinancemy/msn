@@ -103,6 +103,12 @@ async function getSavedPlaylists() {
 }
 
 
+async function updateBio(userId, bio) {
+    const response = await fetch(`http://localhost:3001/updateBio?userId=${userId}&bio=${bio}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
 function showHomePanel() {
     window.location.href = "../pages/home.html";
 }

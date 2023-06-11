@@ -507,6 +507,28 @@ router.get('/addArtist', (req, res) => {
     });
 });
 
+router.get('/updateBio', (req, res) => {
+    // Load parameters
+    const { userId, bio } = req.query;
+    // Execute query
+    (function (userId, bio, callback) {
+        const q = `
+        UPDATE User
+        SET bio = ? 
+        WHERE id = ?
+      `;
+        const v = [bio, userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId, bio,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 
 router.get('/searchTracks', (req, res) => {
