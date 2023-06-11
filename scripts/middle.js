@@ -139,6 +139,35 @@ async function addPlaylistTrack(playlistId, trackId) {
     console.log("Result: ", data);
 }
 
+async function removePlaylistTrack(playlistId, trackId) {
+    const response = await fetch(`http://localhost:3001/removePlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function addFriend(userId1, userId2) {
+    const response = await fetch(`http://localhost:3001/addFriend?userId1=${userId1}&userId2=${userId2}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function removeFriend(userId1, userId2) {
+    const response = await fetch(`http://localhost:3001/removeFriend?userId1=${userId1}&userId2=${userId2}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function addReaction(userId, contentId, text, emoji2) {
+    const response = await fetch(`http://localhost:3001/addReaction?userId=${userId}&contentId=${contentId}&text=${text}&emoji2=${emoji2}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function removeReaction(userId, contentId) {
+    const response = await fetch(`http://localhost:3001/removeReaction?userId=${userId}&contentId=${contentId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
 
 function showHomePanel() {
     window.location.href = `../pages/home.html`;

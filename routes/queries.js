@@ -23,7 +23,7 @@ router.get('/getExampleQuery', (req, res) => {
 });
 
 router.get('/getUserType', (req, res) => {
-    const {userId} = req.query;
+    const { userId } = req.query;
     (function (userId, callback) {
         const q = `
             SELECT EXISTS(
@@ -472,6 +472,29 @@ router.get('/addReaction', (req, res) => {
         });
 });
 
+
+router.get('/removeReaction', (req, res) => {
+    // Load parameters
+    const { userId, contentId } = req.query;
+    // Execute query
+    (function (userId, contentId, callback) {
+        const q = `
+        DELETE FROM Reaction
+        WHERE user_id = ?
+        AND content_id = ?
+       `;
+        const v = [userId, contentId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId, contentId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 router.get('/addEnjoyer', (req, res) => {
     // Load parameters
     const { userId, enjoyment, username, password, fullName, avatar, email, bio } = req.query;
@@ -537,6 +560,93 @@ router.get('/addArtist', (req, res) => {
         res.send(results);
     });
 });
+
+router.get('/addFriend', (req, res) => {
+    // Load parameters
+    const { userId1, userId2 } = req.query;
+    // Execute query
+    (function (userId1, userId2, callback) {
+        const q = `
+        INSERT INTO Friend (friend_id1, friend_id2, since)
+        VALUES (?, ?, CURRENT_DATE())
+       `;
+        const v = [userId1, userId2];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId1, userId2,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/removeFriend', (req, res) => {
+    // Load parameters
+    const { userId1, userId2 } = req.query;
+    // Execute query
+    (function (userId1, userId2, callback) {
+        const q = `
+        DELETE FROM Friend
+        WHERE (friend_id1 = ? AND friend_id2 = ?)
+        OR (friend_id1 = ? AND friend_id2 = ?)
+       `;
+        const v = [userId1, userId2, userId2, userId1];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId1, userId2,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/addPlaylistTrack', (req, res) => {
+    // Load parameters
+    const { playlistId, trackId } = req.query;
+    // Execute query
+    (function (playlistId, trackId, callback) {
+        const q = `
+        INSERT INTO PlaylistTracks (playlist_id, track_id)
+        VALUES (?, ?)
+      `;
+        const v = [playlistId, trackId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(playlistId, trackId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/removePlaylistTrack', (req, res) => {
+    // Load parameters
+    const { playlistId, trackId } = req.query;
+    // Execute query
+    (function (playlistId, trackId, callback) {
+        const q = `
+        DELETE FROM PlaylistTracks
+        WHERE playlist_id = ? AND track_id = ?
+      `;
+        const v = [playlistId, trackId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(playlistId, trackId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
 
 router.get('/updateBio', (req, res) => {
     // Load parameters
@@ -604,27 +714,6 @@ router.get('/updateAvatar', (req, res) => {
         });
 });
 
-router.get('/addPlaylistTrack', (req, res) => {
-    // Load parameters
-    const { playlistId, trackId } = req.query;
-    // Execute query
-    (function (playlistId, trackId, callback) {
-        const q = `
-        INSERT INTO PlaylistTracks (playlist_id, track_id)
-        VALUES (?, ?)
-      `;
-        const v = [playlistId, trackId];
-        pool.query(q, v, (error, results) => {
-            if (error) throw error;
-            callback(error, results);
-        });
-    })(playlistId, trackId,
-        (error, results) => {
-            if (error) throw error;
-            res.send(results);
-        });
-});
-
 
 router.get('/searchTracks', (req, res) => {
     // Load parameters
@@ -639,7 +728,6 @@ router.get('/searchTracks', (req, res) => {
         WHERE Content.name LIKE ?
       `;
         const v = ['%' + searchQuery + '%'];
-        console.log(v);
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
