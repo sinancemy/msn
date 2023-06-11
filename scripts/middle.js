@@ -125,38 +125,6 @@ async function getAlbumInfo(parameter) {
     console.log("Album Info: ", data);
 }
 
-async function searchTracks(parameter) {
-    console.log("help")
-    const response = await fetch(`http://localhost:3001/searchTracks?searchQuery=${parameter}`);
-    const data = await response.json();
-    console.log("Matched Tracks: ", data);
-}
-
-async function searchAlbums(parameter) {
-    const response = await fetch(`http://localhost:3001/searchAlbums?searchQuery=${parameter}`);
-    const data = await response.json();
-    console.log("Matched Albums: ", data);
-}
-
-async function searchPlaylists(parameter) {
-    const response = await fetch(`http://localhost:3001/searchPlaylists?searchQuery=${parameter}`);
-    const data = await response.json();
-    console.log("Matched Playlists: ", data);
-}
-
-async function searchArtists(parameter) {
-    const response = await fetch(`http://localhost:3001/searchArtists?searchQuery=${parameter}`);
-    const data = await response.json();
-    console.log("Matched Artists: ", data);
-}
-
-async function searchEnjoyers(parameter) {
-    const response = await fetch(`http://localhost:3001/searchEnjoyers?searchQuery=${parameter}`);
-    const data = await response.json();
-    console.log("Matched Enjoyers: ", data);
-}
-
-
 function showHomePanel() {
     window.location.href = "../pages/home.html";
 }
@@ -178,31 +146,3 @@ function showAlbumPanel(album_id) {
 function showArtistPanel(artist_id) {
     window.location.href = `../pages/artistProfile.html?id=${artist_id}`;
 }
-
-function performSearch() {
-    var selectedPanels = [];
-
-    // Check if the Artists checkbox is checked
-    if (document.getElementById("search-artists").checked) {
-        selectedPanels.push("Artists");
-    }
-
-    // Check if the Albums checkbox is checked
-    if (document.getElementById("search-albums").checked) {
-        selectedPanels.push("Albums");
-    }
-
-    // Check if the Playlists checkbox is checked
-    if (document.getElementById("search-playlists").checked) {
-        selectedPanels.push("Playlists");
-    }
-
-    // Check if the Songs checkbox is checked
-    if (document.getElementById("search-songs").checked) {
-        selectedPanels.push("Songs");
-    }
-
-    // Display the selected panels (console.log is used as an example)
-    console.log("Selected Panels: ", selectedPanels);
-}
-

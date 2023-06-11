@@ -10,9 +10,6 @@
     <body>
         <h1>Music Socialization Network</h1>
 
-        <a href="search.html">Go to Main Page</a>
-
-
         <div class="center">
             <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
             <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
@@ -20,14 +17,12 @@
             <button id="profile-panel" class="big-button" onclick="showProfilePanel()">Profile</button>
       </div>
 
-     
-
       <div class="panel-container">
         <div class="panel" style="width: 1325px; height: 60px; float: left; margin-right: 10px; position: relative;">
           <h2 class="panel-header">Search</h2>
           <div class="panel-content">
             <img class="panel-image" src="search.png" alt="Image" style="width: 100px; height: 100px; position: absolute; top: 1px; right: 100px;">
-            <textarea class="panel-textarea" placeholder="What do you want to listen to?" style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px;"></textarea>
+            <textarea id="search-input" class="panel-textarea" placeholder="What are you looking for?" style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px;"></textarea>
             
             <input type="checkbox" id="search-artists" name="enable-search" style="position: absolute; top: 10px; right: 600px;">
             <label for="search-checkbox" style="position: absolute; top: 10px; right: 500px;">Artists</label>
@@ -92,4 +87,5 @@
     
     </body>
     <script type="text/javascript" src="../scripts/middle.js"></script>
+    <script type="text/javascript" src="../scripts/search.js"></script>
 </html>
