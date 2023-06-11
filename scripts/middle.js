@@ -145,29 +145,11 @@ async function getArtistAppearedAlbums(artistId) {
     console.log("Artist Appeared Albums: ", data);
 }
 
-<<<<<<< HEAD
 async function addReaction(userId, contentId, text, emoji) {
     const response = await fetch(`http://localhost:3001/addReaction?userId=${userId}&contentId=${contentId}&text=${text}&emoji=${emoji}`);
     const data = await response.json();
     console.log("Result: ", data);
 }
-=======
-async function addReaction() {
-    const comment = prompt("Enter your comment:");
-  
-    // Check if the user entered a comment
-    if (comment !== null && comment.trim() !== "") {
-      // Perform the desired action with the comment
-      // For example, you can store it in a variable or send it to a server
-  
-      // Here, we'll just display the comment in the console
-      console.log("Entered comment:", comment);
-    } else {
-      // Handle case when the user cancels or enters an empty comment
-      console.log("No comment entered.");
-    }
-  }
->>>>>>> 51cab76777b76198a226c6ee784ae456a4a86817
 
 function showHomePanel() {
     window.location.href = "../pages/home.html";
