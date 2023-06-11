@@ -151,6 +151,24 @@ async function addReaction(userId, contentId, text, emoji) {
     console.log("Result: ", data);
 }
 
+// TODO: deleteReaction
+
+async function addEnjoyer(userId, enjoyment, username, password, fullName, avatar, email, bio) {
+    const response = await fetch(`http://localhost:3001/addEnjoyer?userId=${userId}&enjoyment=${enjoyment}&username=${username}&password=${password}&fullName=${fullName}&avatar=${avatar}&email=${email}&bio=${bio}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+// TODO: deleteEnjoyer
+
+async function addArtist(userId, verified, username, password, fullName, avatar, email, bio) {
+    const response = await fetch(`http://localhost:3001/addArtist?userId=${userId}&verified=${verified}&username=${username}&password=${password}&fullName=${fullName}&avatar=${avatar}&email=${email}&bio=${bio}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+// TODO: deleteArtist
+
 function showHomePanel() {
     window.location.href = "../pages/home.html";
 }
