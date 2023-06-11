@@ -31,8 +31,6 @@ app.get('/', (req, res) => {
 
 // TODO BACKEND:
 
-// aynısı artist profili için...
-
 // TODO FRONTEND
 
 // HOME ve SEARCH scrollable

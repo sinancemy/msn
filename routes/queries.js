@@ -396,6 +396,30 @@ router.get('/getContentReactions', (req, res) => {
         });
 });
 
+router.get('/getPerformers', (req, res) => {
+    // Load parameters
+    const { trackId } = req.query;
+    // Execute query
+    (function (trackId, callback) {
+        const q = `
+        SELECT Artist.id, User.full_name
+        FROM Artist
+        JOIN User ON Artist.id = User.id
+        JOIN PerformsIn ON Artist.id = PerformsIn.artist_id
+        WHERE PerformsIn.track_id = ?
+       `;
+        const v = [trackId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(trackId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 router.get('/searchTracks', (req, res) => {
     // Load parameters
     const { searchQuery } = req.query;
