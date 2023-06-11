@@ -1,10 +1,3 @@
-
-async function getFriends() {
-    const response = await fetch(`http://localhost:3001/getFriends`);
-    const data = await response.json();
-    console.log("Friends: ", data);
-}
-
 async function getCurrentUserInfo() {
     const response = await fetch(`http://localhost:3001/getCurrentUserInfo`);
     const data = await response.json();
