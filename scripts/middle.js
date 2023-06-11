@@ -145,29 +145,3 @@ function performSearch() {
     console.log("Selected Panels: ", selectedPanels);
 }
 
-function showHomePanel() {
-    window.location.href = "../pages/home.html";
-}
-function showSearchPanel() {
-    window.location.href = "../pages/search.html";
-}
-function showFriendsPanel() {
-    window.location.href = "../pages/friends.html";
-}
-function showProfilePanel() {
-    window.location.href = "../pages/profile.html";
-}
-function showPlaylistPanel() {
-    window.location.href = "../pages/playlists.html";
-}
-function showAlbumPanel() {
-    window.location.href = "../pages/albums.html";
-}
-function showArtistPanel(artist_id) {
-    window.location.href = `../pages/artistProfile.html?id=${artist_id}`;
-}
-
-
-
-
-
