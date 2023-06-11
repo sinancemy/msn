@@ -229,7 +229,7 @@ router.get('/getPlaylistInfo', (req, res) => {
     // Execute query
     (function (playlistId, callback) {
         const q = `
-        SELECT Playlist.id, Content.name, Playlist.cover_art, Playlist.description
+        SELECT Playlist.id, Content.name, Playlist.cover_art, Playlist.description, Content.creation_date
         FROM Playlist
         JOIN Content ON Playlist.id = Content.id
         WHERE Playlist.id = ?
