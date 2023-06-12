@@ -308,7 +308,7 @@ router.get('/getArtistInfo', (req, res) => {
     // Execute query
     (function (artistId, callback) {
         const q = `
-        SELECT Artist.id, User.full_name, User.bio, COUNT(Follows.enjoyer_id) AS follower_count, User.avatar
+        SELECT Artist.id, User.full_name, User.bio, COUNT(Follows.enjoyer_id) AS follower_count
         FROM Artist
         JOIN User ON Artist.id = User.id
         LEFT JOIN Follows ON Artist.id = Follows.artist_id
@@ -457,7 +457,7 @@ router.get('/addReaction', (req, res) => {
     // Execute query
     (function (userId, contentId, text, emoji, callback) {
         const q = `
-        INSERT IGNORE INTO Reaction (user_id, content_id, txt, emoji)
+        INSERT INTO Reaction (user_id, content_id, txt, emoji)
         VALUES (?, ?, ?, ?)
        `;
         const v = [userId, contentId, text, emoji];
@@ -495,25 +495,23 @@ router.get('/removeReaction', (req, res) => {
         });
 });
 
-router.post('/addEnjoyer', (req, res) => {
+router.get('/addEnjoyer', (req, res) => {
     // Load parameters
-    const { enjoyment, username, password, fullName, avatar, email, bio } = req.body;
-
+    const { userId, enjoyment, username, password, fullName, avatar, email, bio } = req.query;
     // Execute query
-    (function (enjoyment, username, password, fullName, avatar, email, bio, callback) {
+    (function (userId, enjoyment, username, password, fullName, avatar, email, bio, callback) {
         const userQuery = `
-        INSERT IGNORE INTO User (id, username, password, full_name, avatar, email, bio)
-        SELECT COALESCE(MAX(id), 0) + 1, ?, ?, ?, ?, ?, ?
-        FROM User;
-      `;
-        const userValues = [username, password, fullName, avatar, email, bio];
+        INSERT INTO User (id, username, password, full_name, avatar, email, bio)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+       `;
+        const userValues = [userId, username, password, fullName, avatar, email, bio];
 
         const enjoyerQuery = `
-        INSERT IGNORE INTO Enjoyer (id, enjoyment)
-        SELECT COALESCE(MAX(id), 0) + 1, ?
-        FROM Enjoyer;
-      `;
-        const enjoyerValues = [enjoyment];
+         INSERT INTO Enjoyer (id, enjoyment)
+         VALUES (?, ?)
+       `;
+        const enjoyerValues = [userId, enjoyment];
+
 
         pool.query(userQuery, userValues, (error, userResults) => {
             if (error) throw error;
@@ -524,53 +522,29 @@ router.post('/addEnjoyer', (req, res) => {
                 callback(error, userResults, enjoyerResults);
             });
         });
-    })(enjoyment, username, password, fullName, avatar, email, bio, (error, userResults, enjoyerResults) => {
+    })(userId, enjoyment, username, password, fullName, avatar, email, bio, (error, userResults, enjoyerResults) => {
         if (error) throw error;
         res.send({ userResults, enjoyerResults });
     });
 });
 
-router.get('/removeEnjoyer', (req, res) => {
+router.get('/addArtist', (req, res) => {
     // Load parameters
-    const { enjoyerId } = req.query;
-    // Execute query
-    (function (enjoyerId, callback) {
-        const q = `
-        DELETE FROM Enjoyer
-        WHERE id = ?
-       `;
-        const v = [enjoyerId];
-        pool.query(q, v, (error, results) => {
-            if (error) throw error;
-            callback(error, results);
-        });
-    })(enjoyerId,
-        (error, results) => {
-            if (error) throw error;
-            res.send(results);
-        });
-});
-
-
-router.post('/addArtist', (req, res) => {
-    // Load parameters from the request body
-    const { verified, username, password, fullName, avatar, email, bio } = req.body;
+    const { userId, verified, username, password, fullName, avatar, email, bio } = req.query;
 
     // Execute queries
-    (function (verified, username, password, fullName, avatar, email, bio, callback) {
+    (function (userId, verified, username, password, fullName, avatar, email, bio, callback) {
         const userQuery = `
-        INSERT IGNORE INTO User (id, username, password, full_name, avatar, email, bio)
-        SELECT COALESCE(MAX(id), 0) + 1, ?, ?, ?, ?, ?, ?
-        FROM User
+        INSERT INTO User (id, username, password, full_name, avatar, email, bio)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
       `;
-        const userValues = [username, password, fullName, avatar, email, bio];
+        const userValues = [userId, username, password, fullName, avatar, email, bio];
 
         const artistQuery = `
-        INSERT IGNORE INTO Artist (id, verified)
-        SELECT COALESCE(MAX(id), 0) + 1, ?
-        FROM Artist
+        INSERT INTO Artist (id, verified)
+        VALUES (?, ?)
       `;
-        const artistValues = [verified];
+        const artistValues = [userId, verified];
 
         pool.query(userQuery, userValues, (error, userResults) => {
             if (error) throw error;
@@ -581,36 +555,11 @@ router.post('/addArtist', (req, res) => {
                 callback(error, artistResults);
             });
         });
-    })(
-        verified, username, password, fullName, avatar, email, bio,
-        (error, results) => {
-            if (error) throw error;
-            res.send(results);
-        }
-    );
+    })(userId, verified, username, password, fullName, avatar, email, bio, (error, results) => {
+        if (error) throw error;
+        res.send(results);
+    });
 });
-
-router.get('/removeArtist', (req, res) => {
-    // Load parameters
-    const { artistId, } = req.query;
-    // Execute query
-    (function (artistId, callback) {
-        const q = `
-        DELETE FROM Artist
-        WHERE id = ?
-       `;
-        const v = [artistId];
-        pool.query(q, v, (error, results) => {
-            if (error) throw error;
-            callback(error, results);
-        });
-    })(artistId,
-        (error, results) => {
-            if (error) throw error;
-            res.send(results);
-        });
-});
-
 
 router.get('/addFriend', (req, res) => {
     // Load parameters
@@ -618,7 +567,7 @@ router.get('/addFriend', (req, res) => {
     // Execute query
     (function (userId1, userId2, callback) {
         const q = `
-        INSERT IGNORE INTO Friend (friend_id1, friend_id2, since)
+        INSERT INTO Friend (friend_id1, friend_id2, since)
         VALUES (?, ?, CURRENT_DATE())
        `;
         const v = [userId1, userId2];
@@ -661,7 +610,7 @@ router.get('/addPlaylistTrack', (req, res) => {
     // Execute query
     (function (playlistId, trackId, callback) {
         const q = `
-        INSERT IGNORE INTO PlaylistTracks (playlist_id, track_id)
+        INSERT INTO PlaylistTracks (playlist_id, track_id)
         VALUES (?, ?)
       `;
         const v = [playlistId, trackId];
