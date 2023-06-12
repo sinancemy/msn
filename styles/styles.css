@@ -220,3 +220,33 @@ h1 {
 .hidden-panel {
   display: none;
 }
+
+.play-image {
+  width: 3.5%;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 45%;
+  left: 50%;
+}
+
+.back-image {
+  width: 3.5%;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 45%;
+  left: 45%;
+}
+
+.next-image {
+  width: 3.5%;
+  height: auto;
+  display: block;
+  position: absolute;
+  top: 45%;
+  left: 55%;
+}
+
+
+
