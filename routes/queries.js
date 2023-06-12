@@ -472,6 +472,29 @@ router.get('/isFriend', (req, res) => {
         });
 });
 
+router.get('/existsUser', (req, res) => {
+    // Load parameters
+    const { userName } = req.query;
+    // Execute query
+    (function (userName, callback) {
+        const q = `
+        SELECT EXISTS (
+            SELECT 1
+            FROM User
+            WHERE username= ?) AS username_exists
+      `;
+        const v = [userName];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userName,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 router.get('/getArtistTracks', (req, res) => {
     // Load parameters

@@ -119,3 +119,9 @@ async function removePlaylistTrack(playlistId, trackId) {
     const data = await response.json();
     console.log("Result: ", data);
 }
+
+async function existsUser(userName) {
+    const response = await fetch(`http://localhost:3001/existsUser?userName=${userName}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
