@@ -3,7 +3,7 @@ USE msn;
 
 CREATE TABLE User (
   id INTEGER,
-  username VARCHAR(32),
+  username VARCHAR(32) UNIQUE,
   password CHAR(64),
   full_name VARCHAR(64),
   avatar BLOB,

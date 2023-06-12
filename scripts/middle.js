@@ -184,6 +184,12 @@ async function removeArtist(artistId) {
 function showHomePanel() {
     window.location.href = `../pages/home.html`;
 }
+function showLoginPanel() {
+    window.location.href = `../pages/login.html`;
+}
+function showSignupPanel() {
+    window.location.href = `../pages/signup.html`;
+}
 function showSearchPanel() {
     window.location.href = `../pages/search.html`;
 }
@@ -266,4 +272,18 @@ function decodeEmoji(emojiBytes) {
 
 function refreshPage(){
     location.reload();
+}
+
+function signUp(){
+    addEnjoyer(
+        document.getElementById('username-field').value,
+        CryptoJS.SHA256(document.getElementById('password-field').value).toString(),
+        document.querySelector('input[name=role]:checked').value,
+        document.getElementById('fullname-field').value,
+        document.getElementById('email-field').value
+        ).then((response) => {
+            if (response == "ok"){
+                showLoginPanel();
+            }
+        })
 }
