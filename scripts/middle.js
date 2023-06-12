@@ -157,6 +157,30 @@ async function removeFriend(userId1, userId2) {
     console.log("Result: ", data);
 }
 
+async function addEnjoyer(enjoyerId) {
+    const response = await fetch(`http://localhost:3001/addEnjoyer?enjoyerId=${enjoyerId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function removeEnjoyer(enjoyerId) {
+    const response = await fetch(`http://localhost:3001/removeEnjoyer?enjoyerId=${enjoyerId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function addArtist(artistId) {
+    const response = await fetch(`http://localhost:3001/addArtist?artistId=${artistId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function removeArtist(artistId) {
+    const response = await fetch(`http://localhost:3001/removeArtist?artistId=${artistId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
 function showHomePanel() {
     window.location.href = `../pages/home.html`;
 }
@@ -231,7 +255,7 @@ function formatDate(dateString) {
 }
 
 function decodeEmoji(emojiBytes) {
-    if (emojiBytes != null){
+    if (emojiBytes != null) {
         const uint8Array = new Uint8Array(emojiBytes.data);
         const decoder = new TextDecoder('utf-8');
         const emojiString = decoder.decode(uint8Array);
