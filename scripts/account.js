@@ -70,7 +70,6 @@ async function removeUser(userId) {
     console.log("Result: ", data);
 }
 
-
 function signUp() {
     type = document.querySelector('input[name=role]:checked').value
     username = document.getElementById('username-field').value
@@ -79,26 +78,34 @@ function signUp() {
     avatar = null//document.getElementById('avatar-file').files[0]
     email = document.getElementById('email-field').value
     bio = document.getElementById('bio-field').value
-    if (type == "enjoyer") {
-        enjoyment = 5
-        addEnjoyer(enjoyment, username, password, full_name, avatar, email, bio).then((response) => {
-            console.log(response)
-            if (response.enjoyerResults.affectedRows == 1) {
-                showLoginPanel();
-            } else {
-                console.log("enjoyer exists")
+
+    existsUser().then((data) => {
+        const exists = data[0].exists
+        if (exists != 1){
+            if (type == "enjoyer") {
+                enjoyment = 5
+                addEnjoyer(enjoyment, username, password, full_name, avatar, email, bio).then((response) => {
+                    console.log(response)
+                    if (response.enjoyerResults.affectedRows == 1) {
+                        showLoginPanel();
+                    } else {
+                        console.log("enjoyer exists")
+                    }
+                })
+            } else if (type == "artist") {
+                verified = false
+                addArtist(verified, username, password, full_name, avatar, email, bio).then((response) => {
+                    if (response.artistResults.affectedRows == 1) {
+                        showLoginPanel();
+                    } else {
+                        console.log("artist exists")
+                    }
+                })
             }
-        })
-    } else if (type == "artist") {
-        verified = false
-        addArtist(verified, username, password, full_name, avatar, email, bio).then((response) => {
-            if (response.artistResults.affectedRows == 1) {
-                showLoginPanel();
-            } else {
-                console.log("artist exists")
-            }
-        })
-    }
+        } else {
+            alert("Username already in use, pick a different one!")
+        }
+    })
 }
 
 async function addPlaylistTrack(playlistId, trackId) {
