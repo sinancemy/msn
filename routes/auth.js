@@ -32,7 +32,7 @@ router.post('/login/auth', (req, res) => {
 });
 
 router.get('/login/signoff', (req, res) => {
-    req.session.userId = null
+    req.session.userId = -1
 });
 
 module.exports = router

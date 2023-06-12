@@ -14,7 +14,6 @@ app.use(session({
 
 app.use(bodyParser.json({ limit: '10mb' }));
 
-session.userId = null
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -25,8 +24,13 @@ app.use(queryRoutes)
 app.use("/", express.static('./'));
 app.listen(3001, () => { });
 
+app.use((req, res, next) => {
+  req.session.userId = -1;
+  next();
+});
+
 app.get('/', (req, res) => {
-  if (req.session.userId == null)
+  if (req.session.userId == -1)
     res.sendFile(__dirname + "/pages/login.html"); 
   else
     res.sendFile(__dirname + "/pages/home.html")
