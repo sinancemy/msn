@@ -6,6 +6,13 @@
 <head>
   <meta charset="UTF-8">
   <title>MSN</title>
+  <style>
+    body {
+      background-image: url('/assets/background.png'); /* Background image for the entire page */
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
 </head>
 
 <body>
@@ -23,7 +30,7 @@
       <h2 id="album-name" class="small-header">Album Name</h2>
       <h4 id="album-date" class="small-header">Album Date</h4>
     </div>
-    <img id="album-cover-art" class="panel-image"></img>
+    <img id="album-cover-art" class="panel-image-album" ></img>
     <table border="1">
       <thead>
         <tr>
@@ -72,13 +79,31 @@
   </div>
 
   <div class="panel-single">
-    <h2 class="panel-header">Add Reaction</h2>
-    <textarea class="comment-textarea" id="comment-input" class="panel-textarea"
+    <h2 class="panel-header">Add Reaction For Album</h2>
+    <textarea class="comment-textarea" id="comment-input" class="panel-textarea"  style="background-image: url('/assets/background.png');"
+      placeholder="Enter your comment..." ></textarea>
+    <select id="emoji-input" class="panel-select">
+      <option value="" selected disabled>Reaction</option>
+    </select>
+    <button class="send-button" id="send-reaction" style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
+      addReaction(
+        userId,
+        new URLSearchParams(window.location.search).get('id'),
+        document.getElementById('comment-input').value,
+        document.getElementById('emoji-input').value)
+      refreshPage()
+    });
+      ">Send</button>
+  </div>
+
+  <div class="panel-single">
+    <h2 class="panel-header">Add Reaction For Track</h2>
+    <textarea class="comment-textarea" id="comment-input" class="panel-textarea" style="background-image: url('/assets/background.png');"
       placeholder="Enter your comment..."></textarea>
     <select id="emoji-input" class="panel-select">
       <option value="" selected disabled>Reaction</option>
     </select>
-    <button class="send-button" id="send-reaction" onclick="getCurrentUserId().then((userId) => {
+    <button class="send-button" id="send-reaction" style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
       addReaction(
         userId,
         new URLSearchParams(window.location.search).get('id'),
