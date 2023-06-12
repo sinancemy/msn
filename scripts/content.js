@@ -43,7 +43,16 @@ function getTrackReactions(trackId){
             var row = table.insertRow();
             // When row is clicked, go to the artist page with the proper id.
             row.className = "clickable-table-row"
-            row.onclick = function () { } // kendi yorumuysa silebilir?
+            row.onclick = function () { 
+                getCurrentUserId().then((userId) => {
+                    if (data[i].id==userId){
+                        removeReaction(userId, trackId);
+                        refreshPage();
+                    } else {
+                        showUserPanel(data[i].id);
+                    }
+                })
+            } // kendi yorumuysa silebilir?
 
             var avatarCell = row.insertCell(0);
             var img = document.createElement("img");
@@ -75,9 +84,18 @@ function getAlbumReactions(albumId) {
         var table = document.getElementById("album-reactions-table")
         for (let i = 0; i < data.length; i++) {
             var row = table.insertRow();
-            // When row is clicked, go to the artist page with the proper id.
+
             row.className = "clickable-table-row"
-            row.onclick = function () { } // kendi yorumuysa silebilir?
+            row.onclick = function () {
+                getCurrentUserId().then((userId) => {
+                    if (data[i].id==userId){
+                        removeReaction(userId, albumId)
+                        refreshPage()
+                    } else {
+                        showUserPanel(data[i].id)
+                    }
+                })
+             }
 
             var avatarCell = row.insertCell(0);
             var img = document.createElement("img");

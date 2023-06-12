@@ -239,3 +239,7 @@ function decodeEmoji(emojiBytes) {
     }
     return "-"
 }
+
+function refreshPage(){
+    location.reload();
+}
