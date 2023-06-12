@@ -39,8 +39,9 @@ async function loginAuthorizationRequest(username, password) {
 }
 
 async function signOff(){
+    console.log("eee")
     const response = await fetch(`http://localhost:3001/login/signoff`);
-    showLoginPanel()
+    showLoginPanel();
 }
 
 function refreshPage(){

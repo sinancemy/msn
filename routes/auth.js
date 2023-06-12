@@ -33,6 +33,7 @@ router.post('/login/auth', (req, res) => {
 
 router.get('/login/signoff', (req, res) => {
     req.session.userId = -1
+    res.send({userId : -1})
 });
 
 module.exports = router

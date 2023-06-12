@@ -25,7 +25,9 @@ app.use("/", express.static('./'));
 app.listen(3001, () => { });
 
 app.use((req, res, next) => {
-  req.session.userId = -1;
+  if (!req.session.userId) {
+    req.session.userId = -1;
+  }
   next();
 });
 
