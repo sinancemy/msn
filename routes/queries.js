@@ -474,21 +474,21 @@ router.get('/isFriend', (req, res) => {
 
 router.get('/existsUser', (req, res) => {
     // Load parameters
-    const { userId } = req.query;
+    const { userName } = req.query;
     // Execute query
-    (function (userId, callback) {
+    (function (userName, callback) {
         const q = `
         SELECT EXISTS (
             SELECT 1
             FROM User
-            WHERE id = ?) AS user_exists
+            WHERE username= ?) AS username_exists
       `;
-        const v = [userId];
+        const v = [userName];
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
         });
-    })(userId,
+    })(userName,
         (error, results) => {
             if (error) throw error;
             res.send(results);
