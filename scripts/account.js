@@ -5,8 +5,9 @@ async function updateBio(userId, bio) {
     console.log("Result: ", data);
 }
 
-async function updateUsername(userId, username) {
-    const response = await fetch(`http://localhost:3001/updateUsername?userId=${userId}&username=${username}`);
+async function updateFullName(userId, full_name) {
+    console.log(userId + " " + full_name)
+    const response = await fetch(`http://localhost:3001/updateFullName?userId=${userId}&full_name=${full_name}`);
     const data = await response.json();
     console.log("Result: ", data);
 }
