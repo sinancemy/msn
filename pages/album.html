@@ -74,15 +74,14 @@
     <select id="emoji-input" class="panel-select">
       <option value="" selected disabled>Reaction</option>
     </select>
-    <button class="send-button" id="send-reaction" onclick="
-    getCurrentUserId().then((userId) => {
+    <button class="send-button" id="send-reaction" onclick="getCurrentUserId().then((userId) => {
       addReaction(
         userId,
         new URLSearchParams(window.location.search).get('id'),
         document.getElementById('comment-input').value,
         document.getElementById('emoji-input').value)
+      refreshPage()
     });
-    refreshPage()
       ">Send</button>
   </div>
 
