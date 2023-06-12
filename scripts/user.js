@@ -117,6 +117,12 @@ async function isFriend(userId) {
     return data
 }
 
+async function existsUser(userId) {
+    const response = await fetch(`http://localhost:3001/existsUser?userId=${userId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
 async function getArtistFollowers(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistFollowers?artistId=${artistId}`);
     const data = await response.json();
