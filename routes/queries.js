@@ -399,6 +399,79 @@ router.get('/unfollowArist', (req, res) => {
 });
 
 
+router.get('/hasSaved', (req, res) => {
+    // Load parameters
+    const { contentId } = req.query;
+    // Execute query
+    (function (contentId, callback) {
+        const q = `
+        SELECT EXISTS (
+            SELECT 1
+            FROM Saved
+            WHERE enjoyer_id = ? AND content_id = ?
+          ) AS is_saved
+      `;
+        const v = [req.session.userId, contentId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(contentId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/isFollowing', (req, res) => {
+    // Load parameters
+    const { artistId } = req.query;
+    // Execute query
+    (function (artistId, callback) {
+        const q = `
+        SELECT EXISTS (
+            SELECT 1
+            FROM Follows
+            WHERE enjoyer_id = ? AND artist_id = ?
+        ) AS is_following
+      `;
+        const v = [req.session.userId, artistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(artistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/isFollowing', (req, res) => {
+    // Load parameters
+    const { userId } = req.query;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+        SELECT EXISTS (
+            SELECT 1
+            FROM Friend
+            WHERE (friend_id1 = ? AND friend_id2 = ?)
+            OR (friend_id1 = ? AND friend_id2 = ?)
+        ) AS is_friend
+      `;
+        const v = [req.session.userId, userId, userId, req.session.userId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 
 router.get('/getArtistTracks', (req, res) => {
     // Load parameters
