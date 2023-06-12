@@ -356,7 +356,7 @@ router.get('/getArtistInfo', (req, res) => {
 });
 
 
-router.get('/followArist', (req, res) => {
+router.get('/followArtist', (req, res) => {
     // Load parameters
     const { artistId } = req.query;
     // Execute query
@@ -377,7 +377,7 @@ router.get('/followArist', (req, res) => {
         });
 });
 
-router.get('/unfollowArist', (req, res) => {
+router.get('/unfollowArtist', (req, res) => {
     // Load parameters
     const { artistId } = req.query;
     // Execute query
@@ -447,7 +447,7 @@ router.get('/isFollowing', (req, res) => {
         });
 });
 
-router.get('/isFollowing', (req, res) => {
+router.get('/isFriend', (req, res) => {
     // Load parameters
     const { userId } = req.query;
     // Execute query
@@ -466,6 +466,29 @@ router.get('/isFollowing', (req, res) => {
             callback(error, results);
         });
     })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/existsUser', (req, res) => {
+    // Load parameters
+    const { userName } = req.query;
+    // Execute query
+    (function (userName, callback) {
+        const q = `
+        SELECT EXISTS (
+            SELECT 1
+            FROM User
+            WHERE username= ?) AS username_exists
+      `;
+        const v = [userName];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userName,
         (error, results) => {
             if (error) throw error;
             res.send(results);

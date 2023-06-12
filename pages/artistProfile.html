@@ -8,7 +8,8 @@
   <title>MSN</title>
   <style>
     body {
-      background-image: url('/assets/background.png'); /* Background image for the entire page */
+      background-image: url('/assets/background.png');
+      /* Background image for the entire page */
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -27,7 +28,7 @@
   </div>
 
   <div class="panel-scrollable">
-    <button id="artist-info-panel" class="buttons" onclick="followArtist()">Follow</button>
+    <button id="follow-artist-button" class="buttons" style="display: none"></button>
     <h2 class="panel-header">Artist Info</h2>
     <img id="artist-avatar" class="panel-image-avatar"></img>
     <table border="1">
@@ -63,16 +64,16 @@
   <div class="panel-scrollable">
     <h2 class="panel-header">Appears In</h2>
     <table border="1">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Cover Art</th>
-          </tr>
-        </thead>
-        <tbody id="artist-album-table">
-        </tbody>
-      </table>
-    </div>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Cover Art</th>
+        </tr>
+      </thead>
+      <tbody id="artist-album-table">
+      </tbody>
+    </table>
+  </div>
   </div>
 
 
@@ -92,13 +93,13 @@
 <script type="text/javascript" src="../scripts/enforceLogin.js"></script>
 
 <script>
-    const id = new URLSearchParams(window.location.search).get('id')
-    console.log(id)
-    getArtistFollowers(id)
-    getArtistAppearedAlbums(id)
-    getArtistInfo(id)
-    
-  
-  </script>
+  const id = new URLSearchParams(window.location.search).get('id')
+  console.log(id)
+  getArtistFollowers(id)
+  getArtistAppearedAlbums(id)
+  getArtistInfo(id)
+  loadFollowButton(id)
+
+</script>
 
 </html>

@@ -72,7 +72,7 @@ async function saveContent(contentId) {
     const response = await fetch(`http://localhost:3001/saveContent?contentId=${contentId}`);
     const data = await response.json();
     console.log("Result: ", data);
-}desk
+}
 
 async function unsaveContent(contentId) {
     const response = await fetch(`http://localhost:3001/unsaveContent?contentId=${contentId}`);
@@ -96,27 +96,26 @@ async function unfollowArtist(artistId) {
 async function getArtistTracks(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistTracks?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
 
 async function hasSaved(contentId) {
     const response = await fetch(`http://localhost:3001/hasSaved?contentId=${contentId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
 
 async function isFollowing(artistId) {
     const response = await fetch(`http://localhost:3001/isFollowing?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
 
 async function isFriend(userId) {
     const response = await fetch(`http://localhost:3001/isFriend?userId=${userId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
-
 
 async function getArtistFollowers(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistFollowers?artistId=${artistId}`);
@@ -165,8 +164,6 @@ async function getArtistAppearedAlbums(artistId) {
         img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
         img.className = "panel-image"
         coverCell.appendChild(img);
-
-
     }
 }
 
@@ -193,19 +190,69 @@ async function getFriends(userId) {
     }
 }
 
+function loadSaveButton(contentId){
+    const button = document.getElementById("save-content-button");
 
+    hasSaved(contentId).then((data) => {
+        const hasSaved = data[0].is_saved
+        if (hasSaved == 1){
+            button.textContent = "Unsave"
+            button.onclick = function () { 
+                unsaveContent(contentId)
+                refreshPage()    
+            }
+        } else {
+            button.textContent = "Save"
+            button.onclick = function () { 
+                saveContent(contentId)
+                refreshPage()
+             }
+        }
+    })
+}
 
-// function loadSaveAlbumButton(albumId){
-//     const button = document.getElementById("save-album-button");
+function loadFollowButton(artistId){
+    getCurrentUserId().then((userId)=>{
+        if(userId!=artistId){
+            const button = document.getElementById("follow-artist-button")
+            button.style.display = "block";
+            isFollowing(artistId).then((data)=>{
+                const isFollowing = data[0].is_following
+                console.log("jeje" + isFollowing)
+                if (isFollowing == 1){
+                    button.textContent = "Unfollow"
+                    button.onclick = function () { 
+                        unfollowArtist(artistId)
+                        refreshPage()    
+                    }
+                } else {
+                    button.textContent = "Follow"
+                    button.onclick = function () { followArtist(artistId) 
+                        refreshPage()   }
+                }
+            })
+        }
+    })
+}
 
-//     getSavedAlbums().then((albums) => {
-//         console.log(albums)
-//         if (albumId in albums){
-//             button.textContent = "Unsave"
-//         } else {
-//             button.textContent = "Save"
-//         }
-//     })
-// }
-
-// BUNUN ALTINA EKLEYEBİLİRSİN DERİN :))
+function loadFriendButton(enjoyerId){
+    getCurrentUserId().then((userId)=>{
+        if(userId!=enjoyerId){
+            const button = document.getElementById("friend-enjoyer-button")
+            button.style.display = "block";
+            isFriend(enjoyerId).then((data)=>{
+                const isFriend = data[0].is_friend
+                if (isFriend == 1){
+                    button.textContent = "Unfriend"
+                    button.onclick = function () { removeFriend(enjoyerId) 
+                        refreshPage()   }
+                } else {
+                    button.textContent = "Friend"
+                    button.onclick = function () { addFriend(enjoyerId) 
+                        refreshPage()  
+                     }
+                }
+            })
+        }
+    })
+}

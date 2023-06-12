@@ -8,7 +8,8 @@
   <title>MSN</title>
   <style>
     body {
-      background-image: url('/assets/background.png'); /* Background image for the entire page */
+      background-image: url('/assets/background.png');
+      /* Background image for the entire page */
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -26,9 +27,9 @@
   </div>
 
   <div class="panel">
-    <button id="enjoyer-info-panel" class="buttons" onclick="addFriend()">Add Friend</button>
+    <button id="friend-enjoyer-button" class="buttons" style="display: none"></button>
     <h2 class="panel-header">Enjoyer Info</h2>
-    
+
     <img id="enjoyer-avatar" class="panel-image"></img>
     <table border="1">
       <thead>
@@ -59,7 +60,7 @@
 
   <div class="panel-scrollable">
     <h2 class="panel-header">Enjoyer Playlists</h2>
-    
+
     <table border="1">
       <thead>
         <tr>
@@ -76,9 +77,9 @@
 
   <div class="panel-music-controls">
     <h2 class="panel-header">Music Controls</h2>
-      <img src="/assets/geri.png" alt="Back button" class="back-image">
-      <img src="/assets/play.png" alt="Play button" class="play-image">
-      <img src="/assets/next.png" alt="Next button" class="next-image">
+    <img src="/assets/geri.png" alt="Back button" class="back-image">
+    <img src="/assets/play.png" alt="Play button" class="play-image">
+    <img src="/assets/next.png" alt="Next button" class="next-image">
 
   </div>
 
@@ -94,6 +95,7 @@
   getUserInfo(id)
   getFriends(id)
   getUserPlaylists(id)
+  loadFriendButton(id)
 
 </script>
 

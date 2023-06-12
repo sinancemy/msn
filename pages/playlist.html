@@ -8,7 +8,8 @@
   <title>MSN</title>
   <style>
     body {
-      background-image: url('/assets/background.png'); /* Background image for the entire page */
+      background-image: url('/assets/background.png');
+      /* Background image for the entire page */
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -27,7 +28,7 @@
 
   <div class="panel-scrollable">
     <div class="panel-header">
-      <button id="playlist-info-panel" class="buttons" onclick="savePlaylist()" style="position: absolute; top: 100%; left: 2%;">Save Playlist</button>
+      <button id="save-content-button" class="buttons" style="position: absolute; top: 100%; left: 2%;"></button>
       <h2 id="playlist-name" class="small-header">Playlist Name</h2>
       <h4 id="playlist-date" class="small-header">Playlist Date</h4>
     </div>
@@ -44,7 +45,7 @@
       </tbody>
     </table>
   </div>
-  
+
 
   <div class="panel-scrollable">
     <h2 class="panel-header">Playlist Reactions</h2>
@@ -81,12 +82,12 @@
 
   <div class="panel-single">
     <h2 class="panel-header">Add Reaction For Playlist</h2>
-    <textarea class="comment-textarea" id="comment-input" class="panel-textarea" style="background-image: url('/assets/background.png');"
-      placeholder="Enter your comment..."></textarea>
+    <textarea class="comment-textarea" id="comment-input" class="panel-textarea"
+      style="background-image: url('/assets/background.png');" placeholder="Enter your comment..."></textarea>
     <select id="emoji-input" class="panel-select">
       <option value="" selected disabled>Reaction</option>
     </select>
-    <button class="send-button" id="send-reaction"  style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
+    <button class="send-button" id="send-reaction" style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
       addReaction(
         userId,
         new URLSearchParams(window.location.search).get('id'),
@@ -99,8 +100,8 @@
 
   <div class="panel-single">
     <h2 class="panel-header">Add Reaction For Track</h2>
-    <textarea class="comment-textarea" id="comment-input" class="panel-textarea" style="background-image: url('/assets/background.png');"
-      placeholder="Enter your comment..."></textarea>
+    <textarea class="comment-textarea" id="comment-input" class="panel-textarea"
+      style="background-image: url('/assets/background.png');" placeholder="Enter your comment..."></textarea>
     <select id="emoji-input" class="panel-select">
       <option value="" selected disabled>Reaction</option>
     </select>
@@ -118,21 +119,23 @@
   </div>
   <div class="panel-music-controls">
     <h2 class="panel-header">Music Controls</h2>
-      <img src="/assets/geri.png" alt="Back button" class="back-image">
-      <img src="/assets/play.png" alt="Play button" class="play-image">
-      <img src="/assets/next.png" alt="Next button" class="next-image">
+    <img src="/assets/geri.png" alt="Back button" class="back-image">
+    <img src="/assets/play.png" alt="Play button" class="play-image">
+    <img src="/assets/next.png" alt="Next button" class="next-image">
 
   </div>
 
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
 <script type="text/javascript" src="../scripts/content.js"></script>
+<script type="text/javascript" src="../scripts/user.js"></script>
 <script type="text/javascript" src="../scripts/enforceLogin.js"></script>
 <script type="text/javascript">
   const id = new URLSearchParams(window.location.search).get('id')
   getPlaylistInfo(id);
   getPlaylistTracks(id);
   getPlaylistReactions(id);
+  loadSaveButton(id);
 </script>
 
 </html>
