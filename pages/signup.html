@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="../styles/styles.css">
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>MSN</title>
+</head>
+
+<body>
+    <h1>Music Socialization Network</h1>
+
+    <div class="center">
+        <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
+        <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
+        <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
+        <button id="settings-panel" class="big-button" onclick="showSettingsPanel()">Settings</button>
+    </div>
+
+
+
+    <div class="panel-container">
+        <div class="panel" style="width: 1325px; height: 400px; float: left; margin-right: 10px; position: relative;">
+          <h2 class="panel-header">Sign Up</h2>
+          <div class="panel-content">
+            <textarea id="username-field" class="panel-textarea" placeholder="Enter Your Username"
+              style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px; resize: none;"></textarea>
+            <textarea id="password-field" class="panel-textarea" placeholder="Enter Your Password"
+              style="width: 500px; height: 60px; position: absolute; top: 100px; left: 200px; resize: none;"></textarea>
+            <textarea id="fullname-field" class="panel-textarea" placeholder="Enter Your Full Name"
+              style="width: 500px; height: 60px; position: absolute; top: 180px; left: 200px; resize: none;"></textarea>
+            <textarea id="fullname-field" class="panel-textarea" placeholder="Enter Your E-mail"
+              style="width: 500px; height: 60px; position: absolute; top: 260px; left: 200px; resize: none;"></textarea>
+            <button class="panel-button" style="position: absolute; top: 40px; right: 300px;" onclick="signup()">Sign Up</button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="panel-music-controls">
+        <h2 class="panel-header">Music Controls</h2>
+        <img src="/assets/geri.png" alt="Back button" class="back-image">
+        <img src="/assets/play.png" alt="Play button" class="play-image">
+        <img src="/assets/next.png" alt="Next button" class="next-image">
+    </div>
+
+</body>
+<script type="text/javascript" src="../scripts/middle.js"></script>
+
+</html>
