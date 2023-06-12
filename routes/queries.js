@@ -133,6 +133,32 @@ router.get('/getSavedPlaylists', (req, res) => {
         });
 });
 
+router.get('/getUserPlaylists', (req, res) => {
+    // Load parameters
+    const { userId } = req.query;
+    // Execute query
+    (function (userId, callback) {
+        const q = `
+
+        SELECT Playlist.id, Content.name, Playlist.description, Playlist.cover_art
+        FROM Playlist
+        JOIN Content ON Content.id = Playlist.id
+        WHERE Playlist.enjoyer_id = ?
+      `;
+        const v = [userId,];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(userId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+
 
 router.get('/getFriends', (req, res) => {
     // Load parameters
