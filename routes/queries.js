@@ -356,7 +356,7 @@ router.get('/getArtistInfo', (req, res) => {
 });
 
 
-router.get('/followArist', (req, res) => {
+router.get('/followArtist', (req, res) => {
     // Load parameters
     const { artistId } = req.query;
     // Execute query
@@ -377,7 +377,7 @@ router.get('/followArist', (req, res) => {
         });
 });
 
-router.get('/unfollowArist', (req, res) => {
+router.get('/unfollowArtist', (req, res) => {
     // Load parameters
     const { artistId } = req.query;
     // Execute query
@@ -447,7 +447,7 @@ router.get('/isFollowing', (req, res) => {
         });
 });
 
-router.get('/isFollowing', (req, res) => {
+router.get('/isFriend', (req, res) => {
     // Load parameters
     const { userId } = req.query;
     // Execute query

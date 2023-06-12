@@ -72,7 +72,7 @@ async function saveContent(contentId) {
     const response = await fetch(`http://localhost:3001/saveContent?contentId=${contentId}`);
     const data = await response.json();
     console.log("Result: ", data);
-}desk
+}
 
 async function unsaveContent(contentId) {
     const response = await fetch(`http://localhost:3001/unsaveContent?contentId=${contentId}`);
@@ -96,27 +96,26 @@ async function unfollowArtist(artistId) {
 async function getArtistTracks(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistTracks?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
 
 async function hasSaved(contentId) {
     const response = await fetch(`http://localhost:3001/hasSaved?contentId=${contentId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
 
 async function isFollowing(artistId) {
     const response = await fetch(`http://localhost:3001/isFollowing?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
 
 async function isFriend(userId) {
     const response = await fetch(`http://localhost:3001/isFriend?userId=${userId}`);
     const data = await response.json();
-    console.log("Result: ", data);
+    return data
 }
-
 
 async function getArtistFollowers(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistFollowers?artistId=${artistId}`);
@@ -165,8 +164,6 @@ async function getArtistAppearedAlbums(artistId) {
         img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
         img.className = "panel-image"
         coverCell.appendChild(img);
-
-
     }
 }
 
@@ -193,49 +190,69 @@ async function getFriends(userId) {
     }
 }
 
-function loadContentButton(contentId){
+function loadSaveButton(contentId){
     const button = document.getElementById("save-content-button");
 
-    hasSaved(contentId).then((hasSaved) => {
-        console.log(hasSaved)
-        if (hasSaved){
+    hasSaved(contentId).then((data) => {
+        const hasSaved = data[0].is_saved
+        if (hasSaved == 1){
             button.textContent = "Unsave"
-            button.onclick = function () { unsaveContent(contentId) }
+            button.onclick = function () { 
+                unsaveContent(contentId)
+                refreshPage()    
+            }
         } else {
             button.textContent = "Save"
-            button.onclick = function () { saveContent(contentId) }
+            button.onclick = function () { 
+                saveContent(contentId)
+                refreshPage()
+             }
         }
     })
 }
 
 function loadFollowButton(artistId){
-    // Kendisi değilse
-    const button = document.getElementById("follow-artist-button")
-    isFollowing(artistId).then((isFollowing)=>{
-        console.log(isFollowing)
-        if (isFollowing){
-            button.textContent = "Unfollow"
-            button.onclick = function () { unfollowArtist(artistId) }
-        } else {
-            button.textContent = "Follow"
-            button.onclick = function () { followArtist(artistId) }
+    getCurrentUserId().then((userId)=>{
+        if(userId!=artistId){
+            const button = document.getElementById("follow-artist-button")
+            button.style.display = "block";
+            isFollowing(artistId).then((data)=>{
+                const isFollowing = data[0].is_following
+                console.log("jeje" + isFollowing)
+                if (isFollowing == 1){
+                    button.textContent = "Unfollow"
+                    button.onclick = function () { 
+                        unfollowArtist(artistId)
+                        refreshPage()    
+                    }
+                } else {
+                    button.textContent = "Follow"
+                    button.onclick = function () { followArtist(artistId) 
+                        refreshPage()   }
+                }
+            })
         }
     })
 }
 
 function loadFriendButton(enjoyerId){
-    // Kendisi değilse
-    const button = document.getElementById("friend-button")
-    isFriend(enjoyerId).then((isFriend)=>{
-        console.log(isFriend)
-        if (isFriend){
-            button.textContent = "Unfriend"
-            button.onclick = function () { addFriend(enjoyerId) }
-        } else {
-            button.textContent = "Friend"
-            button.onclick = function () { removeFriend(enjoyerId) }
+    getCurrentUserId().then((userId)=>{
+        if(userId!=enjoyerId){
+            const button = document.getElementById("friend-enjoyer-button")
+            button.style.display = "block";
+            isFriend(enjoyerId).then((data)=>{
+                const isFriend = data[0].is_friend
+                if (isFriend == 1){
+                    button.textContent = "Unfriend"
+                    button.onclick = function () { removeFriend(enjoyerId) 
+                        refreshPage()   }
+                } else {
+                    button.textContent = "Friend"
+                    button.onclick = function () { addFriend(enjoyerId) 
+                        refreshPage()  
+                     }
+                }
+            })
         }
     })
 }
-
-// BUNUN ALTINA EKLEYEBİLİRSİN DERİN :))

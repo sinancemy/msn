@@ -27,7 +27,7 @@
 
   <div class="panel-scrollable">
     <div class="panel-header">
-      <button id="playlist-info-panel" class="buttons" onclick="savePlaylist()" style="position: absolute; top: 100%; left: 2%;">Save Playlist</button>
+      <button id="save-content-button" class="buttons" style="position: absolute; top: 100%; left: 2%;"></button>
       <h2 id="playlist-name" class="small-header">Playlist Name</h2>
       <h4 id="playlist-date" class="small-header">Playlist Date</h4>
     </div>
@@ -127,12 +127,14 @@
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
 <script type="text/javascript" src="../scripts/content.js"></script>
+<script type="text/javascript" src="../scripts/user.js"></script>
 <script type="text/javascript" src="../scripts/enforceLogin.js"></script>
 <script type="text/javascript">
   const id = new URLSearchParams(window.location.search).get('id')
   getPlaylistInfo(id);
   getPlaylistTracks(id);
   getPlaylistReactions(id);
+  loadSaveButton(id);
 </script>
 
 </html>
