@@ -21,8 +21,17 @@
 
   <div class="panel">
     <h2 class="panel-header">Enjoyer Avatar</h2>
-
-  </div>
+    <img id="enjoyer-avatar" class="panel-image"></img>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody id="enjoyer-info-table">
+      </tbody>
+    </table>
   </div>
 
   <div class="panel-scrollable">
@@ -72,6 +81,7 @@
 <script>
   const id = new URLSearchParams(window.location.search).get('id')
   console.log(id)
+  getUserInfo(id)
   getFriends(id)
   getSavedPlaylists()
 

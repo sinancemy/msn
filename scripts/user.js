@@ -7,6 +7,24 @@ async function getUserInfo(userId) {
     const response = await fetch(`http://localhost:3001/getUserInfo?userId=${userId}`);
     const data = await response.json();
     console.log("User Info: ", data);
+
+    var table = document.getElementById("enjoyer-info-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        
+        // Put image in cell
+        var coverCell = row.insertCell(0);
+        coverCell.innerHTML = data[i].full_name;
+       
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].bio;
+
+        var avatarElem = document.getElementById("enjoyer-avatar");
+        avatarElem.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null,data[i].avatar));
+    }
 }
 
 async function getArtistInfo(artistId) {
@@ -27,7 +45,11 @@ async function getArtistInfo(artistId) {
         // Put name in cell
         var nameCell = row.insertCell(1);
         nameCell.innerHTML = data[i].bio;
+
+        var avatarElem = document.getElementById("artist-avatar");
+        avatarElem.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null,data[i].avatar));
     }
+   
   }
   
 
