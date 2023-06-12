@@ -18,17 +18,6 @@ async function updateAvatar(userId, avatar) {
     console.log("Result: ", data);
 }
 
-async function addFriend(userId1, userId2) {
-    const response = await fetch(`http://localhost:3001/addFriend?userId1=${userId1}&userId2=${userId2}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function removeFriend(userId1, userId2) {
-    const response = await fetch(`http://localhost:3001/removeFriend?userId1=${userId1}&userId2=${userId2}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
 
 async function addEnjoyer(enjoyment, username, password, fullName, avatar, email, bio) {
     const url = 'http://localhost:3001/addEnjoyer';
