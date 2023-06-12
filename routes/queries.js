@@ -356,6 +356,50 @@ router.get('/getArtistInfo', (req, res) => {
 });
 
 
+router.get('/followArist', (req, res) => {
+    // Load parameters
+    const { artistId } = req.query;
+    // Execute query
+    (function (artistId, callback) {
+        const q = `
+        INSERT INTO Follows (enjoyer_id, artist_id)
+        VALUES (?, ?)
+      `;
+        const v = [req.session.userId, artistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(artistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/unfollowArist', (req, res) => {
+    // Load parameters
+    const { artistId } = req.query;
+    // Execute query
+    (function (artistId, callback) {
+        const q = `
+        DELETE FROM Follows
+        WHERE enjoyer_id = ? AND artist_id = ?
+      `;
+        const v = [req.session.userId, artistId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(artistId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+
+
 router.get('/getArtistTracks', (req, res) => {
     // Load parameters
     const { artistId } = req.query;
