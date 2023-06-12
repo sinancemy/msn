@@ -68,6 +68,18 @@ async function removeFriend(userId) {
     console.log("Result: ", data);
 }
 
+async function saveContent(contentId) {
+    const response = await fetch(`http://localhost:3001/saveContent?contentId=${contentId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function unsaveContent(contentId) {
+    const response = await fetch(`http://localhost:3001/unsaveContent?contentId=${contentId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
 async function followArtist(artistId) {
     const response = await fetch(`http://localhost:3001/followArtist?artistId=${artistId}`);
     const data = await response.json();

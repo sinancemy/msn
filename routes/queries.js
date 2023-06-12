@@ -704,6 +704,49 @@ router.get('/removeFriend', (req, res) => {
         });
 });
 
+
+router.get('/saveContent', (req, res) => {
+    // Load parameters
+    const { contentId } = req.query;
+    // Execute query
+    (function (contentId, callback) {
+        const q = `
+        INSERT INTO Saved (enjoyer_id, content_id)
+        VALUES (?, ?)
+       `;
+        const v = [req.session.userId, contentId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(contentId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
+router.get('/unsaveContent', (req, res) => {
+    // Load parameters
+    const { contentId } = req.query;
+    // Execute query
+    (function (contentId, callback) {
+        const q = `
+        DELETE FROM Saved
+        WHERE content_id = ?
+       `;
+        const v = [contentId];
+        pool.query(q, v, (error, results) => {
+            if (error) throw error;
+            callback(error, results);
+        });
+    })(contentId,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        });
+});
+
 router.get('/addPlaylistTrack', (req, res) => {
     // Load parameters
     const { playlistId, trackId } = req.query;
