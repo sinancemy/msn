@@ -72,7 +72,7 @@ async function saveContent(contentId) {
     const response = await fetch(`http://localhost:3001/saveContent?contentId=${contentId}`);
     const data = await response.json();
     console.log("Result: ", data);
-}
+}desk
 
 async function unsaveContent(contentId) {
     const response = await fetch(`http://localhost:3001/unsaveContent?contentId=${contentId}`);
@@ -83,21 +83,40 @@ async function unsaveContent(contentId) {
 async function followArtist(artistId) {
     const response = await fetch(`http://localhost:3001/followArtist?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Artist Tracks: ", data);
+    console.log("Result: ", data);
 }
 
 async function unfollowArtist(artistId) {
     const response = await fetch(`http://localhost:3001/unfollowArtist?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Artist Tracks: ", data);
+    console.log("Result: ", data);
 }
 
 
 async function getArtistTracks(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistTracks?artistId=${artistId}`);
     const data = await response.json();
-    console.log("Artist Tracks: ", data);
+    console.log("Result: ", data);
 }
+
+async function hasSaved(contentId) {
+    const response = await fetch(`http://localhost:3001/hasSaved?contentId=${contentId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function isFollowing(artistId) {
+    const response = await fetch(`http://localhost:3001/isFollowing?artistId=${artistId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function isFriend(userId) {
+    const response = await fetch(`http://localhost:3001/isFriend?userId=${userId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
 
 async function getArtistFollowers(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistFollowers?artistId=${artistId}`);
