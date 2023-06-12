@@ -556,21 +556,21 @@ router.post('/addEnjoyer', (req, res) => {
     });
 });
 
-router.get('/removeEnjoyer', (req, res) => {
+router.get('/removeUser', (req, res) => {
     // Load parameters
-    const { enjoyerId } = req.query;
+    const { userId } = req.query;
     // Execute query
-    (function (enjoyerId, callback) {
+    (function (userId, callback) {
         const q = `
-        DELETE FROM Enjoyer
+        DELETE FROM User
         WHERE id = ?
        `;
-        const v = [enjoyerId];
+        const v = [userId];
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
         });
-    })(enjoyerId,
+    })(userId,
         (error, results) => {
             if (error) throw error;
             res.send(results);
@@ -614,27 +614,6 @@ router.post('/addArtist', (req, res) => {
             res.send(results);
         }
     );
-});
-
-router.get('/removeArtist', (req, res) => {
-    // Load parameters
-    const { artistId, } = req.query;
-    // Execute query
-    (function (artistId, callback) {
-        const q = `
-        DELETE FROM Artist
-        WHERE id = ?
-       `;
-        const v = [artistId];
-        pool.query(q, v, (error, results) => {
-            if (error) throw error;
-            callback(error, results);
-        });
-    })(artistId,
-        (error, results) => {
-            if (error) throw error;
-            res.send(results);
-        });
 });
 
 

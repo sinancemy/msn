@@ -65,12 +65,6 @@ async function addEnjoyer(enjoyment, username, password, fullName, avatar, email
     return result
 }
 
-async function removeEnjoyer(enjoyerId) {
-    const response = await fetch(`http://localhost:3001/removeEnjoyer?enjoyerId=${enjoyerId}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
 async function addArtist(verified, username, password, fullName, avatar, email, bio) {
     const response = await fetch('http://localhost:3001/addArtist', {
         method: 'POST',
@@ -92,8 +86,8 @@ async function addArtist(verified, username, password, fullName, avatar, email, 
     return data
 }
 
-async function removeArtist(artistId) {
-    const response = await fetch(`http://localhost:3001/removeArtist?artistId=${artistId}`);
+async function removeUser(userId) {
+    const response = await fetch(`http://localhost:3001/removeUser?userId=${userId}`);
     const data = await response.json();
     console.log("Result: ", data);
 }
