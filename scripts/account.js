@@ -68,58 +68,77 @@ async function removeArtist(artistId) {
 // enjoyment, username, password, fullName, avatar, email, bio
 function signUp(){
     type = document.querySelector('input[name=role]:checked').value
-
-    username = document.getElementById('username-field').value,
-    password = CryptoJS.SHA256(document.getElementById('password-field').value).toString(),
-    full_name = document.getElementById('fullname-field').value,
-    avatar = processAvatar(document.getElementById('avatar-file').files[0]),
-    email = document.getElementById('email-field').value,
+    username = document.getElementById('username-field').value
+    password = CryptoJS.SHA256(document.getElementById('password-field').value).toString()
+    full_name = document.getElementById('fullname-field').value
+    email = document.getElementById('email-field').value
     bio = document.getElementById('bio-field').value
-    console.log(avatar)
-    if (type == "enjoyer"){
-        enjoyment = 5
-        addEnjoyer(enjoyment, username, password, full_name, avatar, email, bio).then((response) => {
+    encodeImage(document.getElementById('avatar-file').files[0]).then((avatar) => {
+        console.log(avatar)
+        if (type == "enjoyer"){
+            enjoyment = 5
+            addEnjoyer(enjoyment, username, password, full_name, avatar, email, bio).then((response) => {
+                    if (response == "ok"){
+                        showLoginPanel();
+                    } else {
+                        console.log("enjoyer exists")
+                    }
+                })
+        } else if (type == "artist"){
+            verified = false
+            addArtist(verified, username, password, full_name, avatar, email, bio).then((response) => {
                 if (response == "ok"){
                     showLoginPanel();
                 } else {
-                    console.log("enjoyer exists")
+                    console.log("artist exists")
                 }
             })
-    } else if (type == "artist"){
-        verified = false
-        addArtist(verified, username, password, full_name, avatar, email, bio).then((response) => {
-            if (response == "ok"){
-                showLoginPanel();
-            } else {
-                console.log("artist exists")
-            }
-        })
-    }
-
+        }
+    })
 }
 
 
-function processAvatar(file) {
+function encodeImage(imageData) {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = function (event) {
-        const img = new Image();
-        img.onload = function () {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          canvas.width = 256;
-          canvas.height = 256;
-          ctx.drawImage(img, 0, 0, 256, 256);
-          canvas.toBlob(function (blob) {
-            const reader = new FileReader();
-            reader.onloadend = function () {
-              resolve(reader.result);
-            };
-            reader.readAsArrayBuffer(blob);
-          }, 'image/jpeg', 1);
-        };
-        img.src = event.target.result;
+      const img = new Image();
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      
+      img.onload = () => {
+        const { width, height } = img;
+        const maxSize = 256;
+        
+        let newWidth, newHeight;
+        if (width > height) {
+          newWidth = maxSize;
+          newHeight = Math.floor(height * (maxSize / width));
+        } else {
+          newWidth = Math.floor(width * (maxSize / height));
+          newHeight = maxSize;
+        }
+        
+        canvas.width = newWidth;
+        canvas.height = newHeight;
+        
+        ctx.drawImage(img, 0, 0, newWidth, newHeight);
+        
+        canvas.toBlob((blob) => {
+          const reader = new FileReader();
+          
+          reader.onloadend = () => {
+            const arrayBuffer = reader.result;
+            const uint8Array = new Uint8Array(arrayBuffer);
+            resolve(uint8Array);
+          };
+          
+          reader.onerror = reject;
+          
+          reader.readAsArrayBuffer(blob);
+        }, 'image/png');
       };
-      reader.readAsDataURL(file);
+      
+      img.onerror = reject;
+      
+      img.src = URL.createObjectURL(imageData);
     });
-}
+  }
