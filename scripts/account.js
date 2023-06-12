@@ -18,18 +18,6 @@ async function updateAvatar(userId, avatar) {
     console.log("Result: ", data);
 }
 
-async function addPlaylistTrack(playlistId, trackId) {
-    const response = await fetch(`http://localhost:3001/addPlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function removePlaylistTrack(playlistId, trackId) {
-    const response = await fetch(`http://localhost:3001/removePlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
 async function addFriend(userId1, userId2) {
     const response = await fetch(`http://localhost:3001/addFriend?userId1=${userId1}&userId2=${userId2}`);
     const data = await response.json();
@@ -122,4 +110,16 @@ function signUp() {
             }
         })
     }
+}
+
+async function addPlaylistTrack(playlistId, trackId) {
+    const response = await fetch(`http://localhost:3001/addPlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function removePlaylistTrack(playlistId, trackId) {
+    const response = await fetch(`http://localhost:3001/removePlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
 }
