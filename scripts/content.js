@@ -58,9 +58,16 @@ function getTrackReactions(trackId){
             commentCell.innerHTML = data[i].txt;
 
             var reactionCell = row.insertCell(3);
+
             reactionCell.innerHTML = decodeEmoji(data[i].emoji)
         }
     });
+}
+
+async function getPerformers(trackId) {
+    const response = await fetch(`http://localhost:3001/getPerformers?trackId=${trackId}`);
+    const data = await response.json();
+    return data
 }
 
 function getAlbumReactions(albumId) {
@@ -154,16 +161,20 @@ function getPlaylistReactions(playlistId) {
     });
 }
 
-
-
 async function getContentReactions(contentId) {
     const response = await fetch(`http://localhost:3001/getContentReactions?contentId=${contentId}`);
     const data = await response.json();
     return data
 }
 
-async function getPerformers(trackId) {
-    const response = await fetch(`http://localhost:3001/getPerformers?trackId=${trackId}`);
+async function addReaction(userId, contentId, text, emoji,) {
+    const response = await fetch(`http://localhost:3001/addReaction?userId=${userId}&contentId=${contentId}&text=${text}&emoji=${emoji}`);
     const data = await response.json();
-    return data
+    console.log("Result: ", data);
+}
+
+async function removeReaction(userId, contentId) {
+    const response = await fetch(`http://localhost:3001/removeReaction?userId=${userId}&contentId=${contentId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
 }
