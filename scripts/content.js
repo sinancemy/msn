@@ -115,6 +115,13 @@ function getAlbumReactions(albumId) {
     });
 }
 
+
+async function getUserPlaylists(userId) {
+    const response = await fetch(`http://localhost:3001/getUserPlaylists?userId=${userId}`);
+    const data = await response.json();
+    return data
+}
+
 async function getPlaylistInfo(playlistId) {
     const response = await fetch(`http://localhost:3001/getPlaylistInfo?playlistId=${playlistId}`);
     const data = await response.json();
@@ -184,6 +191,7 @@ async function getContentReactions(contentId) {
     const data = await response.json();
     return data
 }
+
 
 async function addReaction(userId, contentId, text, emoji,) {
     const response = await fetch(`http://localhost:3001/addReaction?userId=${userId}&contentId=${contentId}&text=${text}&emoji=${emoji}`);
