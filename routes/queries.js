@@ -308,7 +308,7 @@ router.get('/getArtistInfo', (req, res) => {
     // Execute query
     (function (artistId, callback) {
         const q = `
-        SELECT Artist.id, User.full_name, User.bio, COUNT(Follows.enjoyer_id) AS follower_count
+        SELECT Artist.id, User.full_name, User.bio, COUNT(Follows.enjoyer_id) AS follower_count, User.avatar
         FROM Artist
         JOIN User ON Artist.id = User.id
         LEFT JOIN Follows ON Artist.id = Follows.artist_id
