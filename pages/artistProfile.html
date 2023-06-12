@@ -15,25 +15,34 @@
   <div class="center">
     <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
     <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
-    <button id="friends-panel" class="big-button" onclick="showFriendsPanel()">Friends</button>
     <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
+    <button id="settings-panel" class="big-button" onclick="showSettingsPanel()">Settings</button>
   </div>
 
   <div class="panel">
-    <h2 class="panel-header">Artist Avatar</h2>
+    <h2 class="panel-header">Enjoyer Avatar</h2>
     <img id="artist-avatar" class="panel-image"></img>
-  </div>
+    <table border="1">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Bio</th>
+          <th>Follower Count</th>
+        </tr>
+      </thead>
+      <tbody id="artist-info-table">
+      </tbody>
+    </table>
+
   </div>
 
-  <div class="panel">
-    <h2 class="panel-header">Listener Count</h2>
+  
 
-  </div>
-  </div>
+ 
 
 
   <div class="panel-scrollable">
-    <h2 class="panel-header">Artist Follow/Following</h2>
+    <h2 class="panel-header">Artist Followers</h2>
 
     <table border="1">
       <thead>
@@ -63,20 +72,7 @@
     </div>
   </div>
 
-  <div class="panel-scrollable">
-    <h2 class="panel-header">Artist Info</h2>
-    <table border="1">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Bio</th>
-          </tr>
-        </thead>
-        <tbody id="artist-info-table">
-        </tbody>
-      </table>
-    </div>
-  </div>
+
 
   <div class="panel-music-controls">
     <h2 class="panel-header">Music Controls</h2>

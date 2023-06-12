@@ -187,8 +187,8 @@ function showHomePanel() {
 function showSearchPanel() {
     window.location.href = `../pages/search.html`;
 }
-function showFriendsPanel() {
-    window.location.href = `../pages/friends.html`;
+function showSettingsPanel() {
+    window.location.href = `../pages/settings.html`;
 }
 
 function showCurrentProfilePanel() {

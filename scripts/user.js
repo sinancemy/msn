@@ -23,7 +23,7 @@ async function getUserInfo(userId) {
         nameCell.innerHTML = data[i].bio;
 
         var avatarElem = document.getElementById("enjoyer-avatar");
-        avatarElem.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null,data[i].avatar));
+        avatarElem.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null,data[i].avatar.data));
     }
 }
 
@@ -47,7 +47,11 @@ async function getArtistInfo(artistId) {
         nameCell.innerHTML = data[i].bio;
 
         var avatarElem = document.getElementById("artist-avatar");
-        avatarElem.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null,data[i].avatar));
+        avatarElem.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null,data[i].avatar.data));
+
+        // Put name in cell
+        var followerCount = row.insertCell(2);
+        followerCount.innerHTML = data[i].follower_count;
     }
    
   }
