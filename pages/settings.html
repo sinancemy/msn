@@ -6,39 +6,58 @@
 <head>
     <meta charset="UTF-8">
     <title>MSN</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     <style>
-        body {
-          background-image: url('/assets/background.png'); /* Background image for the entire page */
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-      </style>
+      body {
+        background-image: url('/assets/background.png'); /* Background image for the entire page */
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
 </head>
 
 <body>
     <h1>Music Socialization Network</h1>
 
+    <div id="test"></div>
     <div class="center">
         <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
         <button id="search-panel" class="big-button" onclick="showSearchPanel()">Search</button>
         <button id="profile-panel" class="big-button" onclick="showCurrentProfilePanel()">Profile</button>
         <button id="settings-panel" class="big-button" onclick="showSettingsPanel()">Settings</button>
-    </div>
+      </div>
+    
 
-    </div>
-    <div class="panel-scrollable-single">
-        <h2 class="panel-header">Settings</h2>
-    </div>
+    <div class="panel-container">
+        <div class="panel" style="width: 1325px; height: 500px; float: left; margin-right: 10px; position: relative; ">
+          <h2 class="panel-header">Settings</h2>
+          <div class="panel-content">
+            <textarea id="username-field" class="panel-textarea" placeholder="Change Your Username"
+              style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px; resize: none; background-image: url('/assets/background.png');"></textarea>
+            <textarea id="password-field" class="panel-textarea" placeholder="Change Bio"
+              style="width: 500px; height: 60px; position: absolute; top: 100px; left: 200px; resize: none; background-image: url('/assets/background.png');"></textarea>
+      
+            <button class="panel-button" style="position: absolute; top: 40px; right: 450px; background-image: url('/assets/background.png');" onclick="changeUsername()">Change Username</button>
+            <button class="panel-button" style="position: absolute; top: 120px; right: 490px; background-image: url('/assets/background.png');" onclick="changeBio()">Change Bio</button>
+            <button class="panel-button" style="position: absolute; top: 200px; left: 200px; background-image: url('/assets/background.png');" onclick="signOff()">Sign Off</button>
+            <button class="panel-button" style="position: absolute; top: 250px; left: 200px; background-image: url('/assets/background.png');" onclick="deleteAccount()">Delete Account</button>
+
+
+          </div>
+          
+        </div>
+      </div>
 
     </div>
     <div class="panel-music-controls">
         <h2 class="panel-header">Music Controls</h2>
-        <img src="/assets/geri.png" alt="Back button" class="back-image">
-        <img src="/assets/play.png" alt="Play button" class="play-image">
-        <img src="/assets/next.png" alt="Next button" class="next-image">
-    </div>
-
+          <img src="/assets/geri.png" alt="Back button" class="back-image">
+          <img src="/assets/play.png" alt="Play button" class="play-image">
+          <img src="/assets/next.png" alt="Next button" class="next-image">
+      </div>
+    
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
+<script type="text/javascript" src="../scripts/account.js"></script>
 
 </html>
