@@ -217,6 +217,14 @@ h1 {
   height: auto;
   object-fit: cover;
   margin-bottom: 10px;
+
+}
+.panel-image-avatar {
+  width: 40%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
+  float: right;
 }
 
 
