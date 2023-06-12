@@ -495,25 +495,25 @@ router.get('/removeReaction', (req, res) => {
         });
 });
 
-router.get('/addEnjoyer', (req, res) => {
+router.post('/addEnjoyer', (req, res) => {
     // Load parameters
-    const { enjoyment, username, password, fullName, avatar, email, bio } = req.query;
+    const { enjoyment, username, password, fullName, avatar, email, bio } = req.body;
+
     // Execute query
     (function (enjoyment, username, password, fullName, avatar, email, bio, callback) {
         const userQuery = `
         INSERT IGNORE INTO User (id, username, password, full_name, avatar, email, bio)
         SELECT COALESCE(MAX(id), 0) + 1, ?, ?, ?, ?, ?, ?
         FROM User;
-       `;
+      `;
         const userValues = [username, password, fullName, avatar, email, bio];
 
         const enjoyerQuery = `
         INSERT IGNORE INTO Enjoyer (id, enjoyment)
         SELECT COALESCE(MAX(id), 0) + 1, ?
         FROM Enjoyer;
-       `;
+      `;
         const enjoyerValues = [enjoyment];
-
 
         pool.query(userQuery, userValues, (error, userResults) => {
             if (error) throw error;
@@ -552,9 +552,9 @@ router.get('/removeEnjoyer', (req, res) => {
 });
 
 
-router.get('/addArtist', (req, res) => {
-    // Load parameters
-    const { verified, username, password, fullName, avatar, email, bio } = req.query;
+router.post('/addArtist', (req, res) => {
+    // Load parameters from the request body
+    const { verified, username, password, fullName, avatar, email, bio } = req.body;
 
     // Execute queries
     (function (verified, username, password, fullName, avatar, email, bio, callback) {
@@ -563,7 +563,7 @@ router.get('/addArtist', (req, res) => {
         SELECT COALESCE(MAX(id), 0) + 1, ?, ?, ?, ?, ?, ?
         FROM User
       `;
-        const userValues = [ username, password, fullName, avatar, email, bio];
+        const userValues = [username, password, fullName, avatar, email, bio];
 
         const artistQuery = `
         INSERT IGNORE INTO Artist (id, verified)
@@ -581,10 +581,13 @@ router.get('/addArtist', (req, res) => {
                 callback(error, artistResults);
             });
         });
-    })(verified, username, password, fullName, avatar, email, bio, (error, results) => {
-        if (error) throw error;
-        res.send(results);
-    });
+    })(
+        verified, username, password, fullName, avatar, email, bio,
+        (error, results) => {
+            if (error) throw error;
+            res.send(results);
+        }
+    );
 });
 
 router.get('/removeArtist', (req, res) => {

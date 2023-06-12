@@ -11,6 +11,9 @@ app.use(session({
   resave: false,
   saveUninitialized: true
 }));
+
+app.use(bodyParser.json({ limit: '10mb' }));
+
 session.userId = null
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
