@@ -96,23 +96,7 @@
       ">Send</button>
   </div>
 
-  <div class="panel-single">
-    <h2 class="panel-header">Add Reaction For Track</h2>
-    <textarea class="comment-textarea" id="comment-input" class="panel-textarea"
-      style="background-image: url('/assets/background.png');" placeholder="Enter your comment..."></textarea>
-    <select id="emoji-input" class="panel-select">
-      <option value="" selected disabled>Reaction</option>
-    </select>
-    <button class="send-button" id="send-reaction" style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
-      addReaction(
-        userId,
-        new URLSearchParams(window.location.search).get('id'),
-        document.getElementById('comment-input').value,
-        document.getElementById('emoji-input').value)
-      refreshPage()
-    });
-      ">Send</button>
-  </div>
+
 
 
   <div class="panel-music-controls">
