@@ -497,20 +497,22 @@ router.get('/removeReaction', (req, res) => {
 
 router.get('/addEnjoyer', (req, res) => {
     // Load parameters
-    const { userId, enjoyment, username, password, fullName, avatar, email, bio } = req.query;
+    const { enjoyment, username, password, fullName, avatar, email, bio } = req.query;
     // Execute query
-    (function (userId, enjoyment, username, password, fullName, avatar, email, bio, callback) {
+    (function (enjoyment, username, password, fullName, avatar, email, bio, callback) {
         const userQuery = `
         INSERT IGNORE INTO User (id, username, password, full_name, avatar, email, bio)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        SELECT COALESCE(MAX(id), 0) + 1, ?, ?, ?, ?, ?, ?
+        FROM User;
        `;
-        const userValues = [userId, username, password, fullName, avatar, email, bio];
+        const userValues = [username, password, fullName, avatar, email, bio];
 
         const enjoyerQuery = `
-         INSERT IGNORE INTO Enjoyer (id, enjoyment)
-         VALUES (?, ?)
+        INSERT IGNORE INTO Enjoyer (id, enjoyment)
+        SELECT COALESCE(MAX(id), 0) + 1, ?
+        FROM Enjoyer;
        `;
-        const enjoyerValues = [userId, enjoyment];
+        const enjoyerValues = [enjoyment];
 
 
         pool.query(userQuery, userValues, (error, userResults) => {
@@ -522,7 +524,7 @@ router.get('/addEnjoyer', (req, res) => {
                 callback(error, userResults, enjoyerResults);
             });
         });
-    })(userId, enjoyment, username, password, fullName, avatar, email, bio, (error, userResults, enjoyerResults) => {
+    })(enjoyment, username, password, fullName, avatar, email, bio, (error, userResults, enjoyerResults) => {
         if (error) throw error;
         res.send({ userResults, enjoyerResults });
     });
@@ -552,21 +554,23 @@ router.get('/removeEnjoyer', (req, res) => {
 
 router.get('/addArtist', (req, res) => {
     // Load parameters
-    const { userId, verified, username, password, fullName, avatar, email, bio } = req.query;
+    const { verified, username, password, fullName, avatar, email, bio } = req.query;
 
     // Execute queries
-    (function (userId, verified, username, password, fullName, avatar, email, bio, callback) {
+    (function (verified, username, password, fullName, avatar, email, bio, callback) {
         const userQuery = `
         INSERT IGNORE INTO User (id, username, password, full_name, avatar, email, bio)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        SELECT COALESCE(MAX(id), 0) + 1, ?, ?, ?, ?, ?, ?
+        FROM User
       `;
-        const userValues = [userId, username, password, fullName, avatar, email, bio];
+        const userValues = [ username, password, fullName, avatar, email, bio];
 
         const artistQuery = `
         INSERT IGNORE INTO Artist (id, verified)
-        VALUES (?, ?)
+        SELECT COALESCE(MAX(id), 0) + 1, ?
+        FROM Artist
       `;
-        const artistValues = [userId, verified];
+        const artistValues = [verified];
 
         pool.query(userQuery, userValues, (error, userResults) => {
             if (error) throw error;
@@ -577,7 +581,7 @@ router.get('/addArtist', (req, res) => {
                 callback(error, artistResults);
             });
         });
-    })(userId, verified, username, password, fullName, avatar, email, bio, (error, results) => {
+    })(verified, username, password, fullName, avatar, email, bio, (error, results) => {
         if (error) throw error;
         res.send(results);
     });

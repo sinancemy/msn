@@ -157,8 +157,8 @@ async function removeFriend(userId1, userId2) {
     console.log("Result: ", data);
 }
 
-async function addEnjoyer(enjoyerId) {
-    const response = await fetch(`http://localhost:3001/addEnjoyer?enjoyerId=${enjoyerId}`);
+async function addEnjoyer(enjoyment, username, password, fullName, avatar, email, bio) {
+    const response = await fetch(`http://localhost:3001/addEnjoyer?enjoyment=${enjoyment}&username=${username}&password=${password}&fullName=${fullName}&avatar=${avatar}&email=${email}&bio=${bio}`);
     const data = await response.json();
     console.log("Result: ", data);
 }
@@ -169,8 +169,8 @@ async function removeEnjoyer(enjoyerId) {
     console.log("Result: ", data);
 }
 
-async function addArtist(artistId) {
-    const response = await fetch(`http://localhost:3001/addArtist?artistId=${artistId}`);
+async function addArtist(verified, username, password, fullName, avatar, email, bio) {
+    const response = await fetch(`http://localhost:3001/addArtist?verified=${verified}&username=${username}&password=${password}&fullName=${fullName}&avatar=${avatar}&email=${email}&bio=${bio}`);
     const data = await response.json();
     console.log("Result: ", data);
 }
