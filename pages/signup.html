@@ -7,6 +7,13 @@
     <meta charset="UTF-8">
     <title>MSN</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <style>
+      body {
+        background-image: url('/assets/background.png'); /* Background image for the entire page */
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+    </style>
 </head>
 
 <body>
@@ -17,9 +24,9 @@
           <h2 class="panel-header">Sign Up</h2>
           <div class="panel-content">
             <textarea id="username-field" class="panel-textarea" placeholder="Enter Your Username"
-              style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px; resize: none;"></textarea>
+              style="width: 500px; height: 60px; position: absolute; top: 20px; left: 200px; resize: none; background-image: url('/assets/background.png');"></textarea>
             <textarea id="password-field" class="panel-textarea" placeholder="Enter Your Password"
-              style="width: 500px; height: 60px; position: absolute; top: 100px; left: 200px; resize: none;"></textarea>
+              style="width: 500px; height: 60px; position: absolute; top: 100px; left: 200px; resize: none; background-image: url('/assets/background.png');"></textarea>
             <textarea id="fullname-field" class="panel-textarea" placeholder="Enter Your Full Name"
               style="width: 500px; height: 60px; position: absolute; top: 180px; left: 200px; resize: none;"></textarea>
             <textarea id="email-field" class="panel-textarea" placeholder="Enter Your E-mail"
@@ -35,6 +42,11 @@
           
             <button class="panel-button" style="position: absolute; top: 460px; left: 200px;"
               onclick="signUp()">Sign Up</button>
+              style="width: 500px; height: 60px; position: absolute; top: 180px; left: 200px; resize: none; background-image: url('/assets/background.png');"></textarea>
+            <textarea id="fullname-field" class="panel-textarea" placeholder="Enter Your E-mail"
+              style="width: 500px; height: 60px; position: absolute; top: 260px; left: 200px; resize: none; background-image: url('/assets/background.png');"></textarea>
+            <button class="panel-button" style="position: absolute; top: 40px; right: 300px; background-image: url('/assets/background.png');" onclick="signup()">Sign Up</button>
+
           </div>
           
         </div>

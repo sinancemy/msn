@@ -6,11 +6,17 @@
 <head>
   <meta charset="UTF-8">
   <title>MSN</title>
+  <style>
+    body {
+      background-image: url('/assets/background.png'); /* Background image for the entire page */
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
 </head>
 
 <body>
   <h1>Music Socialization Network</h1>
-
 
   <div class="center">
     <button id="home-panel" class="big-button" onclick="showHomePanel()">Home</button>
@@ -20,8 +26,10 @@
   </div>
 
   <div class="panel-scrollable">
-    <h2 id="playlist-name" class="panel-header"></h2>
-    <h4 id="playlist-date" class="panel-header"></h4>
+    <div class="panel-header">
+      <h2 id="playlist-name" class="small-header">Playlist Name</h2>
+      <h4 id="playlist-date" class="small-header">Playlist Date</h4>
+    </div>
     <img id="playlist-cover-art" class="panel-image"></img>
     <table border="1">
       <thead>
@@ -35,6 +43,7 @@
       </tbody>
     </table>
   </div>
+  
 
   <div class="panel-scrollable">
     <h2 class="panel-header">Playlist Reactions</h2>
@@ -68,13 +77,41 @@
     </table>
   </div>
 
+
   <div class="panel-single">
-    <h2 class="panel-header">Add Reaction</h2>
-    <textarea class="comment-textarea" id="comment-input" class="panel-textarea"
+    <h2 class="panel-header">Add Reaction For Playlist</h2>
+    <textarea class="comment-textarea" id="comment-input" class="panel-textarea" style="background-image: url('/assets/background.png');"
       placeholder="Enter your comment..."></textarea>
-    <textarea class="emoji-textarea" id="emoji-input" class="panel-textarea" placeholder="Enter emoji..."></textarea>
-    <button class="send-button" id="send-reaction" onclick="sendReaction()">Send</button>
+    <select id="emoji-input" class="panel-select">
+      <option value="" selected disabled>Reaction</option>
+    </select>
+    <button class="send-button" id="send-reaction"  style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
+      addReaction(
+        userId,
+        new URLSearchParams(window.location.search).get('id'),
+        document.getElementById('comment-input').value,
+        document.getElementById('emoji-input').value)
+      refreshPage()
+    });
+      ">Send</button>
   </div>
+
+  <div class="panel-single">
+    <h2 class="panel-header">Add Reaction For Track</h2>
+    <textarea class="comment-textarea" id="comment-input" class="panel-textarea" style="background-image: url('/assets/background.png');"
+      placeholder="Enter your comment..."></textarea>
+    <select id="emoji-input" class="panel-select">
+      <option value="" selected disabled>Reaction</option>
+    </select>
+    <button class="send-button" id="send-reaction" style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
+      addReaction(
+        userId,
+        new URLSearchParams(window.location.search).get('id'),
+        document.getElementById('comment-input').value,
+        document.getElementById('emoji-input').value)
+      refreshPage()
+    });
+      ">Send</button>
   </div>
 
   </div>
