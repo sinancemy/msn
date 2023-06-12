@@ -173,3 +173,18 @@ async function getFriends(userId) {
         nameCell.innerHTML = data[i].full_name;
     }
 }
+
+// function loadSaveAlbumButton(albumId){
+//     const button = document.getElementById("save-album-button");
+
+//     getSavedAlbums().then((albums) => {
+//         console.log(albums)
+//         if (albumId in albums){
+//             button.textContent = "Unsave"
+//         } else {
+//             button.textContent = "Save"
+//         }
+//     })
+// }
+
+// BUNUN ALTINA EKLEYEBİLİRSİN DERİN :))

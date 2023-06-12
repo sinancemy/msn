@@ -27,7 +27,7 @@
 
   <div class="panel-scrollable">
     <div class="panel-header">
-      <button id="album-info-panel" class="buttons" onclick="saveAlbum()" style="position: absolute; top: 100%; left: 2%;">Save Album</button>
+      <button id="save-album-button" class="buttons" style="position: absolute; top: 100%; left: 2%;"></button>
       <h2 id="album-name" class="small-header">Album Name</h2>
       <h4 id="album-date" class="small-header">Album Date</h4>
     </div>
@@ -125,13 +125,16 @@
 
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
+<script type="text/javascript" src="../scripts/home.js"></script>
 <script type="text/javascript" src="../scripts/content.js"></script>
+<script type="text/javascript" src="../scripts/user.js"></script>
 <script type="text/javascript" src="../scripts/enforceLogin.js"></script>
 <script type="text/javascript">
   const id = new URLSearchParams(window.location.search).get('id')
   getAlbumInfo(id);
   getAlbumTracks(id);
   getAlbumReactions(id);
+  loadSaveAlbumButton(id)
 </script>
 
 <script>
