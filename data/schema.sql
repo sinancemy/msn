@@ -93,7 +93,7 @@ CREATE TABLE Reaction (
   emoji BLOB,
   FOREIGN KEY (user_id) REFERENCES User(id) ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (content_id) REFERENCES Content(id) ON DELETE CASCADE ON UPDATE CASCADE,
-  PRIMARY KEY (content_id, user_id, txt, emoji)
+  PRIMARY KEY (content_id, user_id)
 );
 
 CREATE TABLE Follows (

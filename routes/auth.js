@@ -31,4 +31,8 @@ router.post('/login/auth', (req, res) => {
         });
 });
 
+router.get('/login/signoff', (req, res) => {
+    req.session.userId = null
+});
+
 module.exports = router

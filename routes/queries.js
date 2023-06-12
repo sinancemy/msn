@@ -726,22 +726,22 @@ router.get('/updateBio', (req, res) => {
         });
 });
 
-router.get('/updateUsername', (req, res) => {
+router.get('/updateFullName', (req, res) => {
     // Load parameters
-    const { userId, username } = req.query;
+    const { userId, full_name } = req.query;
     // Execute query
-    (function (userId, username, callback) {
+    (function (userId, full_name, callback) {
         const q = `
         UPDATE User
-        SET username = ? 
+        SET full_name = ? 
         WHERE id = ?
       `;
-        const v = [username, userId];
+        const v = [full_name, userId];
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
         });
-    })(userId, username,
+    })(userId, full_name,
         (error, results) => {
             if (error) throw error;
             res.send(results);

@@ -1,17 +1,4 @@
 
-async function exampleFunction(parameter) {
-    var parameter = document.getElementById("parameter").value;
-    var table = document.getElementById("falan-filan-table");
-    const response = await fetch(`http://localhost:3001/getExampleQuery?parameter=${parameter}`);
-    const data = await response.json();
-    table.innerHTML = "";
-    for (var i = 0; i < data.length; i++) {
-        var row = table.insertRow();
-        var langCell = row.insertCell(0);
-        langCell.innerHTML = data[i].Language;
-    }
-}
-
 async function getCurrentUserId() {
     const response = await fetch(`http://localhost:3001/login/getUserId`);
     const data = await response.json();
@@ -31,7 +18,6 @@ async function getCurrentUserType() {
     return data;
 }
 
-
 async function loginAuthorizationRequest(username, password) {
     const response = await fetch(`http://localhost:3001/login/auth`, {
         method: 'POST',
@@ -50,6 +36,11 @@ async function loginAuthorizationRequest(username, password) {
         // TODO : Display something on page, incorrect username/password.
         console.log("LOGIN FAILED FOR username = " + username)
     }
+}
+
+async function signOff(){
+    const response = await fetch(`http://localhost:3001/login/signoff`);
+    showLoginPanel()
 }
 
 function refreshPage(){
