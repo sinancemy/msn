@@ -122,4 +122,26 @@
   loadSaveButton(id);
 </script>
 
+<script>
+  const emojis = [
+    "👍", "👎", "😊", "😂", "😍",
+    "🤩", "🙌", "🔥", "👏", "🎉",
+    "😎", "😄", "😁", "🤗", "😃",
+    "😘", "👌", "✨", "👀", "🙏",
+    "💯", "😆", "😇", "😉", "🤪",
+    "😜", "😝", "😛", "😔", "😢",
+    "😭", "😞", "😕", "😐", "🤔",
+    "😬", "😠", "😡", "🤬", "😑",
+    "😴", "🙄", "😪", "😫", "🤢",
+    "🤮", "🤡", "🤠", "👽", "👻",
+    "💩", "👺"];
+  const emojiSelect = document.getElementById("emoji-input");
+  emojis.forEach(emoji => {
+    const option = document.createElement("option");
+    option.value = emoji;
+    option.textContent = emoji;
+    emojiSelect.appendChild(option);
+  });
+</script>
+
 </html>
