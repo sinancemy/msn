@@ -10,6 +10,17 @@
   margin: 0 1%;
   background-image: url('/assets/background.png');
 }
+
+.buttons {
+  padding: 1% 4%;
+  margin: 0 1%;
+  background-image: url('/assets/background.png');
+  position: absolute;
+  top: 10%;
+  left: 2%; /* Adjust the value as desired */
+
+}
+
 .send-button {
   padding: 2% 4%;
   font-size: 1.6%;
