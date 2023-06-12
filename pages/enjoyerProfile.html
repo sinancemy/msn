@@ -65,7 +65,7 @@
           <th>Name</th>
         </tr>
       </thead>
-      <tbody id="playlists-table">
+      <tbody id="enjoyer-playlists-table">
       </tbody>
     </table>
   </div>
@@ -83,13 +83,14 @@
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
 <script type="text/javascript" src="../scripts/user.js"></script>
+<script type="text/javascript" src="../scripts/content.js"></script>
 
 <script>
   const id = new URLSearchParams(window.location.search).get('id')
   console.log(id)
   getUserInfo(id)
   getFriends(id)
-  getSavedPlaylists()
+  getUserPlaylists(id)
 
 </script>
 

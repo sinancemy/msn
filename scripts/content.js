@@ -115,6 +115,28 @@ function getAlbumReactions(albumId) {
     });
 }
 
+
+async function getUserPlaylists(userId) {
+    const response = await fetch(`http://localhost:3001/getUserPlaylists?userId=${userId}`);
+    const data = await response.json();
+    var table = document.getElementById("enjoyer-playlists-table")
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        row.onclick = function () { showAlbumPanel(data[i].id) }
+
+        var nameCell = row.insertCell(0)
+        nameCell.innerHTML = data[i].name;
+
+        var coverCell = row.insertCell(0);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
+        img.className = "panel-image"
+        coverCell.appendChild(img);
+    }
+}
+
 async function getPlaylistInfo(playlistId) {
     const response = await fetch(`http://localhost:3001/getPlaylistInfo?playlistId=${playlistId}`);
     const data = await response.json();
@@ -184,6 +206,7 @@ async function getContentReactions(contentId) {
     const data = await response.json();
     return data
 }
+
 
 async function addReaction(userId, contentId, text, emoji,) {
     const response = await fetch(`http://localhost:3001/addReaction?userId=${userId}&contentId=${contentId}&text=${text}&emoji=${emoji}`);
