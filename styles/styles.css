@@ -155,7 +155,7 @@
 
 /* Styles for the tables */
 table {
-  width: 100%;
+  width: 70%;
   border-collapse: collapse;
   margin-bottom: 0;
 }
@@ -193,12 +193,19 @@ h1 {
   margin-bottom: 20px;
   float: right; /* Add this line */
 }
-
-.panel-image {
-  width: 70%;
+.panel-image-playlist {
+  width: 40%;
   height: auto;
   object-fit: cover;
   margin-bottom: 20px;
+  float: right; /* Add this line */
+}
+
+.panel-image {
+  width: 50%;
+  height: auto;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
 
