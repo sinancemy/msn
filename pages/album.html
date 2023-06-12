@@ -81,11 +81,17 @@
   <div class="panel-single">
     <h2 class="panel-header">Add Reaction For Album</h2>
     <textarea class="comment-textarea" id="comment-input" class="panel-textarea"
-      style="background-image: url('/assets/background.png');" placeholder="Enter your comment..."></textarea>
+      style="margin-left: -6%; background-image: url('/assets/background.png');" placeholder="Enter your comment..."></textarea>
     <select id="emoji-input" class="panel-select">
       <option value="" selected disabled>Reaction</option>
+      <style>
+        body {
+          margin-left: -6%; 
+          background-image: url('/assets/background.png');
+        }
+      </style>
     </select>
-    <button class="send-button" id="send-reaction" style="background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
+    <button id="send-reaction" style="margin-left: -12%; background-image: url('/assets/background.png');" onclick="getCurrentUserId().then((userId) => {
       addReaction(
         userId,
         new URLSearchParams(window.location.search).get('id'),
