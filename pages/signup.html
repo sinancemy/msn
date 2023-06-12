@@ -6,13 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <title>MSN</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
 </head>
 
 <body>
     <h1>Music Socialization Network</h1>
 
     <div class="panel-container">
-        <div class="panel" style="width: 1325px; height: 400px; float: left; margin-right: 10px; position: relative;">
+        <div class="panel" style="width: 1325px; height: 500px; float: left; margin-right: 10px; position: relative;">
           <h2 class="panel-header">Sign Up</h2>
           <div class="panel-content">
             <textarea id="username-field" class="panel-textarea" placeholder="Enter Your Username"
@@ -23,14 +24,16 @@
               style="width: 500px; height: 60px; position: absolute; top: 180px; left: 200px; resize: none;"></textarea>
             <textarea id="email-field" class="panel-textarea" placeholder="Enter Your E-mail"
               style="width: 500px; height: 60px; position: absolute; top: 260px; left: 200px; resize: none;"></textarea>
-            
-            <label style="position: absolute; top: 340px; left: 200px;">Choose your role:</label>
-            <input type="radio" id="enjoyer-radio" name="role" value="enjoyer" style="position: absolute; top: 340px; left: 350px;">
-            <label for="enjoyer-radio" style="position: absolute; top: 340px; left: 370px;">Enjoyer</label>
-            <input type="radio" id="artist-radio" name="role" value="artist" style="position: absolute; top: 340px; left: 450px;">
-            <label for="artist-radio" style="position: absolute; top: 340px; left: 470px;">Artist</label>
+            <textarea id="bio-field" class="panel-textarea" placeholder="Enter Your Bio"
+            style="width: 500px; height: 60px; position: absolute; top: 260px; left: 750px; resize: none;"></textarea>
+              <input type="file" id="avatar-file" accept="image/*" style="position: absolute; top: 340px; left: 200px;">
+            <label style="position: absolute; top: 400px; left: 200px;">Choose your role:</label>
+            <input type="radio" id="enjoyer-radio" name="role" value="enjoyer" style="position: absolute; top: 400px; left: 350px;">
+            <label for="enjoyer-radio" style="position: absolute; top: 400px; left: 370px;">Enjoyer</label>
+            <input type="radio" id="artist-radio" name="role" value="artist" style="position: absolute; top: 400px; left: 450px;">
+            <label for="artist-radio" style="position: absolute; top: 400px; left: 470px;">Artist</label>
           
-            <button class="panel-button" style="position: absolute; top: 400px; left: 200px;"
+            <button class="panel-button" style="position: absolute; top: 460px; left: 200px;"
               onclick="signUp()">Sign Up</button>
           </div>
           
@@ -41,5 +44,6 @@
 
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
+<script type="text/javascript" src="../scripts/account.js"></script>
 
 </html>

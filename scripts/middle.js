@@ -115,72 +115,10 @@ async function getSavedPlaylists() {
     }
 }
 
-async function updateBio(userId, bio) {
-    const response = await fetch(`http://localhost:3001/updateBio?userId=${userId}&bio=${bio}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
 
-async function updateUsername(userId, username) {
-    const response = await fetch(`http://localhost:3001/updateUsername?userId=${userId}&username=${username}`);
-    const data = await response.json();
-    console.log("Result: ", data);
+function refreshPage(){
+    location.reload();
 }
-
-async function updateAvatar(userId, avatar) {
-    const response = await fetch(`http://localhost:3001/updateAvatar?userId=${userId}&avatar=${avatar}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function addPlaylistTrack(playlistId, trackId) {
-    const response = await fetch(`http://localhost:3001/addPlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function removePlaylistTrack(playlistId, trackId) {
-    const response = await fetch(`http://localhost:3001/removePlaylistTrack?playlistId=${playlistId}&trackId=${trackId}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function addFriend(userId1, userId2) {
-    const response = await fetch(`http://localhost:3001/addFriend?userId1=${userId1}&userId2=${userId2}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function removeFriend(userId1, userId2) {
-    const response = await fetch(`http://localhost:3001/removeFriend?userId1=${userId1}&userId2=${userId2}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function addEnjoyer(enjoyment, username, password, fullName, avatar, email, bio) {
-    const response = await fetch(`http://localhost:3001/addEnjoyer?enjoyment=${enjoyment}&username=${username}&password=${password}&fullName=${fullName}&avatar=${avatar}&email=${email}&bio=${bio}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function removeEnjoyer(enjoyerId) {
-    const response = await fetch(`http://localhost:3001/removeEnjoyer?enjoyerId=${enjoyerId}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function addArtist(verified, username, password, fullName, avatar, email, bio) {
-    const response = await fetch(`http://localhost:3001/addArtist?verified=${verified}&username=${username}&password=${password}&fullName=${fullName}&avatar=${avatar}&email=${email}&bio=${bio}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
-async function removeArtist(artistId) {
-    const response = await fetch(`http://localhost:3001/removeArtist?artistId=${artistId}`);
-    const data = await response.json();
-    console.log("Result: ", data);
-}
-
 function showHomePanel() {
     window.location.href = `../pages/home.html`;
 }
@@ -270,20 +208,3 @@ function decodeEmoji(emojiBytes) {
     return "-"
 }
 
-function refreshPage(){
-    location.reload();
-}
-
-function signUp(){
-    addEnjoyer(
-        document.getElementById('username-field').value,
-        CryptoJS.SHA256(document.getElementById('password-field').value).toString(),
-        document.querySelector('input[name=role]:checked').value,
-        document.getElementById('fullname-field').value,
-        document.getElementById('email-field').value
-        ).then((response) => {
-            if (response == "ok"){
-                showLoginPanel();
-            }
-        })
-}
