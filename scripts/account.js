@@ -62,7 +62,7 @@ async function addEnjoyer(enjoyment, username, password, fullName, avatar, email
     });
 
     const result = await response.json();
-    console.log('Result: ', result);
+    return result
 }
 
 async function removeEnjoyer(enjoyerId) {
@@ -89,7 +89,7 @@ async function addArtist(verified, username, password, fullName, avatar, email, 
     });
 
     const data = await response.json();
-    console.log('Result: ', data);
+    return data
 }
 
 async function removeArtist(artistId) {
@@ -104,14 +104,14 @@ function signUp() {
     username = document.getElementById('username-field').value
     password = CryptoJS.SHA256(document.getElementById('password-field').value).toString()
     full_name = document.getElementById('fullname-field').value
-    avatar = document.getElementById('avatar-file').files[0]
+    avatar = null//document.getElementById('avatar-file').files[0]
     email = document.getElementById('email-field').value
     bio = document.getElementById('bio-field').value
-    console.log(avatar)
     if (type == "enjoyer") {
         enjoyment = 5
-        addEnjoyer(enjoyment, username, password, full_name, null, email, bio).then((response) => {
-            if (response == "ok") {
+        addEnjoyer(enjoyment, username, password, full_name, avatar, email, bio).then((response) => {
+            console.log(response)
+            if (response.enjoyerResults.affectedRows == 1) {
                 showLoginPanel();
             } else {
                 console.log("enjoyer exists")
@@ -119,8 +119,8 @@ function signUp() {
         })
     } else if (type == "artist") {
         verified = false
-        addArtist(verified, username, password, full_name, null, email, bio).then((response) => {
-            if (response == "ok") {
+        addArtist(verified, username, password, full_name, avatar, email, bio).then((response) => {
+            if (response.artistResults.affectedRows == 1) {
                 showLoginPanel();
             } else {
                 console.log("artist exists")
