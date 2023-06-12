@@ -42,18 +42,40 @@
           <th>Name</th>
         </tr>
       </thead>
-      <tbody id="enjoyer-friends-table">
+      <tbody id="artist-follower-table">
       </tbody>
     </table>
   </div>
   </div>
 
-  <div class="panel">
+  <div class="panel-scrollable">
     <h2 class="panel-header">Contents</h2>
+    <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Cover Art</th>
+          </tr>
+        </thead>
+        <tbody id="artist-album-table">
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="panel">
+  <div class="panel-scrollable">
     <h2 class="panel-header">Artist Info</h2>
+    <table border="1">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Bio</th>
+          </tr>
+        </thead>
+        <tbody id="artist-info-table">
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="panel-music-controls">
@@ -64,5 +86,15 @@
 </body>
 <script type="text/javascript" src="../scripts/middle.js"></script>
 <script type="text/javascript" src="../scripts/user.js"></script>
+
+<script>
+    const id = new URLSearchParams(window.location.search).get('id')
+    console.log(id)
+    getArtistFollowers(id)
+    getArtistAppearedAlbums(id)
+    getArtistInfo(id)
+    
+  
+  </script>
 
 </html>

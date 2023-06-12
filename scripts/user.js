@@ -13,7 +13,23 @@ async function getArtistInfo(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistInfo?artistId=${artistId}`);
     const data = await response.json();
     console.log("Artist Info: ", data);
-}
+    
+    var table = document.getElementById("artist-info-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        
+        // Put image in cell
+        var coverCell = row.insertCell(0);
+        coverCell.innerHTML = data[i].full_name;
+       
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].bio;
+    }
+  }
+  
 
 async function getArtistTracks(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistTracks?artistId=${artistId}`);
@@ -25,12 +41,52 @@ async function getArtistFollowers(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistFollowers?artistId=${artistId}`);
     const data = await response.json();
     console.log("Artist Followers: ", data);
+
+    var table = document.getElementById("artist-follower-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        row.onclick = function () { showEnjoyerPanel(data[i].friend_id); }
+        
+        // Put image in cell
+        var coverCell = row.insertCell(0);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].avatar.data));
+        img.className = "panel-image"
+        coverCell.appendChild(img);
+       
+        // Put name in cell
+        var nameCell = row.insertCell(1);
+        nameCell.innerHTML = data[i].full_name;
+    }
 }
 
 async function getArtistAppearedAlbums(artistId) {
     const response = await fetch(`http://localhost:3001/getArtistAppearedAlbums?artistId=${artistId}`);
     const data = await response.json();
     console.log("Artist Appeared Albums: ", data);
+
+    var table = document.getElementById("artist-album-table");
+    for (let i = 0; i < data.length; i++) {
+        var row = table.insertRow();
+        // When row is clicked, go to the artist page with the proper id.
+        row.className = "clickable-table-row"
+        row.onclick = function () { showAlbumPanel(data[i].id); }
+        
+        // Put image in cell
+        // Put name in cell
+        var nameCell = row.insertCell(0);
+        nameCell.innerHTML = data[i].name;
+
+        var coverCell = row.insertCell(1);
+        var img = document.createElement("img");
+        img.src = "data:image/png;base64," + btoa(String.fromCharCode.apply(null, data[i].cover_art.data));
+        img.className = "panel-image"
+        coverCell.appendChild(img);
+       
+     
+    }
 }
 
 async function getFriends(userId) {
