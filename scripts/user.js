@@ -174,17 +174,49 @@ async function getFriends(userId) {
     }
 }
 
-// function loadSaveAlbumButton(albumId){
-//     const button = document.getElementById("save-album-button");
+function loadContentButton(contentId){
+    const button = document.getElementById("save-content-button");
 
-//     getSavedAlbums().then((albums) => {
-//         console.log(albums)
-//         if (albumId in albums){
-//             button.textContent = "Unsave"
-//         } else {
-//             button.textContent = "Save"
-//         }
-//     })
-// }
+    hasSaved(contentId).then((hasSaved) => {
+        console.log(hasSaved)
+        if (hasSaved){
+            button.textContent = "Unsave"
+            button.onclick = function () { unsaveContent(contentId) }
+        } else {
+            button.textContent = "Save"
+            button.onclick = function () { saveContent(contentId) }
+        }
+    })
+}
+
+function loadFollowButton(artistId){
+    // Kendisi değilse
+    const button = document.getElementById("follow-artist-button")
+    isFollowing(artistId).then((isFollowing)=>{
+        console.log(isFollowing)
+        if (isFollowing){
+            button.textContent = "Unfollow"
+            button.onclick = function () { unfollowArtist(artistId) }
+        } else {
+            button.textContent = "Follow"
+            button.onclick = function () { followArtist(artistId) }
+        }
+    })
+}
+
+function loadFriendButton(enjoyerId){
+    // Kendisi değilse
+    const button = document.getElementById("friend-button")
+    isFriend(enjoyerId).then((isFriend)=>{
+        console.log(isFriend)
+        if (isFriend){
+            button.textContent = "Unfriend"
+            button.onclick = function () { addFriend(enjoyerId) }
+        } else {
+            button.textContent = "Friend"
+            button.onclick = function () { removeFriend(enjoyerId) }
+        }
+    })
+}
 
 // BUNUN ALTINA EKLEYEBİLİRSİN DERİN :))
