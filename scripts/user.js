@@ -56,6 +56,18 @@ async function getArtistInfo(artistId) {
 
 }
 
+async function addFriend(userId) {
+    const response = await fetch(`http://localhost:3001/addFriend?userId=${userId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
+async function removeFriend(userId) {
+    const response = await fetch(`http://localhost:3001/removeFriend?userId=${userId}`);
+    const data = await response.json();
+    console.log("Result: ", data);
+}
+
 async function followArtist(artistId) {
     const response = await fetch(`http://localhost:3001/followArtist?artistId=${artistId}`);
     const data = await response.json();

@@ -663,19 +663,19 @@ router.post('/addArtist', (req, res) => {
 
 router.get('/addFriend', (req, res) => {
     // Load parameters
-    const { userId1, userId2 } = req.query;
+    const { userId } = req.query;
     // Execute query
-    (function (userId1, userId2, callback) {
+    (function (userId, callback) {
         const q = `
         INSERT IGNORE INTO Friend (friend_id1, friend_id2, since)
         VALUES (?, ?, CURRENT_DATE())
        `;
-        const v = [userId1, userId2];
+        const v = [req.session.userId, userId];
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
         });
-    })(userId1, userId2,
+    })(userId,
         (error, results) => {
             if (error) throw error;
             res.send(results);
@@ -684,20 +684,20 @@ router.get('/addFriend', (req, res) => {
 
 router.get('/removeFriend', (req, res) => {
     // Load parameters
-    const { userId1, userId2 } = req.query;
+    const { userId } = req.query;
     // Execute query
-    (function (userId1, userId2, callback) {
+    (function (userId1, callback) {
         const q = `
         DELETE FROM Friend
         WHERE (friend_id1 = ? AND friend_id2 = ?)
         OR (friend_id1 = ? AND friend_id2 = ?)
        `;
-        const v = [userId1, userId2, userId2, userId1];
+        const v = [req.session.userId, userId, userId, req.session.userId];
         pool.query(q, v, (error, results) => {
             if (error) throw error;
             callback(error, results);
         });
-    })(userId1, userId2,
+    })(userId,
         (error, results) => {
             if (error) throw error;
             res.send(results);
